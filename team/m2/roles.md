@@ -24,6 +24,6 @@
 ## Ray Zhou - YOUR ROLE
 - **Role**: DESCRIBE YOUR ROLE
 - **Top 3 Commits**:
-  1. [Commit 1](https://github.com/repo/commit1): REPLACE THE LINK AND ADD THE COMMIT MESSAGE
+  1. [Updated data.md](https://github.com/mya03/Meal-Planner/commit/fbae2dc660888391ff5a9fffc45693a2fe08fc93): Wrote and committed data.md, which consists of most if not all data types and how they will be used / interact with other data types.
   2. [Commit 2](https://github.com/repo/commit2): REPLACE THE LINK AND ADD THE COMMIT MESSAGE
   3. [Commit 3](https://github.com/repo/commit3): REPLACE THE LINK AND ADD THE COMMIT MESSAGE
