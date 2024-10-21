@@ -25,5 +25,5 @@
 - **Role**: DESCRIBE YOUR ROLE
 - **Top 3 Commits**:
   1. [Updated data.md](https://github.com/mya03/Meal-Planner/commit/fbae2dc660888391ff5a9fffc45693a2fe08fc93): Wrote and committed data.md, which consists of most if not all data types and how they will be used / interact with other data types.
-  2. [Commit 2](https://github.com/repo/commit2): REPLACE THE LINK AND ADD THE COMMIT MESSAGE
+  2. [Updated roles.md](https://github.com/mya03/Meal-Planner/commit/9d5237c84c621fd4e8ef5d875c418ee955ca143e): Updated my role in roles.md with my contributions to the project so far.
   3. [Commit 3](https://github.com/repo/commit3): REPLACE THE LINK AND ADD THE COMMIT MESSAGE
