@@ -14,12 +14,12 @@
   2. [Commit 2](https://github.com/repo/commit2): REPLACE THE LINK AND ADD THE COMMIT MESSAGE
   3. [Commit 3](https://github.com/repo/commit3): REPLACE THE LINK AND ADD THE COMMIT MESSAGE
 
-## My Anh Nguyen - YOUR ROLE
-- **Role**: DESCRIBE YOUR ROLE
+## My Anh Nguyen - Note Taker
+- **Role**: Records detailed notes during meetings and ensures that project features/ideas are clearly communicated. Responsible for distributing meeting summary to the team after each team meeting.
 - **Top 3 Commits**:
-  1. [Commit 1](https://github.com/repo/commit1): REPLACE THE LINK AND ADD THE COMMIT MESSAGE
-  2. [Commit 2](https://github.com/repo/commit2): REPLACE THE LINK AND ADD THE COMMIT MESSAGE
-  3. [Commit 3](https://github.com/repo/commit3): REPLACE THE LINK AND ADD THE COMMIT MESSAGE
+  1. [Commit 1]([https://github.com/repo/commit1](https://github.com/mya03/Meal-Planner/commit/c8f0ac6f7093af159fd9f3fae76228a82df6dc11)): Set up the initial GitHub repository.
+  2. [Commit 2](https://github.com/mya03/Meal-Planner/commit/e778c709edf6f617789814074ac859f5652eda02): Update problem.md file.
+  3. [Commit 3](https://github.com/mya03/Meal-Planner/commit/96ff87fda2a60bc2391db54a751a938a2a4aa9fa): Update report file.
 
 ## Ray Zhou - YOUR ROLE
 - **Role**: DESCRIBE YOUR ROLE
