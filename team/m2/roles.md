@@ -11,8 +11,8 @@
 - **Role**: Manages the timing of team activities, making sure meetings start and end on time, tracking deadlines, and reminding the team of upcoming due dates
 - **Top 3 Commits**:
   1. [Commit 1](https://github.com/mya03/Meal-Planner/commit/ac472ba8c5e85320bf7519aab80b28ca17209e32): Update the ui-diagrams.md file
-  2. [Commit 2](https://github.com/repo/commit2): REPLACE THE LINK AND ADD THE COMMIT MESSAGE
-  3. [Commit 3](https://github.com/repo/commit3): REPLACE THE LINK AND ADD THE COMMIT MESSAGE
+  2. [Commit 2](https://github.com/mya03/Meal-Planner/commit/6d6c12d8728bbfbaae89a3ab2aecb6a0179f911c): Update my role in the roles.md file
+  3. [Commit 3](https://github.com/mya03/Meal-Planner/commit/91ad7baabcd18ec99295a8afd0b9bf0ac70c1bd5): Update my contributions to the project with the timeline in report file
 
 ## My Anh Nguyen - Note Taker
 - **Role**: Records detailed notes during meetings and ensures that project features/ideas are clearly communicated. Responsible for distributing meeting summary to the team after each team meeting.
