@@ -7,10 +7,10 @@
   2. [Update roles.md](https://github.com/mya03/Meal-Planner/commit/d66290033ecd1c61588a64c1b4e1342168df8bc0): I created a template for the `roles.md` file, allowing team members to input their specific responsibilities. This template will help standardize the information and make it easier for everyone to contribute and access the details of each role within the team.
   3. [Update features.md](https://github.com/mya03/Meal-Planner/commit/a3f7fb37c2a5b6c1fe55abea2c129654542cf5d9): I took the initiative to write the entire `features.md` file from scratch. This document outlines all the key features of our project, providing a comprehensive overview for the team. Having a complete and detailed features file will help ensure everyone is aligned on the project’s capabilities and goals.
 
-## Eris Nguyen - YOUR ROLE
-- **Role**: DESCRIBE YOUR ROLE
+## Eris Nguyen - Time Keeper
+- **Role**: Manages the timing of team activities, making sure meetings start and end on time, tracking deadlines, and reminding the team of upcoming due dates
 - **Top 3 Commits**:
-  1. [Commit 1](https://github.com/repo/commit1): REPLACE THE LINK AND ADD THE COMMIT MESSAGE
+  1. [Commit 1](https://github.com/mya03/Meal-Planner/commit/ac472ba8c5e85320bf7519aab80b28ca17209e32): Update the ui-diagrams.md file
   2. [Commit 2](https://github.com/repo/commit2): REPLACE THE LINK AND ADD THE COMMIT MESSAGE
   3. [Commit 3](https://github.com/repo/commit3): REPLACE THE LINK AND ADD THE COMMIT MESSAGE
 
