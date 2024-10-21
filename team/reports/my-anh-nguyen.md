@@ -1,4 +1,4 @@
-## Contribution Log for Alice Johnson
+## Contribution Log for My Anh Nguyen
 
 ### October 18, 2024
 - **Task**: Set up the initial GitHub repository.
