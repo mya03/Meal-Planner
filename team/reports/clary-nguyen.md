@@ -35,4 +35,8 @@
 - **Details**: Updated `features.md` file with 5 features that we discussed as a group together.
 - **Link to Commit**: [Update features.md](https://github.com/mya03/Meal-Planner/commit/a3f7fb37c2a5b6c1fe55abea2c129654542cf5d9)
 
+### October 21, 2024
+- **Task**: Update my part in the `roles.md` file.
+- **Details**: Updated `roles.md` file with my role and commits.
+- **Link to Commit**: [Update roles.md](https://github.com/mya03/Meal-Planner/commit/2d10c4cbb220fea57f29a14ba2a0d9b8b11cac0a)
 
