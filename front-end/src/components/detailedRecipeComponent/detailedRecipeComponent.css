@@ -1,11 +1,11 @@
-.container{
+.detailed-container{
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     margin: 20px
 }
 
-.flex-item {
+.detailed-flex-item {
     flex: 1;
 
 }
@@ -26,22 +26,22 @@
 }
 
 /* Style Ingredient container*/
-.ingredient {
+.detailed-ingredient {
     border-right: solid;
     max-width: 300px;
 }
 
 /* Style unordered list*/
-ul {
+.detailed-ingredient ul {
     list-style-type: circle;
 }
 
-li {
+.detailed-ingredient li {
     margin-bottom: 15px
 }
 
 /* Style ordered list*/
-ol li{
+.instructionContainer li{
     background: gainsboro;
     padding: 10px;
     margin-bottom: 30px;

@@ -23,20 +23,20 @@ export class detailedRecipeComponent extends BaseComponent{
 
     #createContainer() {
         this.#container = document.createElement('div');
-        this.#container.classList.add('container');
+        this.#container.classList.add('detailed-container');
     }
     
 
     #addRecipeImgContainer(){
         const recipeImgContainer = document.createElement('div');
         recipeImgContainer.id = 'recipeImgContainer';
-        recipeImgContainer.classList.add('flex-item');
+        recipeImgContainer.classList.add('detailed-flex-item');
         this.#container.appendChild(recipeImgContainer);
     }
 
     #addRecipeInfo(){
         const recipeInfoContainer = document.createElement('div');
-        recipeInfoContainer.classList.add('flex-item');
+        recipeInfoContainer.classList.add('detailed-flex-item');
 
         recipeInfoContainer.innerHTML = `
         <h1>Name of Recipe</h1>
@@ -66,12 +66,12 @@ export class detailedRecipeComponent extends BaseComponent{
 
     #addRecipeDetailedInfo() {
         const recipeDetailedInfoContainer = document.createElement('div');
-        recipeDetailedInfoContainer.classList.add('container')
+        recipeDetailedInfoContainer.classList.add('detailed-container')
 
 
         const ingredientSection = document.createElement('div');
-        ingredientSection.classList.add('flex-item');
-        ingredientSection.classList.add('ingredient');
+        ingredientSection.classList.add('detailed-flex-item');
+        ingredientSection.classList.add('detailed-ingredient');
         ingredientSection.innerHTML = `
             <h3>Ingredients</h3>
             <ul>
@@ -82,6 +82,7 @@ export class detailedRecipeComponent extends BaseComponent{
 
         const instructionSection = document.createElement('div');
         instructionSection.classList.add('flex-item');
+        instructionSection.classList.add('instructionContainer');
         instructionSection.innerHTML = `
             <h3>Instructions</h3>
             <ol>
