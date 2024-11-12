@@ -1,0 +1,48 @@
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px
+}
+
+.flex-item {
+    flex: 1;
+
+}
+
+/* Style recipe thumbnail*/
+#recipeImgContainer {
+    background-color: gray;
+    aspect-ratio: 1 / 1;
+    max-width: 400px;
+    max-height: 400px;
+    margin-right: 20px;
+}
+
+#divider {
+    border-style: solid;
+    border-width: 1px;
+    width: 100%;
+}
+
+/* Style Ingredient container*/
+.ingredient {
+    border-right: solid;
+    max-width: 300px;
+}
+
+/* Style unordered list*/
+ul {
+    list-style-type: circle;
+}
+
+li {
+    margin-bottom: 15px
+}
+
+/* Style ordered list*/
+ol li{
+    background: gainsboro;
+    padding: 10px;
+    margin-bottom: 30px;
+}
