@@ -1,0 +1,56 @@
+.meal-plan-title {
+	position: absolute;
+	top: 85%;
+	left: 45%;
+}
+
+.meal-options{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+.meal-options .box{
+	position: relative;
+	margin: 10px;
+	margin-top: 50px;
+	box-sizing: border-box;
+	display: inline-block;
+}
+.meal-options .box .imageBox{
+	position: relative;
+	overflow: hidden;
+}
+
+.meal-options .box .imageBox img{
+	width: 100%;
+	height: 70vh;
+	transition: transform 2s;
+}
+.meal-options .box:hover .imageBox img{
+	transform: scale(1.5);
+}
+.meal-options .box .description{
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	bottom: 10px;
+	right: 10px;
+	background: rgba(0,0,0,.5);
+	transform: scale(0);
+	transition: transform .5s;
+}
+.meal-options .box:hover .description{
+	transform: scale(1);
+}
+.meal-options .box .description .content-imageBox{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	text-align: center;
+	padding: 15px;
+	color: #EFACA5;
+}
+.meal-options .box .description .content-imageBox h2{
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+}

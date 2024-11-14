@@ -55,6 +55,7 @@ select {
     text-align: center;
     grid-column: 3;
     width: 15vw;
+    height: 5vh;
     border-width: 0;
     background-color: #F7EFDA;
 }
