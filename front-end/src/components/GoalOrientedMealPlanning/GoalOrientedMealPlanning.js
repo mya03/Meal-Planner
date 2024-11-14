@@ -7,6 +7,8 @@ export class GoalOrientedMealPlanning extends BaseComponent {
     constructor(){
         super();
         this.loadCSS('GoalOrientedMealPlanning');
+        this.#optionsSection = this.#createGoalOptions();
+        this.#optionsSection.setAttribute("id", "options-section");
     }
 
     render(){
@@ -30,7 +32,7 @@ export class GoalOrientedMealPlanning extends BaseComponent {
     #getTemplateUserInput() {
         // Returns the HTML template for the component
         return `
-        <section class='goal-oriented-meal-planner'>
+        <section class='goal-oriented-meal-planner' id='goal-oriented-meal-planner'>
             <div class="welcome-message">
                 <h1>Welcome to Goal-Oriented Meal Planner!</h1>
                 <h3 class="instruction">Please enter your information below to proceed.</h3>
@@ -71,9 +73,9 @@ export class GoalOrientedMealPlanning extends BaseComponent {
                 </select>
                 <br/><br/>
                 <label for="gender-male">Male</label>
-                <input type="radio" id="gender-male" name="gender"/>
+                <input type="radio" id="gender-male" name="gender" required/>
                 <label for="gender-female">Female</label>
-                <input type="radio" id="gender-female" name="gender"/>
+                <input type="radio" id="gender-female" name="gender" required/>
                 <br/><br/>
                 <button id="calculateTDEE">Calculate TDEE</button>
             </div>
@@ -133,7 +135,18 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         container.appendChild(maintainWeightOption);
         container.appendChild(gainWeightOption);
 
+        // Re-calculate option button
+        const recalculateButton = document.createElement('button');
+        recalculateButton.setAttribute("id", "recalculate-button");
+        recalculateButton.innerHTML = "Re-Calculate";
+        recalculateButton.addEventListener('click', () => {
+            const welcomSection = document.getElementById("goal-oriented-meal-planner");
+            this.#container.removeChild(this.#optionsSection);
+            welcomSection.scrollIntoView({ behavior: "instant", block: "start" });
+        });
+
         containerSection.appendChild(container);
+        containerSection.appendChild(recalculateButton);
         return containerSection;
     }
 
@@ -143,36 +156,44 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         const weightInput = this.#container.querySelector('#weightInput');
         const heightInput = this.#container.querySelector('#heightInput');
         const ageInput = this.#container.querySelector('#ageInput');
+        const maleGender = this.#container.querySelector('#gender-male');
+        const femaleGender = this.#container.querySelector('#gender-female');
 
+        
         // Calculate TDEE
-        calculateTDEE.addEventListener('click', () => this.#handleTDEECalculation(weightInput, heightInput, ageInput));
+        calculateTDEE.addEventListener('click', () => this.#handleTDEECalculation(weightInput, heightInput, ageInput, maleGender, femaleGender));
     }
+    
+    #handleTDEECalculation(weightInput, heightInput, ageInput, maleGender, femaleGender){
 
-    #handleTDEECalculation(weightInput, heightInput, ageInput){
+        // Check if all fields are filled
+        if (maleGender.checked === false && femaleGender.checked === false) {
+            alert("Please fill out the gender info.")
+            return;
+        }
+    
         const weight = weightInput.value;
         const height = heightInput.value;
         const age = ageInput.value;
-
+    
         if(weight === '' || height === '' || age === '') {
             alert('Please enter all information.');
             return;
         }
-
+    
         if(!this.#isNumeric(weight) || !this.#isNumeric(height) || !this.#isNumeric(age)) {
             alert('Please enter numbers only.');
             return;
         }
-
         // Calculate TDEE
 
-        if(this.#optionsSection !== null) {
-            this.#container.removeChild(this.#optionsSection);
-        }
-        this.#optionsSection = this.#createGoalOptions();
-        this.#container.appendChild(this.#optionsSection);
+        // scroll to options
+        const options = document.getElementById("options-section");
+        if(options === null) this.#container.appendChild(this.#optionsSection);
+        this.#optionsSection.scrollIntoView({ behavior: "instant", block: "end" });
 
         // Clear inputs
-        this.#clearInputs(weightInput, heightInput);
+        this.#clearInputs(weightInput, heightInput, ageInput, maleGender, femaleGender);
     }
 
     #isNumeric(str) {
@@ -180,8 +201,11 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         return !isNaN(str) && !isNaN(parseFloat(str));
     }
 
-    #clearInputs(weightInput, heightInput){
+    #clearInputs(weightInput, heightInput, ageInput, maleGender, femaleGender){
         weightInput.value = '';
         heightInput.value = '';
+        ageInput.value = '';
+        maleGender.checked = false;
+        femaleGender.checked = false;
     }
 }

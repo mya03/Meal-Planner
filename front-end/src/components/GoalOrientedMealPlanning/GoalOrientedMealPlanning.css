@@ -62,16 +62,17 @@ select {
 /* Goal options */
 
 .options {
+    padding-top: 10%;
+    width: 100vw;
+    height: 100vh;
 	background-color: #BADD7F;
-    padding-bottom: 10%;
 }
 
 .goal-options-container {
     position: relative;
     top: 5%;
-    left: 20%;
-	width: 60%;
-	height: 70vh;
+	width: 100vw;
+	height: 80%;
 	background-color: #BADD7F;
 }
 
@@ -123,4 +124,17 @@ select {
 .goal-options-container .goal-option:hover .meal-content {
     bottom: 0;
     opacity: 1;
+}
+
+#recalculate-button {
+    position: absolute;
+    margin-top: 7%;
+    text-align: center;
+    scroll-margin-bottom: 0;
+    width: 15vw;
+    height: 5vh;
+    border-width: 0;
+    background-color: #F7EFDA;
+    transform: translate(-50%, -50%);
+    left: 50%;
 }
