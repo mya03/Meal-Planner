@@ -4,6 +4,7 @@ Such as the recipe name, ingredients, and instructions
 */
 
 import React, { useState } from 'react';
+import './RecipeForm.css';
 
 const RecipeForm = ({ onSubmit }) => {
     const [recipeName, setRecipeName] = useState('');
@@ -12,10 +13,12 @@ const RecipeForm = ({ onSubmit }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit({ recipeName, ingredients, instructions });
-        setRecipeName('');
-        setIngredients('');
-        setInstructions('');
+        if (recipeName && ingredients && instructions) {
+            onSubmit({ recipeName, ingredients, instructions });
+            setRecipeName('');
+            setIngredients('');
+            setInstructions('');
+        }
     };
     
     return (

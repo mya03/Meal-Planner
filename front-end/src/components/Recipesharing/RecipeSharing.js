@@ -5,6 +5,7 @@ The RecipeSharing component will manage state, combining RecipeForm and RecipeLi
 import React, { useState } from 'react';
 import RecipeForm from './RecipeForm';
 import RecipeList from './RecipeList';
+import './RecipeSharing.css';
 
 const RecipeSharing = () => {
     const [recipes, setRecipes] = useState([]);
@@ -14,12 +15,12 @@ const RecipeSharing = () => {
     };
 
     return (
-        <div>
+        <div className="recipe-sharing-container">
           <h1>Share a Recipe</h1>
           <RecipeForm onSubmit={addRecipe} />
           <RecipeList recipes={recipes} />
         </div>
-    );
+      );
 };
 
 export default RecipeSharing;
