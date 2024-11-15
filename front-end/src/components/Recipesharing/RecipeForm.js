@@ -1,3 +1,8 @@
+/* 
+the RecipeForm component will include fields that the user may want to share
+Such as the recipe name, ingredients, and instructions
+*/
+
 import React, { useState } from 'react';
 
 const RecipeForm = ({ onSubmit }) => {
