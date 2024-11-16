@@ -26,7 +26,7 @@ export class RecipeSharingComponent extends BaseComponent {
   
       // Append header
       const header = document.createElement('h1');
-      header.textContent = 'Share Your Recipe';
+      header.textContent = 'Share Your Recipe!';
       this.#container.appendChild(header);
   
       // Append form

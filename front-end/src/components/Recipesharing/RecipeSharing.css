@@ -2,7 +2,7 @@
 
 /* General styling for the container */
 .recipe-sharing-container {
-    background-color: #d87c7c; /* Dark pink */
+    background: linear-gradient(to bottom, #d87c7c, #b86161); /* Gradient from light to dark pink */
     padding: 20px;
     border-radius: 8px;
     color: white; /* White text */
@@ -24,7 +24,7 @@
   
   .recipe-form input,
   .recipe-form textarea {
-    width: 100%;
+    width: 90%;
     padding: 8px;
     margin-top: 5px;
     border-radius: 4px;
@@ -33,7 +33,7 @@
   }
   
   .recipe-form button {
-    background-color: #b86161; /* A darker, muted pink */
+    background-color: #C3A6E6; /* Lavender */
     color: white;
     padding: 10px 20px;
     border: none;
@@ -44,7 +44,7 @@
   }
   
   .recipe-form button:hover {
-    background-color: #a75050; /* Even darker pink for hover */
+    background-color: #A385D6; /* Darker lavender for hover */
   }
   
   /* Recipe List styling */
