@@ -1,5 +1,5 @@
 //import { GoalOrientedMealPlanning } from "../GoalOrientedMealPlanning/GoalOrientedMealPlanning.js";
-import { RecipeSharingComponent } from "../RecipeSharing/RecipeSharingComponent.js";
+import { RecipeSharingComponent } from "../RecipeSharing/RecipeSharing2.js";
 
 export class AppControllerComponent {
     #container = null;
@@ -18,9 +18,7 @@ export class AppControllerComponent {
         //this.#container.appendChild(mealPlanningElement);
 
         // Render Recipe Sharing Feature
-        const recipeSharingElement = this.#recipeSharingComponent.render();
-        this.#container.appendChild(recipeSharingElement);
-
+        this.#container.appendChild(this.#recipeSharingComponent.render());
         return this.#container;
     }
 
