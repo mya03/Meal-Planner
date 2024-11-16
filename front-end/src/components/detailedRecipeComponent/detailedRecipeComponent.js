@@ -26,7 +26,7 @@ export class detailedRecipeComponent extends BaseComponent{
         this.#container.classList.add('detailed-container');
     }
     
-
+    // add the thumbnail of recipe
     #addRecipeImgContainer(){
         const recipeImgContainer = document.createElement('div');
         recipeImgContainer.id = 'recipeImgContainer';
@@ -34,6 +34,7 @@ export class detailedRecipeComponent extends BaseComponent{
         this.#container.appendChild(recipeImgContainer);
     }
 
+    // add general and summary info of recipe
     #addRecipeInfo(){
         const recipeInfoContainer = document.createElement('div');
         recipeInfoContainer.classList.add('detailed-flex-item');
@@ -58,12 +59,14 @@ export class detailedRecipeComponent extends BaseComponent{
         this.#container.appendChild(recipeInfoContainer);
     }
 
+    // the divider between the upper section and lower section
     #addDivider() {
         const divider = document.createElement('div');
         divider.id = 'divider';
         this.#container.appendChild(divider);
     }
 
+    // add ingredients and instructions section
     #addRecipeDetailedInfo() {
         const recipeDetailedInfoContainer = document.createElement('div');
         recipeDetailedInfoContainer.classList.add('detailed-container')
@@ -77,11 +80,12 @@ export class detailedRecipeComponent extends BaseComponent{
             <ul>
                 <li>Lorem ipsum</li>
                 <li>Lorem ipsum</li>
+                <li>Lorem ipsum</li>
             </ul>
         `;
 
         const instructionSection = document.createElement('div');
-        instructionSection.classList.add('flex-item');
+        instructionSection.classList.add('detailed-flex-item');
         instructionSection.classList.add('instructionContainer');
         instructionSection.innerHTML = `
             <h3>Instructions</h3>
@@ -94,10 +98,6 @@ export class detailedRecipeComponent extends BaseComponent{
         recipeDetailedInfoContainer.appendChild(ingredientSection);
         recipeDetailedInfoContainer.appendChild(instructionSection);
         this.#container.appendChild(recipeDetailedInfoContainer);
-
     }
-
-
-
     
 }       
