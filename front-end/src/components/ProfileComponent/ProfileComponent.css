@@ -1,0 +1,54 @@
+.user-profile{
+    display: flex;
+}
+
+.user-info{
+    margin-left: 10%; 
+    margin-right: 20px;
+    width: 30%;
+}
+
+.preference-container{
+    flex-grow: 1;
+    margin-right: 10%;
+}
+
+.info-box{
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.preference-box{
+    height: auto;
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.preference-options{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 20px;
+}
+
+.preference-options button{
+    margin-top: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
+    width: 200px; /* Fixed width for the button */
+    padding: 10px;
+    font-size: 1rem;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #EFACA5;
+}
