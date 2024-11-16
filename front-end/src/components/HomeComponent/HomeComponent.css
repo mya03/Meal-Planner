@@ -1,9 +1,11 @@
+/*Apply styles for thumbnail section*/
 .homeIntroContainer{
+    background-color: #badd7f;
     display: flex;
-    border-style: solid;
     padding: 10px;
-    margin: 20px;
+    width: 95%;
     align-items: center;
+    justify-self: center;
 }
 
 .homeTextContainer {
@@ -17,17 +19,12 @@
 }
 
 .homeTextContainer button {
+    background-color: #f7efda;
     margin-top: 20px;
     padding: 10px;
     border: none;
     border-radius: 12px;
 }
-
-/*Change style when hover button*/
-.homeTextContainer button:hover {
-   background-color: grey;
-}
-
 
 #homeImg{
     width: 50%;
@@ -35,26 +32,33 @@
     object-fit: contain;
 }
 
-#recTitle {
-    margin-left: 20px;
-}
-
+/* Apply styles for the recommend recipes section */
 .homeRecipeContainer {
     display:flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+#recTitle {
+    flex: 1 0 100%;
+    margin-left: 20px;
 }
 
 .homeRecipeCard {
-    border-style: solid;
+    background-color: #efaca5;
     padding: 10px;
     width: 25%;
     height: auto;
+    border-radius: 12px;
 }
 
 .homeRecipeCard div {
-    background-color: gray;
-    border-style: solid;
+    background-color: #f7efda;
     aspect-ratio: 1/1;
     border-radius: 8px;
   
+}
+
+.homeRecipeCard:hover {
+    cursor: pointer;
 }

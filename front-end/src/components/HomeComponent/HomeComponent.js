@@ -27,6 +27,7 @@ export class HomeComponent extends BaseComponent {
         this.#container.classList.add('container');
     }
 
+    // Add thumbnail container
     #createIntroContainer(){
         const introContainer = document.createElement('div');
         introContainer.classList.add('homeIntroContainer');
@@ -55,13 +56,14 @@ export class HomeComponent extends BaseComponent {
         this.#container.appendChild(introContainer);
     }
 
+    // Add recommended recipes section
     #createRecommendedRecipeContainer(){
         const recTitle = document.createElement('h2');
         recTitle.innerText = "Recommended Recipes";
         recTitle.id = "recTitle";
         const recRecipeContainer = document.createElement('div');
         recRecipeContainer.classList.add('homeRecipeContainer');
-
+        recRecipeContainer.appendChild(recTitle);
         for (let i=0; i < 3;i++){
             const recipeCard = document.createElement('div');
             recipeCard.classList.add('homeRecipeCard');
@@ -74,7 +76,6 @@ export class HomeComponent extends BaseComponent {
             recRecipeContainer.appendChild(recipeCard);
         }
 
-        this.#container.appendChild(recTitle);
         this.#container.appendChild(recRecipeContainer);
 
     }
