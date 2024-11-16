@@ -1,0 +1,60 @@
+.homeIntroContainer{
+    display: flex;
+    border-style: solid;
+    padding: 10px;
+    margin: 20px;
+    align-items: center;
+}
+
+.homeTextContainer {
+    margin-left: 50px;
+    padding: 50px;
+    flex-grow: 1;
+}
+
+.homeTextContainer h1 {
+    font-size: 4rem;
+}
+
+.homeTextContainer button {
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 12px;
+}
+
+/*Change style when hover button*/
+.homeTextContainer button:hover {
+   background-color: grey;
+}
+
+
+#homeImg{
+    width: 50%;
+    height: auto;
+    object-fit: contain;
+}
+
+#recTitle {
+    margin-left: 20px;
+}
+
+.homeRecipeContainer {
+    display:flex;
+    justify-content: space-evenly;
+}
+
+.homeRecipeCard {
+    border-style: solid;
+    padding: 10px;
+    width: 25%;
+    height: auto;
+}
+
+.homeRecipeCard div {
+    background-color: gray;
+    border-style: solid;
+    aspect-ratio: 1/1;
+    border-radius: 8px;
+  
+}

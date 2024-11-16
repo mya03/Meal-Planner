@@ -21,14 +21,6 @@ export class RecipesRepositoryService extends Service {
                       console.error(error);
                     });
         });
-    //   this.initDB()
-    //     .then(() => {
-    //       // Load tasks on initialization
-    //       this.loadRecipesFromDB();
-    //     })
-    //     .catch(error => {
-    //       console.error(error);
-    //     });
 
         console.log(this.recipesData);
     }
