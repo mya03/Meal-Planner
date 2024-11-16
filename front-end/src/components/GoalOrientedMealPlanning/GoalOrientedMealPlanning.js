@@ -1,5 +1,6 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
 import { MealPlan } from '../MealPlan/MealPlan.js';
+import { EventHub } from '../../eventhub/EventHub.js';
 
 export class GoalOrientedMealPlanning extends BaseComponent {
     #container = null;
@@ -159,6 +160,7 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         
         // Calculate TDEE
         calculateTDEE.addEventListener('click', () => this.#handleTDEECalculation(weightInput, heightInput, ageInput, maleGender, femaleGender, activityInput));
+
     }
     
     #handleTDEECalculation(weightInput, heightInput, ageInput, maleGender, femaleGender, activityInput){
@@ -202,6 +204,7 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         if(options === null) this.#container.appendChild(this.#optionsSection);
         this.#optionsSection.scrollIntoView({ behavior: "instant", block: "end" });
 
+        // switch to options
         this.#switchToOptions();
 
         // Clear inputs
@@ -209,11 +212,13 @@ export class GoalOrientedMealPlanning extends BaseComponent {
     }
 
     #switchToOptions() {
+        // Switch to meal options
+        const hub = EventHub.getInstance();
+
         const options = document.getElementsByClassName("goal-option");
         for(let option of options) {
             option.addEventListener('click', () => {
-                location.reload();
-                this.#container = new MealPlan();
+                hub.publish('navigateToMealPlan', null);
             });
         }
     }
