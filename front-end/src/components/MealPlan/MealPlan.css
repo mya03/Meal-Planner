@@ -1,0 +1,84 @@
+.meal-plan {
+	display: flex;
+	margin: 0 auto;
+	scroll-snap-type: x mandatory;
+	overflow: auto;
+	flex-flow: row nowrap;
+	overflow-y: hidden;
+}
+
+.meal {
+	width: 100vw;
+	height: 100vh;
+	scroll-snap-align: center;
+	scroll-snap-stop: always;
+	flex: none;
+	display: grid;
+	grid-template-columns: 60% 1fr 10%;
+	grid-template-rows: 10% 1fr 10%;
+	text-align: center;
+	background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../GoalOrientedMealPlanning/images/maintainOption.jpeg");
+	background-size: cover;
+}
+
+.meal h1 {
+	margin-left: 10%;
+	margin-top: 30%;
+	font-size: 10vw;
+	color: #F7EFDA;
+	grid-row: 1;
+}
+
+.meal h3 {
+	font-size: 1.75vw;
+	color: #F7EFDA;
+	grid-column: 1;
+	margin-top: 38%;
+	margin-left: 10%;
+	text-decoration: underline dotted;
+}
+
+.recipe-card {
+	text-align: center;
+	border-radius: 5%;
+	grid-column: 2;
+	grid-row: 2;
+	overflow: hidden;
+	background-color: #3E8440;
+	opacity: .95;
+	display: grid;
+	grid-template-rows: 40% 1fr;
+	outline: dashed #F7EFDA;
+}
+
+.recipe-content {
+	grid-row: 1;
+	margin-top: 20%;
+	margin-left: 4%;
+	margin-right: 4%;
+}
+
+.recipe-info {
+	grid-row: 2;
+	margin-top: 10%;
+	margin-left: 4%;
+	margin-right: 4%;
+	margin-bottom: 10%;
+	border-radius: 5%;
+	overflow: hidden;
+	outline: dashed #F7EFDA;
+}
+
+.recipe-info .recipe-photo {
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	z-index: 0;
+	transition: transform .5s, opacity .5s;
+}
+
+.recipe-info:hover .recipe-photo {
+	transform: scale(1.5);
+	opacity: .5;
+}
