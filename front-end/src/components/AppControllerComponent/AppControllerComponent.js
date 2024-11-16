@@ -1,11 +1,14 @@
 import { GoalOrientedMealPlanning } from "../GoalOrientedMealPlanning/GoalOrientedMealPlanning.js";
+import { MealPlan } from "../MealPlan/MealPlan.js";
 
 export class AppControllerComponent {
     #container = null;
     #goalOrientedMealPlanning = null;
+    #mealPlan = null;
 
     constructor() {
         this.#goalOrientedMealPlanning = new GoalOrientedMealPlanning();
+        this.#mealPlan = new MealPlan();
     }
 
     render() {
