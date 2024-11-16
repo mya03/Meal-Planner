@@ -62,18 +62,20 @@ export class ProfileComponent extends BaseComponent{
     #createPreferenceBox(){
         const preferenceBox = document.createElement('div');
         preferenceBox.classList.add("preference-box");
-        preferenceBox.appendChild(this.#getPreferenceTemplate("Dietary Restrictions", "Vegan", "Vegetarian", "Gluten Free"));
-        preferenceBox.appendChild(this.#getPreferenceTemplate("Health & Fitness Goals", "Low Carb", "High Protein", "Low Fat"));
-        preferenceBox.appendChild(this.#getPreferenceTemplate("Cuisine Preferences", "Western", "Asian", "Mediterranean"));
+        preferenceBox.innerHTML += `<h3>Dietary Restrictions</h3>`;
+        preferenceBox.appendChild(this.#getPreferenceTemplate("Vegan", "Vegetarian", "Gluten Free"));
+        preferenceBox.innerHTML += `<h3>Health & Fitness Goals</h3>`;
+        preferenceBox.appendChild(this.#getPreferenceTemplate("Low Carb", "High Protein", "Low Fat"));
+        preferenceBox.innerHTML += `<h3>Cuisine Preferences</h3>`;
+        preferenceBox.appendChild(this.#getPreferenceTemplate("Western", "Asian", "Mediterranean"));
         return preferenceBox;
     }
     
 
-    #getPreferenceTemplate(name, option1, option2, option3){
+    #getPreferenceTemplate(option1, option2, option3){
         const options = document.createElement('div');
         options.classList.add("preference-options");
         options.innerHTML = `
-        <h3>${name}</h3>
         <button>${option1}</button>
         <button>${option2}</button>
         <button>${option3}</button>

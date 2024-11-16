@@ -8,12 +8,14 @@
     width: 30%;
 }
 
+/* container for both preferences header and box */
 .preference-container{
     flex-grow: 1;
     margin-right: 10%;
 }
 
 .info-box{
+    background-color: #badd7f;
     padding: 10px;
     font-size: 1rem;
     margin-bottom: 10px;
@@ -22,7 +24,9 @@
     box-sizing: border-box;
 }
 
+/* container for all the preferences */
 .preference-box{
+    background-color: #badd7f;
     height: auto;
     flex-grow: 1;
     padding: 10px;
@@ -33,7 +37,9 @@
     box-sizing: border-box;
 }
 
+/* three options buttons */
 .preference-options{
+    display: flex;
     margin-top: 30px;
     margin-bottom: 30px;
     margin-left: 20px;
@@ -51,4 +57,8 @@
     border-radius: 5px;
     box-sizing: border-box;
     background-color: #EFACA5;
+}
+
+.preference-options button:active{
+    background-color: #ec968c;
 }
