@@ -1,0 +1,77 @@
+/* .ingredient-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.ingredient-input button{
+    width: 100%;
+    max-width: 200px;
+} */
+h1 {
+    text-align: center;
+}
+
+/* Styling for the input field */
+.ingredient-input {
+    display: flex; /* Use flexbox to align children horizontally */
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Style for the input box */
+.ingredient-input input {
+    flex-grow: 1; /* Let the input take up the remaining space */
+    padding: 15px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-right: 10px;
+}
+
+/* Style for the button */
+.ingredient-input button {
+    width: 200px; /* Fixed width for the button */
+    padding: 10px;
+    font-size: 1rem;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.ingredient-input button:hover {
+    color:white;
+    background-color: gray;
+}
+
+.recipes-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.recipe-box {
+    width: 49.6%;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.recipe-box img{
+    width: 100%;
+}
