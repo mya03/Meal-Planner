@@ -107,7 +107,7 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         const headerLoseWeight = document.createElement('h2');
         headerLoseWeight.textContent = "Lose Weight";
         const descriptionLoseWeight = document.createElement('p');
-        descriptionLoseWeight.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        descriptionLoseWeight.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
         contentLoseWeightOption.appendChild(headerLoseWeight);
         contentLoseWeightOption.appendChild(descriptionLoseWeight);
 
@@ -121,7 +121,7 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         const headerMaintainWeight = document.createElement('h2');
         headerMaintainWeight.textContent = "Maintain Weight";
         const descriptionMaintainWeight = document.createElement('p');
-        descriptionMaintainWeight.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        descriptionMaintainWeight.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
         contentMaintainWeightOption.appendChild(headerMaintainWeight);
         contentMaintainWeightOption.appendChild(descriptionMaintainWeight);
 
@@ -135,7 +135,7 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         const headerGainWeight = document.createElement('h2');
         headerGainWeight.textContent = "Gain Weight";
         const descriptionGainWeight = document.createElement('p');
-        descriptionGainWeight.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        descriptionGainWeight.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
         contentGainWeightOption.appendChild(headerGainWeight);
         contentGainWeightOption.appendChild(descriptionGainWeight);
 
@@ -196,7 +196,7 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         else if(activity === '5') tdee *= 1.725;
         else if(activity === '6' || activity === '7') tdee *= 1.99;
 
-        this.#tdeeOutput.innerHTML = 'Your TDEE is ' + tdee;
+        this.#tdeeOutput.innerHTML = 'Your TDEE is ' + tdee + ' (choose an option below)';
 
         // scroll to options
         const options = document.getElementById("options-section");

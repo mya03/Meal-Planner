@@ -42,7 +42,7 @@ export class MealPlan extends BaseComponent {
                 <h3>recipe recommendation</h3>
                 <div class="recipe-card">
                     <div class="recipe-content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin leo nunc, placerat eget pellentesque ut, tincidunt sed nunc. Proin condimentum ante at facilisis pretium. Nullam a lorem sed turpis iaculis tempus. Nunc blandit massa vitae lacus dictum, nec ultricies dui aliquam.</p>
+                        <p>Click image to see the details of the recipe below or swipe left to see other meals. </p>
                     </div>
                     <div class="recipe-info">
                         <img class="recipe-photo" src="components/GoalOrientedMealPlanning/images/gainOption.jpeg" alt="recipe-photo"</img>
@@ -55,7 +55,7 @@ export class MealPlan extends BaseComponent {
                 <h3>recipe recommendation</h3>
                 <div class="recipe-card">
                     <div class="recipe-content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin leo nunc, placerat eget pellentesque ut, tincidunt sed nunc. Proin condimentum ante at facilisis pretium. Nullam a lorem sed turpis iaculis tempus. Nunc blandit massa vitae lacus dictum, nec ultricies dui aliquam.</p>
+                        <p>Click image to see the details of the recipe below or swipe left to see other meals. </p>
                     </div>
                     <div class="recipe-info">
                         <img class="recipe-photo" src="components/GoalOrientedMealPlanning/images/maintainOption.jpeg" alt="recipe-photo"</img>
@@ -68,7 +68,7 @@ export class MealPlan extends BaseComponent {
                 <h3>recipe recommendation</h3>
                 <div class="recipe-card">
                     <div class="recipe-content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin leo nunc, placerat eget pellentesque ut, tincidunt sed nunc. Proin condimentum ante at facilisis pretium. Nullam a lorem sed turpis iaculis tempus. Nunc blandit massa vitae lacus dictum, nec ultricies dui aliquam.</p>
+                        <p>Click image to see the details of the recipe below or swipe left to see other meals. </p>
                     </div>
                     <div class="recipe-info">
                         <img class="recipe-photo" src="components/GoalOrientedMealPlanning/images/loseOption.jpeg" alt="recipe-photo"</img>
