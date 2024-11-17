@@ -52,3 +52,22 @@
     font-weight: bold;
     color: #3e8440;
 }
+
+/*Responsive Design*/
+
+/* Mobile (up to 600px) */
+@media (max-width: 600px) {
+    .detailed-container{
+        display: block;
+       
+    }
+
+    #recipeImgContainer {
+        margin-left: 20px;
+    }
+
+    .detailed-ingredient {
+        border: none;
+        max-width: 300px;
+    }
+}

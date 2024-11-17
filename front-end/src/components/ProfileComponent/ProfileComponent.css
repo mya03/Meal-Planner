@@ -62,3 +62,31 @@
 .preference-options button:active{
     background-color: #ec968c;
 }
+
+/*Responsive Design*/
+
+/* Mobile (up to 600px) */
+@media (max-width: 600px) {
+
+    .user-profile {
+        display: block;
+    }
+
+    .user-info {
+        margin: 0px;
+        width: 100%;
+    }
+
+    .preference-container {
+        margin: 0px;
+    }
+
+    .preference-options{
+        margin: 0px;
+    }
+
+    .preference-options button {
+        margin: 5px;
+    }
+    
+}
