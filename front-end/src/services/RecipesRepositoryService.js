@@ -4,7 +4,7 @@ import Service from './Service.js';
 
 export class RecipesRepositoryService extends Service {
   #api = "https://api.spoonacular.com/recipes/";
-  #apiKey = "193232ec7aa447bd889235b1cb5196ad";
+  #apiKey = "56696075b2fe4df48b9d6f5660305da8";
 
   constructor() {
     super();
@@ -27,6 +27,7 @@ export class RecipesRepositoryService extends Service {
 
     //   console.log(this.recipesData);
     this.getRandomRecipe();
+    this.loadMultiRecipes();
   }
 
   async fetchRecipesData() {
@@ -98,22 +99,14 @@ export class RecipesRepositoryService extends Service {
   }
 
 
-  async loadRecipesFromDB() {
-    return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([this.storeName], 'readonly');
-      const store = transaction.objectStore(this.storeName);
-      const request = store.getAll();
+  async loadMultiRecipes() {
+    let recipes = [];
 
-      request.onsuccess = event => {
-        const recipes = event.target.result;
-        this.publish(Events.AllRecipes, recipes);
-        resolve(recipes);
-      };
-
-      request.onerror = () => {
-        reject('Error retrieving recipes');
-      };
-    });
+    for(let i=0; i<5; i++){
+      const recipe = await this.getRandomRecipe();
+      recipes.push(recipe);
+    }
+    this.publish(Events.AllRecipes, recipes);
   }
 
 
@@ -125,46 +118,28 @@ export class RecipesRepositoryService extends Service {
 
   //find recipes from db based on input ingredients
   async findRecipes(ingredients){
-      return new Promise((resolve, reject) => {
-          const transaction = this.db.transaction([this.storeName], 'readonly');
-          const store = transaction.objectStore(this.storeName);
-          const request = store.getAll(); // Get all recipes
-    
-          request.onsuccess = event => {
-              const recipes = event.target.result;
-
-              const foundRecipes = recipes.filter(recipe => {
-                  // Loop through ingredients
-                  for (let i = 1; i <= 20; i++) { 
-                    const ingredient = recipe[`strIngredient${i}`];
-                    if (ingredient && ingredient.toLowerCase().includes(ingredients.toLowerCase())) {
-                      return true;
-                    }
-                  }
-                  return false; // No match
-              });
-
-              const hub = EventHub.getInstance();
-              hub.publish("FoundRecipes", foundRecipes);   
-              resolve(foundRecipes);
-          };
-    
-          request.onerror = event => {
-            reject('Error finding recipes');
-          };
-        });
+      try{
+        const ingredientsList = ingredients.replace(/ /g, '+');
+        const response = await fetch(this.#api + `findByIngredients?ingredients=${ingredientsList}?apiKey=` + this.#apiKey);
+        const result = await this.getRandomRecipe();
+        return  result;
+      }catch(error){
+        console.error(error);
+      }
   }
 
   async getRandomRecipe() {
-    this.#fetchRandomRecipe()
-      .then((data) => {this.#fetchNutritionData(data.recipes[0].id)
-        .then((nutrition) => {
-          // Load tasks on initialization
-          return this.#createRecipeObject(data, nutrition.nutrients);
-        })
-        .catch(error => {
-          console.error(error);
-          return null;
+    return new Promise((resolve, reject) => {
+      this.#fetchRandomRecipe()
+        .then((data) => {this.#fetchNutritionData(data.recipes[0].id)
+          .then((nutrition) => {
+            // Load tasks on initialization
+            resolve(this.#createRecipeObject(data.recipes[0], nutrition.nutrients));
+          })
+          .catch(error => {
+            console.error(error);
+            reject(null);
+        });
       });
     });
   }
