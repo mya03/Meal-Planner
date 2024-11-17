@@ -4,10 +4,10 @@ import { Events } from '../../eventhub/Events.js';
 
 export class IngredientBasedSuggestionComponent extends BaseComponent{
     #container = null;
+    #body = null;
     #headerComponent = null;
     #searchComponent = null;
     #recipeComponent = null;
-
 
     constructor(){
         super();
@@ -19,10 +19,10 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
             return this.#container;
         }
         this.#createContainer();
+        this.#attachEventListeners();
         return this.#container;
     }
 
-    //FIX NEED TO DO 
     #createContainer() {
         // Create and configure the container element
         this.#container = document.createElement('div');;
@@ -34,8 +34,8 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
         //append search bar
         this.#container.appendChild(this.#createSearchComponent());
 
-        //append recipes
-        this.#container.appendChild(this.#createRecipes(4));
+        //append page body
+        this.#container.appendChild(this.#createBody());
         
     }
 
@@ -58,48 +58,123 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
     #getIngredientTemplate() {
         // Returns the HTML template for the component
         return `
-          <input type="text" id="ingredientInput" placeholder="Enter your avaible ingredients">
+          <input type="text" id="ingredientInput" placeholder="Enter your avaible ingredients. (multiple ingredients should be separated by comma and space">
           <button id="findRecipeBtn">Find</button>
         `;
     }
 
-    #createRecipes(number){
+    //create page body
+    #createBody(){
+        this.#body = document.createElement('div');
+        this.#body.classList.add("recipes-body");
+        this.#body.appendChild(this.#createFilterComponent());
+        return this.#body;
+    }
+    
+    //add filter box
+    #createFilterComponent(){
+        const filterBox = document.createElement('div');
+        filterBox.classList.add("filter-box");
+        filterBox.innerHTML += '<h3>Filter</h3>';
+
+        //add filter options
+        filterBox.appendChild(this.#getFilterOptionTemplate("veganFilter", "Vegan"));
+        filterBox.appendChild(this.#getFilterOptionTemplate("vegetarianFilter", "Vegetarian"));
+        filterBox.appendChild(this.#getFilterOptionTemplate("glutenFreeFilter", "Gluten Free"));
+        filterBox.appendChild(this.#getFilterOptionTemplate("lactoseIntFilter", "Lactose Intolerance"));
+
+        return filterBox;
+    }
+
+    #getFilterOptionTemplate(id, name){
+        const filterOption = document.createElement('div');
+        filterOption.classList.add("filter-option");
+        filterOption.innerHTML = `
+            <input type="checkbox" id="${id}">
+            <label for="${id}">${name}</label>
+        `
+        
+        return filterOption;
+    }
+
+    //container for recipes
+    #createRecipes(recipes){
         this.#recipeComponent = document.createElement('div');
         this.#recipeComponent.classList.add("recipes-container");
-        for(let i=0; i<number; i++){
-            this.#recipeComponent.appendChild(this.#createRecipeComponent());
+        this.#recipeComponent.id = "recipes-container";
+
+        for(let i=0; i<recipes.length; i++){
+            console.log(recipes[i]);
+            this.#recipeComponent.appendChild(this.#createRecipeComponent(recipes[i].title, recipes[i].image, recipes[i].summary));
         }
         return this.#recipeComponent;
     }
 
     //add recipe component
-    #createRecipeComponent(){
+    #createRecipeComponent(name, image, summary){
         const recipeComponent = document.createElement('div');
         recipeComponent.classList.add("recipe-box");
-        recipeComponent.innerHTML = this.#getRecipeImageTemplate();
+        recipeComponent.innerHTML = this.#getRecipeImageTemplate(image);
         
         //add information box
         const recipeInfo = document.createElement('div');
         recipeInfo.classList.add("recipe-info");
-        recipeInfo.innerHTML = this.#getRecipeInfoTemplate();
+        recipeInfo.innerHTML = this.#getRecipeInfoTemplate(name, summary);
         recipeComponent.appendChild(recipeInfo);
 
         return recipeComponent;
     }
 
-    #getRecipeImageTemplate(){
+    #getRecipeImageTemplate(image){
         // Returns the HTML template for the component
         return `
-          <img src="https://yummione.com/wp-content/uploads/2019/02/banh-canh-cua-4.jpg">
+          <img src="${image}">
         `;
     }
-    #getRecipeInfoTemplate(){
+    #getRecipeInfoTemplate(name, summary){
         return `
-          <p>Recipe: <p>
-          <p>Description: <p>
+          <p>Recipe: ${name}<p>
+          <p>Description: ${summary}<p>
         `;
     }
 
+    #attachEventListeners(){
+        const ingredientInput = this.#searchComponent.querySelector('#ingredientInput');
+        const findRecipeBtn = this.#searchComponent.querySelector('#findRecipeBtn');
 
+        findRecipeBtn.addEventListener("click", ()=>this.#handleFindRecipe(ingredientInput));
+
+        const hub = EventHub.getInstance();
+        hub.subscribe(Events.AllRecipes, (recipes) =>this.#displayRecipes(recipes));
+        hub.subscribe("FoundRecipes", (foundRecipes) => this.#displayRecipes(foundRecipes));
+    }
+
+    #handleFindRecipe(ingredientInput){
+        const ingredients = ingredientInput.value;
+
+        if (!ingredients) {
+            alert('Please enter at least one ingredient.');
+            return;
+        }
+        this.#publishFindRecipes(ingredients);
+
+        //clear input of search box
+        ingredientInput.value = "";
+    }
+
+    #publishFindRecipes(ingredients){
+        const hub = EventHub.getInstance();
+        hub.publish(Events.FindRecipes, ingredients);
+    }
+
+    #displayRecipes(recipes){
+        //clear the recipes-container if they are current recipes displayed
+        const recipeContainer = document.getElementById("recipes-container");
+        if(recipeContainer){
+            this.#body.removeChild(recipeContainer);
+        }
+
+        this.#body.appendChild(this.#createRecipes(recipes));
+    }
 
 }
