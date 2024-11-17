@@ -22,3 +22,18 @@
 .navigation-bar button:hover {
     color: #548048;
 }
+
+/*Responsive Design*/
+
+/* Mobile (up to 600px) */
+@media (max-width: 600px) {
+    .navigation-bar {
+        display: block;
+        gap:0px;
+        margin: 0px;
+    }
+
+    .navigation-bar button {
+        margin: 0;
+    }
+}

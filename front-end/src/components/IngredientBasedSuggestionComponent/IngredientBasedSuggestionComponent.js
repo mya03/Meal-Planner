@@ -131,6 +131,7 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
           <img src="${image}">
         `;
     }
+
     #getRecipeInfoTemplate(name, summary){
         return `
           <p>Recipe: ${name}<p>
@@ -176,5 +177,4 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
 
         this.#body.appendChild(this.#createRecipes(recipes));
     }
-
 }

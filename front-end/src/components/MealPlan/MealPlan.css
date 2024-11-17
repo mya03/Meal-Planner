@@ -83,6 +83,23 @@
 	opacity: .5;
 }
 
-@media (max-width: 600px) {
-	
+/*Responsive Design*/
+
+/* Mobile (up to 600px) */
+@media (max-width: 600px){
+
+	.meal-plan {
+		overflow-y: visible;
+
+	}
+
+	.meal {
+		display: block;
+	}
+
+	.recipe-card {
+		height: 100%;
+		
+	}
+
 }

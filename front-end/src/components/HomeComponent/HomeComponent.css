@@ -62,3 +62,25 @@
 .homeRecipeCard:hover {
     cursor: pointer;
 }
+
+/*Responsive Design*/
+
+/* Mobile (up to 600px) */
+@media (max-width: 600px) {
+    .homeIntroContainer{
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+
+    }
+
+    .homeTextContainer {
+        margin: 0px;
+        padding: 10px;
+    }
+
+    .homeRecipeCard {
+        width: 70%;
+        margin: 10px;
+    }
+}
