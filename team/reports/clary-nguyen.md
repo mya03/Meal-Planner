@@ -106,7 +106,7 @@
 - **Details**: Create a sequence diagram of the Goal oriented meal planner feature (including TDEE calculation).
 - **Link to Commit**: [Update feature-sequence-diagram.md](https://github.com/mya03/Meal-Planner/commit/eab696eafd1472b662ef831c3072d4a78fcd851d).
   
-### November 16, 2024
+### November 17, 2024
 - **Task**: Modify CSS code to ensure responsiveness.
 - **Details**: Modify css to ensure responsiveness for text in goal-oriented meal planner and add some instructions to ensure that user knows how to navigate between pages.
 - **Link to Commit**: [Modify css to ensure responsiveness for text in goal-oriented meal planner](https://github.com/mya03/Meal-Planner/commit/a6984c59db053d80b5abc91d9323f9d9155a1556).
