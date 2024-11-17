@@ -132,6 +132,7 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
           <img src="${image}">
         `;
     }
+
     #getRecipeInfoTemplate(name, summary){
         return `
           <p>Recipe: ${name}<p>

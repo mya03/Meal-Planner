@@ -1,0 +1,92 @@
+.user-profile{
+    display: flex;
+}
+
+.user-info{
+    margin-left: 10%; 
+    margin-right: 20px;
+    width: 30%;
+}
+
+/* container for both preferences header and box */
+.preference-container{
+    flex-grow: 1;
+    margin-right: 10%;
+}
+
+.info-box{
+    background-color: #badd7f;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* container for all the preferences */
+.preference-box{
+    background-color: #badd7f;
+    height: auto;
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* three options buttons */
+.preference-options{
+    display: flex;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 20px;
+}
+
+.preference-options button{
+    margin-top: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
+    width: 200px; /* Fixed width for the button */
+    padding: 10px;
+    font-size: 1rem;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #EFACA5;
+}
+
+.preference-options button:active{
+    background-color: #ec968c;
+}
+
+/*Responsive Design*/
+
+/* Mobile (up to 600px) */
+@media (max-width: 600px) {
+
+    .user-profile {
+        display: block;
+    }
+
+    .user-info {
+        margin: 0px;
+        width: 100%;
+    }
+
+    .preference-container {
+        margin: 0px;
+    }
+
+    .preference-options{
+        margin: 0px;
+    }
+
+    .preference-options button {
+        margin: 5px;
+    }
+    
+}

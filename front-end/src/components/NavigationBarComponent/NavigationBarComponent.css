@@ -1,0 +1,39 @@
+.navigation-bar {
+    display: flex;
+    gap: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.navigation-bar h2 {
+    flex-grow: 1;
+}
+
+.navigation-bar button {
+    align-self: center;
+    height: 50%;
+    margin-left: 30px;
+    background: transparent;
+    border:  none;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.navigation-bar button:hover {
+    color: #548048;
+}
+
+/*Responsive Design*/
+
+/* Mobile (up to 600px) */
+@media (max-width: 600px) {
+    .navigation-bar {
+        display: block;
+        gap:0px;
+        margin: 0px;
+    }
+
+    .navigation-bar button {
+        margin: 0;
+    }
+}
