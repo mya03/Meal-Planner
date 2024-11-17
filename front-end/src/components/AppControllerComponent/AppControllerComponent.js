@@ -5,6 +5,7 @@ import { GoalOrientedMealPlanning } from "../GoalOrientedMealPlanning/GoalOrient
 import { MealPlan } from "../MealPlan/MealPlan.js";
 import { IngredientBasedSuggestionComponent } from "../IngredientBasedSuggestionComponent/IngredientBasedSuggestionComponent.js"
 import { ProfileComponent } from "../ProfileComponent/ProfileComponent.js";
+import { RecipeSharingComponent } from "../Recipesharing/RecipeSharing2.js";
 import { EventHub } from '../../eventhub/EventHub.js';
 
 export class AppControllerComponent{
@@ -17,6 +18,7 @@ export class AppControllerComponent{
     #MealPlan = null;
     #IngredientBasedSuggestionComponent = null;
     #ProfileComponent = null;
+    #RecipeSharingComponent = null;
     #hub = null; // EventHub instance for managing events
 
     constructor(){
@@ -32,6 +34,7 @@ export class AppControllerComponent{
         this.#MealPlan = new MealPlan();
         this.#IngredientBasedSuggestionComponent = new IngredientBasedSuggestionComponent();
         this.#ProfileComponent = new ProfileComponent();
+        this.#RecipeSharingComponent = new RecipeSharingComponent();
     }
 
     // Render the AppController component and return the container
@@ -100,6 +103,11 @@ export class AppControllerComponent{
             this.#currentView = 'recipes';
             this.#renderCurrentView();
         });
+
+        this.#hub.subscribe('navigateToShare', () => {
+            this.#currentView = 'sharing';
+            this.#renderCurrentView();
+        });
         
 
 
@@ -136,6 +144,9 @@ export class AppControllerComponent{
         } else if (this.#currentView === 'recipes') {
             //render detailed recipe page 
             viewContainer.appendChild(this.#IngredientBasedSuggestionComponent.render());    
+        } else if (this.#currentView === 'sharing') {
+            //render detailed recipe page 
+            viewContainer.appendChild(this.#RecipeSharingComponent.render());    
         }
     }
 }
