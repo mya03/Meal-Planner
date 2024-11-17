@@ -28,22 +28,47 @@ export class NavigationBarComponent extends BaseComponent{
 
     #setupContainerContent() {
         this.#container.innerHTML = `
-        <h2>Meal Planner</h2>
+        <h2>Meally</h2>
         <button id="homeBtn">Home</button>
         <button id="recipesBtn">Recipes</button>
+        <button id="plannerBtn">Meal Planner</button>
         <button id="profileBtn">Profile</button>
+        <button id="shareBtn">Share Recipes</button>
         `;
     }
 
     #attachEventListeners(){
         const hub = EventHub.getInstance();
-        const RecipesBtn = this.#container.querySelector('#recipeBtn');
+        const recipesBtn = this.#container.querySelector('#recipesBtn');
         const homeBtn = this.#container.querySelector('#homeBtn');
+        const plannerBtn = this.#container.querySelector('#plannerBtn');
+        const profileBtn = this.#container.querySelector('#profileBtn');
+        const shareBtn = this.#container.querySelector('#shareBtn');
+    
         
         // Event listener for navigating pages
         homeBtn.addEventListener('click', () => {
             hub.publish('navigateToHome', null);
         });
+
+        recipesBtn.addEventListener('click', () => {
+            hub.publish('navigateToRecipes', null);
+        });
+
+        plannerBtn.addEventListener('click', () => {
+            hub.publish('navigateToGoal', null);
+        });
+
+        profileBtn.addEventListener('click', () => {
+            hub.publish('navigateToProfile', null);
+        });
+
+        shareBtn.addEventListener('click', () => {
+            hub.publish('navigateToShare', null);
+        });
+
+
+        
 
     }
 
