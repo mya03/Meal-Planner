@@ -202,9 +202,8 @@
     }
 
     #calculateTDEE {
-        width: 30vw;
+        width: auto;
         padding: 0 0 0 0;
-        font-size: 3vw;
     }
 
     .options {
