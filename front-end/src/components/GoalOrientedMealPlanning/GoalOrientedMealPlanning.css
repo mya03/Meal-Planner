@@ -124,6 +124,22 @@
     clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
 }
 
+@media (min-width: 601px) {
+    .goal-options-container .goal-option.lose-weight-meal-option:hover {
+        background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../GoalOrientedMealPlanning/images/loseOption.jpeg");
+        background-size: cover;
+    }
+    .goal-options-container .goal-option.gain-weight-meal-option:hover {
+        background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../GoalOrientedMealPlanning/images/gainOption.jpeg");
+        background-size: cover;
+    }
+    .goal-options-container .goal-option.maintain-weight-meal-option:hover {
+        background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../GoalOrientedMealPlanning/images/maintainOption.jpeg");
+        background-size: cover;
+    }
+}
+
+
 .goal-options-container .goal-option:hover {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
@@ -136,6 +152,7 @@
     background-color: #3E8440;
     opacity: 0;
     transition: 0.5s;
+    width: 70vw;
 }
 
 .meal-content:hover {
