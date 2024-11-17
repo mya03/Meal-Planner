@@ -58,7 +58,7 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
     #getIngredientTemplate() {
         // Returns the HTML template for the component
         return `
-          <input type="text" id="ingredientInput" placeholder="Enter your avaible ingredients">
+          <input type="text" id="ingredientInput" placeholder="Enter your avaible ingredients. (multiple ingredients should be separated by comma and space">
           <button id="findRecipeBtn">Find</button>
         `;
     }
@@ -104,13 +104,14 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
         this.#recipeComponent.id = "recipes-container";
 
         for(let i=0; i<recipes.length; i++){
-            this.#recipeComponent.appendChild(this.#createRecipeComponent(recipes[i].strMeal, recipes[i].strMealThumb));
+            console.log(recipes[i]);
+            this.#recipeComponent.appendChild(this.#createRecipeComponent(recipes[i].title, recipes[i].image, recipes[i].summary));
         }
         return this.#recipeComponent;
     }
 
     //add recipe component
-    #createRecipeComponent(name, image){
+    #createRecipeComponent(name, image, summary){
         const recipeComponent = document.createElement('div');
         recipeComponent.classList.add("recipe-box");
         recipeComponent.innerHTML = this.#getRecipeImageTemplate(image);
@@ -118,7 +119,7 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
         //add information box
         const recipeInfo = document.createElement('div');
         recipeInfo.classList.add("recipe-info");
-        recipeInfo.innerHTML = this.#getRecipeInfoTemplate(name);
+        recipeInfo.innerHTML = this.#getRecipeInfoTemplate(name, summary);
         recipeComponent.appendChild(recipeInfo);
 
         return recipeComponent;
@@ -130,10 +131,11 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
           <img src="${image}">
         `;
     }
-    #getRecipeInfoTemplate(name){
+
+    #getRecipeInfoTemplate(name, summary){
         return `
           <p>Recipe: ${name}<p>
-          <p>Description: <p>
+          <p>Description: ${summary}<p>
         `;
     }
 
@@ -175,6 +177,4 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
 
         this.#body.appendChild(this.#createRecipes(recipes));
     }
-
-
 }

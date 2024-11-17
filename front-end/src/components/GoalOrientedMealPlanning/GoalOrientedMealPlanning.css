@@ -33,7 +33,7 @@
     text-align: center;
 }
 
-label {
+.TDEECalculation-container label {
     grid-column: 2;
 }
 
@@ -148,4 +148,98 @@ label {
     color: black;
     font-size: 3vw;
     padding-top: 2%;
+}
+
+@media (max-width: 600px) {
+    .goal-oriented-meal-planner {
+        display: block;
+        padding-top: 10%;
+    }
+
+    .welcome-message {
+        padding: 10% 0 0 0;
+        height: 20vh;
+    }
+
+	.TDEECalculation-container {
+        display: block;
+        margin: 0 auto;
+        padding: 0 0 0 0;
+        padding-left: 5%;
+        text-align: left;
+    }
+
+    .TDEECalculation-container input, .TDEECalculation-container select {
+        height: 2.5vh;
+        width: 45vw;
+    }
+
+    .TDEECalculation-container input[type="radio"] {
+        width: 10vw;
+    }
+
+    #calculateTDEE {
+        width: 30vw;
+    }
+
+    .options {
+        display: block;
+        height: 100vh;
+        background-color: #F7EFDA;
+    }
+
+    #tdeeOutput {
+        font-size: 5vw;
+    }
+
+    .goal-options-container {
+        display: block;
+        width: 100%;
+        background-color: #F7EFDA;
+    }
+
+    .goal-options-container .goal-option.lose-weight-meal-option {
+        background-image: none;
+        position: relative;
+        clip-path: none;
+        background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../GoalOrientedMealPlanning/images/loseOption.jpeg");
+        background-repeat: no-repeat;
+        background-color: #F7EFDA;
+        height: 30vh;
+    }
+
+    .goal-options-container .goal-option.maintain-weight-meal-option {
+        clip-path: none;
+        background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../GoalOrientedMealPlanning/images/maintainOption.jpeg");
+        position: relative;
+        background-repeat: no-repeat;
+        background-color: #F7EFDA;
+        height: 30vh;
+    }
+
+    .goal-options-container .goal-option.gain-weight-meal-option {
+        clip-path: none;
+        background-image: none;
+        position: relative;
+        background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../GoalOrientedMealPlanning/images/gainOption.jpeg");
+        background-repeat: no-repeat;
+        background-color: #F7EFDA;
+        height: 30vh;
+    }
+
+    .meal-content {
+        position: relative;
+        opacity: 1;
+        width: 100vw;
+        height: 10vh;
+        text-wrap: wrap;
+        padding: 0 0 0 0;
+        text-align: center;
+        padding-top: 3%;
+    }
+
+    .meal-content p {
+        margin-top: 10vh;
+        color: #F7EFDA;
+    }
 }
