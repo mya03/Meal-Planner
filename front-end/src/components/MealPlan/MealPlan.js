@@ -1,4 +1,5 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
+import { EventHub } from '../../eventhub/EventHub.js';
 
 export class MealPlan extends BaseComponent {
     #container = null;
@@ -14,7 +15,18 @@ export class MealPlan extends BaseComponent {
         }
 
         this.#createContainer();
+        this.#attachEventListener();
         return this.#container;
+    }
+
+    #attachEventListener() {
+        const hub = EventHub.getInstance();
+        const recipeCards = document.getElementsByClassName("recipe-card");
+        for(let recipe of recipeCards) {
+            recipe.addEventListener('click', () => {
+                hub.publish('navigateToDetailRecipe', null);
+            })
+        }
     }
 
     #createContainer() {
