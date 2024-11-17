@@ -1,0 +1,245 @@
+.container-goal-oriented-meal-planner {
+    /* display: flex; */
+    margin: 0 auto;
+    background-color: #F7EFDA;
+}
+
+/* Welcome section */
+.welcome-message {
+    font-size: 1.75vw;
+    text-align: center;
+    grid-column: 2;
+    padding-top: 5%;
+}
+
+#title {
+    font-size: 7vw;
+    text-shadow: -15px -15px #EFACA5;
+}
+
+.goal-oriented-meal-planner {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 10% 1fr 10%;
+}
+
+.TDEECalculation-container {
+    display: grid;
+    padding-bottom: 3%;
+    border-radius: 20px;
+    grid-template-columns: 25% 1fr 1fr 25%;
+    grid-column: 2;
+    text-align: center;
+}
+
+.TDEECalculation-container label {
+    grid-column: 2;
+}
+
+.TDEECalculation-container input, .TDEECalculation-container select{
+    background-color: #BADD7F;
+    border-width: 0;
+    grid-column: 3;
+    height: 2.5vh;
+    width: 25vw;
+    accent-color: #3E8440;
+}
+
+.TDEECalculation-container input[type="text"], .TDEECalculation-container button, .TDEECalculation-container select {
+    outline: dashed #3E8440;
+}
+
+.TDEECalculation-container select {
+    height: 3vh;
+    width: 25.5vw;
+}
+
+#calculateTDEE {
+    text-align: center;
+    grid-column: 3;
+    width: 15vw;
+    height: 5vh;
+    border-width: 0;
+    background-color: #BADD7F;
+    transition: opacity .5s;
+}
+
+#calculateTDEE:hover {
+    opacity: .5;
+}
+
+/* Goal options */
+
+.options {
+    display: grid;
+    grid-template-rows: 20% 1fr;
+    width: 100vw;
+    height: 100vh;
+	background-color: #F7EFDA;
+}
+
+.goal-options-container {
+    grid-row: 2;
+    position: relative;
+	width: 100vw;
+	height: 80%;
+	background-color: #BADD7F;
+}
+
+/* For the CSS Clip Path below,
+ * I did watch this tutorial https://youtu.be/yKYmbsrZoag
+ * but I changed some stuff to get the effect that I wanted.
+ * This tutorial is helpful for learning about clip path and polygon.
+ */
+.goal-options-container .goal-option {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0;
+    transition: .5s;
+}
+
+.goal-options-container .goal-option.lose-weight-meal-option {
+    background: url(images/loseOption.jpeg);
+    background-size: cover;
+    clip-path: polygon(0 0, 50% 0, 20% 100%, 0% 100%);
+}
+
+.goal-options-container .goal-option.maintain-weight-meal-option {
+    background: url(images/maintainOption.jpeg);
+    background-size: cover;
+    clip-path: polygon(50% 0, 100% 0, 60% 100%, 20% 100%);
+}
+
+.goal-options-container .goal-option.gain-weight-meal-option {
+    background: url(images/gainOption.jpeg);
+    background-size: cover;
+    clip-path: polygon(100% 0, 100% 0, 100% 100%, 60% 100%);
+}
+
+.goal-options-container:hover .goal-option {
+    clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+}
+
+.goal-options-container .goal-option:hover {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.meal-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    background-color: #3E8440;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.goal-options-container .goal-option:hover .meal-content {
+    bottom: 0;
+    opacity: 1;
+}
+
+#tdeeOutput {
+    grid-row: 1;
+    text-align: center;
+    color: black;
+    font-size: 3vw;
+    padding-top: 2%;
+}
+
+@media (max-width: 600px) {
+    .goal-oriented-meal-planner {
+        display: block;
+        padding-top: 10%;
+    }
+
+    .welcome-message {
+        padding: 10% 0 0 0;
+        height: 20vh;
+    }
+
+	.TDEECalculation-container {
+        display: block;
+        margin: 0 auto;
+        padding: 0 0 0 0;
+        padding-left: 5%;
+        text-align: left;
+    }
+
+    .TDEECalculation-container input, .TDEECalculation-container select {
+        height: 2.5vh;
+        width: 45vw;
+    }
+
+    .TDEECalculation-container input[type="radio"] {
+        width: 10vw;
+    }
+
+    #calculateTDEE {
+        width: 30vw;
+    }
+
+    .options {
+        display: block;
+        height: 100vh;
+        background-color: #F7EFDA;
+    }
+
+    #tdeeOutput {
+        font-size: 5vw;
+    }
+
+    .goal-options-container {
+        display: block;
+        width: 100%;
+        background-color: #F7EFDA;
+    }
+
+    .goal-options-container .goal-option.lose-weight-meal-option {
+        background-image: none;
+        position: relative;
+        clip-path: none;
+        background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../GoalOrientedMealPlanning/images/loseOption.jpeg");
+        background-repeat: no-repeat;
+        background-color: #F7EFDA;
+        height: 30vh;
+    }
+
+    .goal-options-container .goal-option.maintain-weight-meal-option {
+        clip-path: none;
+        background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../GoalOrientedMealPlanning/images/maintainOption.jpeg");
+        position: relative;
+        background-repeat: no-repeat;
+        background-color: #F7EFDA;
+        height: 30vh;
+    }
+
+    .goal-options-container .goal-option.gain-weight-meal-option {
+        clip-path: none;
+        background-image: none;
+        position: relative;
+        background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../GoalOrientedMealPlanning/images/gainOption.jpeg");
+        background-repeat: no-repeat;
+        background-color: #F7EFDA;
+        height: 30vh;
+    }
+
+    .meal-content {
+        position: relative;
+        opacity: 1;
+        width: 100vw;
+        height: 10vh;
+        text-wrap: wrap;
+        padding: 0 0 0 0;
+        text-align: center;
+        padding-top: 3%;
+    }
+
+    .meal-content p {
+        margin-top: 10vh;
+        color: #F7EFDA;
+    }
+}
