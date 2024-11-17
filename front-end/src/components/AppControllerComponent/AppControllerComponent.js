@@ -125,9 +125,9 @@ export class AppControllerComponent{
         const viewContainer = this.#container.querySelector('#viewContainer');
         viewContainer.innerHTML = ''; // Clear existing content
 
+        this.initializePages();
         if (this.#currentView === 'home'){
             //render home page
-            this.initializePages();
             viewContainer.appendChild(this.#HomeComponent.render());
         } else if (this.#currentView === 'detailedRecipe') {
             //render detailed recipe page 

@@ -73,7 +73,7 @@
 
 .options {
     display: grid;
-    grid-template-rows: 20% 1fr;
+    grid-template-rows: 30% 1fr;
     width: 100vw;
     height: 100vh;
 	background-color: #F7EFDA;
@@ -84,6 +84,7 @@
     position: relative;
 	width: 100vw;
 	height: 80%;
+    margin-top: 1vh;
 	background-color: #BADD7F;
 }
 
@@ -151,7 +152,8 @@
     text-align: center;
     color: black;
     font-size: 3vw;
-    padding-top: 2%;
+    height: auto;
+    padding-top: 5%;
 }
 
 @media (max-width: 600px) {
