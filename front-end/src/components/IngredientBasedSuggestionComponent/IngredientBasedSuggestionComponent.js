@@ -58,7 +58,7 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
     #getIngredientTemplate() {
         // Returns the HTML template for the component
         return `
-          <input type="text" id="ingredientInput" placeholder="Enter your avaible ingredients. (multiple ingredients should be separated by comma and space">
+          <input type="text" id="ingredientInput" placeholder="Enter your avaible ingredients. (multiple ingredients should be separated by comma and space)">
           <button id="findRecipeBtn">Find</button>
         `;
     }
@@ -68,6 +68,7 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
         this.#body = document.createElement('div');
         this.#body.classList.add("recipes-body");
         this.#body.appendChild(this.#createFilterComponent());
+        this.#body.appendChild(this.#createPlaceHolderRecipes());
         return this.#body;
     }
     
@@ -146,8 +147,10 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
         findRecipeBtn.addEventListener("click", ()=>this.#handleFindRecipe(ingredientInput));
 
         const hub = EventHub.getInstance();
-        hub.subscribe(Events.AllRecipes, (recipes) =>this.#displayRecipes(recipes));
-        hub.subscribe("FoundRecipes", (foundRecipes) => this.#displayRecipes(foundRecipes));
+        // hub.subscribe(Events.AllRecipes, (recipes) =>this.#displayRecipes(recipes));
+        // hub.subscribe("FoundRecipes", (foundRecipes) => this.#displayRecipes(foundRecipes));
+        hub.subscribe(Events.AllRecipes, (recipes) =>this.#createPlaceHolderRecipes());//placeholder recipes
+        hub.subscribe("FoundRecipes", (foundRecipes) => this.#createPlaceHolderRecipes());//placeholder recipes
     }
 
     #handleFindRecipe(ingredientInput){
@@ -177,4 +180,17 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
 
         this.#body.appendChild(this.#createRecipes(recipes));
     }
+
+    //create temp placeholder recipes
+    #createPlaceHolderRecipes(){
+        this.#recipeComponent = document.createElement('div');
+        this.#recipeComponent.classList.add("recipes-container");
+        this.#recipeComponent.id = "recipes-container";
+
+        for(let i=0; i<5; i++){
+            this.#recipeComponent.appendChild(this.#createRecipeComponent("", "https://www.svgrepo.com/show/508699/landscape-placeholder.svg", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."));
+        }
+        return this.#recipeComponent;
+    }
+
 }
