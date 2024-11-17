@@ -31,7 +31,6 @@ export class AppControllerComponent{
         this.#renderNavigationBar();
         //Initialize the landing view
         this.#renderCurrentView();
-
         return this.#container;
     }
 
