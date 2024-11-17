@@ -1,5 +1,4 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
-import { MealPlan } from '../MealPlan/MealPlan.js';
 import { EventHub } from '../../eventhub/EventHub.js';
 
 export class GoalOrientedMealPlanning extends BaseComponent {

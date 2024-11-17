@@ -18,17 +18,17 @@ export class MealPlan extends BaseComponent {
         this.#attachEventListener();
         return this.#container;
     }
-
+    
     #attachEventListener() {
         const hub = EventHub.getInstance();
-        const recipeCards = document.getElementsByClassName("recipe-card");
+        const recipeCards = this.#container.getElementsByClassName("recipe-photo");
         for(let recipe of recipeCards) {
             recipe.addEventListener('click', () => {
-                hub.publish('navigateToDetailRecipe', null);
+                hub.publish('navigateToDetailedRecipe', null);
             })
         }
     }
-
+    
     #createContainer() {
         this.#container = document.createElement('div');
         this.#container.innerHTML = this.#getTemplate();

@@ -41,7 +41,7 @@ export class HomeComponent extends BaseComponent {
             Aenean nisl quis accumsan nisi posuere faucibus est taciti ex. 
             Rhoncus lacus varius tortor tempor tincidunt luctus.
         <p>
-        <button id="discoverBtn">Discover Receipts</button>
+        <button id="discoverBtn">Discover Recipes</button>
         `;
 
         const imgContainer = document.createElement('img');
@@ -83,6 +83,7 @@ export class HomeComponent extends BaseComponent {
     #attachEventListeners(){
         const hub = EventHub.getInstance();
         const homeRecipeCards = this.#container.querySelectorAll('.homeRecipeCard');
+        const discoverBtn = this.#container.querySelector('#discoverBtn');
 
         // Loop through each element in the List of recipe cards and attach event
         homeRecipeCards.forEach((homeRecipeCard) => {
@@ -90,6 +91,10 @@ export class HomeComponent extends BaseComponent {
                 hub.publish('navigateToDetailedRecipe', null);
             });
         });
+
+        discoverBtn.addEventListener('click', () => {
+            hub.publish('navigateToRecipes', null);
+        })
 
     }
     

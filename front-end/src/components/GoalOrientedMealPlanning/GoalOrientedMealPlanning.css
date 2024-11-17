@@ -37,7 +37,7 @@ label {
     grid-column: 2;
 }
 
-input, select{
+.TDEECalculation-container input, .TDEECalculation-container select{
     background-color: #BADD7F;
     border-width: 0;
     grid-column: 3;
@@ -46,11 +46,11 @@ input, select{
     accent-color: #3E8440;
 }
 
-input[type="text"], button, select {
+.TDEECalculation-container input[type="text"], .TDEECalculation-container button, .TDEECalculation-container select {
     outline: dashed #3E8440;
 }
 
-select {
+.TDEECalculation-container select {
     height: 3vh;
     width: 25.5vw;
 }
