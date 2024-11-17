@@ -74,7 +74,7 @@ The **Share Recipes Screen** is designed to be intuitive, allowing users to shar
 
 **Use Case**: 
 
-A user can find the screen by choosing the Share Recipes on the navigation bar. On the screen, users can input their recipe's name, the ingredients that the recipes need, and how many steps there are to the recipe. As they click the share button, their shared recipe will be shown at the bottom of the screen. 
+A user can find the screen by choosing the Share Recipes on the navigation bar. On the screen, users can input their recipe's name, the ingredients that the recipes need, and how many steps there are to the recipe. As they click the share button, their shared recipe will be shown at the bottom of the screen.
 
 
 
