@@ -1,0 +1,165 @@
+.ingredient-based-suggestion{
+    background-color: #f7efda;
+    padding: 20px;
+}
+.recipe-header {
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+/* Styling for the input field */
+.ingredient-input {
+    display: flex; /* Use flexbox to align children horizontally */
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+/* Style for the input box */
+.ingredient-input input {
+    flex-grow: 1; /* Let the input take up the remaining space */
+    padding: 15px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-right: 10px;
+}
+
+/* Style for the button */
+.ingredient-input button {
+    width: 200px; /* Fixed width for the button */
+    padding: 10px;
+    font-size: 1rem;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #EFACA5;
+}
+
+.ingredient-input button:hover {
+    color:white;
+    background-color: #ed9389;
+}
+
+.recipes-body{
+    display: flex;
+}
+
+.recipes-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.recipe-box {
+    background-color: #BADD7f;
+    width: 48.6%;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.recipe-box img{
+    border-radius: 5px;
+    width: 100%;
+}
+
+.recipe-box:hover {
+    background-color: #3e8440;
+}
+
+
+.filter-box h3 {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.filter-box {
+    min-width: 130px; /* Fixed width for filter box */
+    height: fit-content;
+    background-color: #EFACA5;
+    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input[type="checkbox"] {
+    display: none; /* Hide the default checkbox */
+}
+
+/* Create a custom checkmark using the label */
+.filter-option {
+    margin-bottom: 20px;
+    position: relative;
+    font-size: 1rem;
+}
+
+.filter-option input[type="checkbox"] + label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    padding-left: 35px; /* Add space for the custom checkbox */
+}
+
+/* Create a custom checkbox */
+.filter-option label:before {
+    content: ''; /* Empty content to create the checkmark box */
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 25px;
+    width: 25px;
+    border-radius: 5px;
+    border: 1px solid #BADD7f;
+   
+}
+
+/* Style the checkbox when it's checked */
+input[type="checkbox"]:checked + label:before {
+    background-color: #BADD7f; 
+    border: 1px solid #BADD7f;
+}
+
+/* Create the checkmark inside the box */
+.filter-option input[type="checkbox"]:checked + label:after {
+    content: '\2713'; /* Unicode checkmark symbol */
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 18px;
+    color: white;
+    padding-left: 5px;
+    padding-top: 2px;
+}
+
+@media (max-width: 600px) {
+    .recipes-body{
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .filter-box{
+        margin-left: 10px;
+        margin-bottom: 20px;
+    }
+
+    .recipe-box{
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 100%;
+    }
+}
+
