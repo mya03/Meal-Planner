@@ -1,1 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 /* Base Styles for the Application */
+#app {
+    font-family: 'Inter';
+}
+
+/* General Style */
+body {
+    font-size: 16px;
+    background-color: #f7efda;
+}
+
+/* Button Styling */
+button {
+    background-color: #badd7f;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-3px); 
+    box-shadow: 0 4px 10px rgba(193, 219, 139, 0.5);
+}

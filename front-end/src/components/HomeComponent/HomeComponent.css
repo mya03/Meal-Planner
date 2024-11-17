@@ -1,0 +1,86 @@
+/*Apply styles for thumbnail section*/
+.homeIntroContainer{
+    background-color: #badd7f;
+    display: flex;
+    padding: 10px;
+    width: 95%;
+    align-items: center;
+    justify-self: center;
+}
+
+.homeTextContainer {
+    margin-left: 50px;
+    padding: 50px;
+    flex-grow: 1;
+}
+
+.homeTextContainer h1 {
+    font-size: 4rem;
+}
+
+.homeTextContainer button {
+    background-color: #f7efda;
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 12px;
+}
+
+#homeImg{
+    width: 50%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Apply styles for the recommend recipes section */
+.homeRecipeContainer {
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+#recTitle {
+    flex: 1 0 100%;
+    margin-left: 20px;
+}
+
+.homeRecipeCard {
+    background-color: #efaca5;
+    padding: 10px;
+    width: 25%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.homeRecipeCard div {
+    background-color: #f7efda;
+    aspect-ratio: 1/1;
+    border-radius: 8px;
+  
+}
+
+.homeRecipeCard:hover {
+    cursor: pointer;
+}
+
+/*Responsive Design*/
+
+/* Mobile (up to 600px) */
+@media (max-width: 600px) {
+    .homeIntroContainer{
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+
+    }
+
+    .homeTextContainer {
+        margin: 0px;
+        padding: 10px;
+    }
+
+    .homeRecipeCard {
+        width: 70%;
+        margin: 10px;
+    }
+}
