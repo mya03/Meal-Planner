@@ -6,8 +6,8 @@ const appController = new AppControllerComponent();
 
 // Render the component in the #app container
 const appContainer = document.getElementById('app');
-appContainer.appendChild(appController.render());/* main.js */
-
+appContainer.appendChild(appController.render());
 
 // Services
 const taskRepository = new RecipesRepositoryService();
+
