@@ -62,7 +62,10 @@ const Recipes = sequelize.define("Recipes", {
 
 class _RecipesModel {
     #api = "https://api.spoonacular.com/recipes/";
-    #apiKey = "9a228f1e657f4e0eba6aadba28db9239";
+    #apiKey1 = "75689177ee554a0d991c952b86f4b4f0";
+    #apiKey2 = "c38789c63e6448d296ae87c829288fa6";
+    #apiKey3 = "a1b174e35419408daadb08677f61695c";
+    #apiKey4 = "b47b29729e9644edb531ee75a3150db5";
 
     constructor() {}
 
@@ -76,8 +79,26 @@ class _RecipesModel {
 
             let numRecipes = 0;
 
-            while(numRecipes < 100) {
-                await this.create(await this.#fetchRecipes());
+            while(numRecipes < 34) {
+                await this.create(await this.#fetchRecipes(this.#apiKey1));
+                numRecipes++;
+            }
+
+            numRecipes = 0;
+            while(numRecipes < 34) {
+                await this.create(await this.#fetchRecipes(this.#apiKey2));
+                numRecipes++;
+            }
+
+            numRecipes = 0;
+            while(numRecipes < 34) {
+                await this.create(await this.#fetchRecipes(this.#apiKey3));
+                numRecipes++;
+            }
+            
+            numRecipes = 0;
+            while(numRecipes < 30) {
+                await this.create(await this.#fetchRecipes(this.#apiKey4));
                 numRecipes++;
             }
         }
@@ -115,11 +136,11 @@ class _RecipesModel {
         return recipe;
     }
 
-    async #fetchRecipes() {
+    async #fetchRecipes(key) {
         return new Promise((resolve, reject) => {
-            this.#fetchRecipeData()
+            this.#fetchRecipeData(key)
                 .then((data) => {
-                    this.#fetchNutritionData(data.recipes[0].id)
+                    this.#fetchNutritionData(data.recipes[0].id, key)
                         .then((nutrition) => {
                             let ingredients = "";
                             for(let ingredient of nutrition.ingredients) {
@@ -135,12 +156,10 @@ class _RecipesModel {
         });
     }
 
-    async #fetchRecipeData() {
+    async #fetchRecipeData(key) {
         try {
-            const response = await fetch(this.#api + "/random?apiKey=" + this.#apiKey);
+            const response = await fetch(this.#api + "/random?apiKey=" + key);
             const data = await response.json();
-            console.log('Fetched a random recipe: ' + Object.keys(data.recipes[0]));
-            // console.log('Fetched nutrition data ingredients: ', data.recipes[0].ingredients);
             return data;
         } catch(error) {
             console.log('Error fetching a random recipe: ' + error);
@@ -148,11 +167,10 @@ class _RecipesModel {
         }
     }
 
-    async #fetchNutritionData(id) {
+    async #fetchNutritionData(id, key) {
         try {
-            const response = await fetch(this.#api + id + "/nutritionWidget.json?apiKey=" + this.#apiKey);
+            const response = await fetch(this.#api + id + "/nutritionWidget.json?apiKey=" + key);
             const data = await response.json();
-            console.log('Fetched nutrition data: ', data);
             return data;
         } catch (error) {
             console.log('Error fetching nutrition data: '+ error);
@@ -164,10 +182,10 @@ class _RecipesModel {
         return {
             recipeid: data.id,
             title: data.title,
-            description: data.summary,
+            description: data.summary.replace(/<[^>]*>/g, ""),
             nutrients: nutrition,
             servings: data.servings,
-            instruction: data.instructions,
+            instruction: data.instructions.replace(/<[^>]*>/g, ""),
             image: data.image,
             diet_type: {
                 vegetarian: data.vegetarian,
