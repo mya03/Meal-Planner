@@ -50,7 +50,7 @@ const Recipes = sequelize.define("Recipes", {
         defaultValue: null,
     },
     ingredients: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+        type: DataTypes.STRING,
         allowNull: true,
         defaultValue: null,
     },
@@ -69,7 +69,7 @@ class _RecipesModel {
         // An exception will be thrown if either of these operations fail.
 
         if (fresh) {
-            await this.delete();
+            // await this.delete();
 
             await this.create({
                 recipeid: 100,
@@ -92,13 +92,7 @@ class _RecipesModel {
                 image: "Image 100",
 
                 // This example if from spoonacular
-                ingredients: [
-                    "1 lb spaghetti",
-                    "3.5 oz pancetta",
-                    "2 Tbsps olive oil",
-                    "1  egg",
-                    "0.5 cup parmesan cheese"
-                ],
+                ingredients: "Ingredients",
                 diet_type: {
                     vegetarian: false,
                     vegan: false,
@@ -129,13 +123,7 @@ class _RecipesModel {
                 image: "Image 100",
 
                 // This example if from spoonacular
-                ingredients: [
-                    "1 lb spaghetti",
-                    "3.5 oz pancetta",
-                    "2 Tbsps olive oil",
-                    "1  egg",
-                    "0.5 cup parmesan cheese"
-                ],
+                ingredients: "Ingredients",
                 diet_type: {
                     vegetarian: false,
                     vegan: false,
@@ -166,13 +154,7 @@ class _RecipesModel {
                 image: "Image 100",
 
                 // This example if from spoonacular
-                ingredients: [
-                    "1 lb spaghetti",
-                    "3.5 oz pancetta",
-                    "2 Tbsps olive oil",
-                    "1  egg",
-                    "0.5 cup parmesan cheese"
-                ],
+                ingredients: "Ingredients",
                 diet_type: {
                     vegetarian: false,
                     vegan: false,
