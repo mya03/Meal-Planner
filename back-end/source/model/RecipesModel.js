@@ -206,3 +206,7 @@ class _RecipesModel {
         return recipeu;
     }
 }
+
+const RecipesModel = new _RecipesModel();
+
+export default RecipesModel;
