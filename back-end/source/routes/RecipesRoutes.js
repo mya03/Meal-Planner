@@ -3,7 +3,7 @@ import RecipesController from "../controller/RecipesController.js";
 
 class RecipesRoutes {
     constructor() {
-        this.route = express.Router();
+        this.router = express.Router();
         this.initializeRoutes();
     }
 
