@@ -12,4 +12,10 @@ class RecipesRoutes {
             await RecipesController.getAllTasks(req, res);
         });
     }
+
+    getRouter() {
+        return this.router;
+    }
 }
+
+export default new RecipesRoutes().getRouter();
