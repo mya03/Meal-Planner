@@ -1,4 +1,3 @@
-import { title } from "process";
 import { Sequelize, DataTypes } from "sequelize";
 
 // Initialize a new Sequelize instance with SQLite
