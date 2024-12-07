@@ -9,8 +9,8 @@ class RecipesController {
 
     // Get all tasks
     async getAllRecipes(req, res) {
-        const tasks = await this.model.read();
-        res.json({ tasks });
+        const recipes = await this.model.read();
+        res.json({ recipes });
     }
 }
 
