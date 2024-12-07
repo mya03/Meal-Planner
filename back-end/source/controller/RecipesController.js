@@ -7,10 +7,16 @@ class RecipesController {
     });
     }
 
-    // Get all tasks
+    // Get all recipes
     async getAllRecipes(req, res) {
         const recipes = await this.model.read();
         res.json({ recipes });
+    }
+
+    // Clear all recipes
+    async clearRecipes(req, res) {
+        await this.model.delete();
+        res.json(await this.model.read());
     }
 }
 
