@@ -34,6 +34,7 @@ export class NavigationBarComponent extends BaseComponent{
         <button id="plannerBtn">Meal Planner</button>
         <button id="profileBtn">Profile</button>
         <button id="shareBtn">Share Recipes</button>
+        <button id="loginBtn">Log In</button>
         `;
     }
 
@@ -44,6 +45,7 @@ export class NavigationBarComponent extends BaseComponent{
         const plannerBtn = this.#container.querySelector('#plannerBtn');
         const profileBtn = this.#container.querySelector('#profileBtn');
         const shareBtn = this.#container.querySelector('#shareBtn');
+        const loginBtn = this.#container.querySelector('#loginBtn');
     
         
         // Event listener for navigating pages
@@ -67,9 +69,10 @@ export class NavigationBarComponent extends BaseComponent{
             hub.publish('navigateToShare', null);
         });
 
-
+        loginBtn.addEventListener('click', () => {
+            hub.publish('navigateToLogIn', null);
+        });
         
-
     }
 
 
