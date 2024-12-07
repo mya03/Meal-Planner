@@ -69,7 +69,7 @@ class _RecipesModel {
         // An exception will be thrown if either of these operations fail.
 
         if (fresh) {
-            // await this.delete();
+            await this.delete();
 
             await this.create({
                 recipeid: 100,
@@ -186,6 +186,16 @@ class _RecipesModel {
 
         await recipeu.update(recipe);
         return recipeu;
+    }
+
+    async delete(recipe = null) {
+        if (recipe === null) {
+            await Recipes.destroy({ truncate: true });
+            return;
+        }
+
+        await Recipes.destroy({ where: { recipeid: recipe.recipeid } });
+        return recipe;
     }
 }
 

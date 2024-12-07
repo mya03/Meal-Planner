@@ -9,7 +9,11 @@ class RecipesRoutes {
 
     initializeRoutes() {
         this.router.get("/recipes", async (req, res) => {
-            await RecipesController.getAllTasks(req, res);
+            await RecipesController.getAllRecipes(req, res);
+        });
+
+        this.router.delete("/recipes", async (req, res) => {
+            await RecipesController.clearRecipes(req, res);
         });
     }
 
