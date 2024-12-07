@@ -2,7 +2,7 @@ import { Sequelize, DataTypes } from "sequelize";
 
 // Intiliaze a new sequelize instance
 const sequelize = new Sequelize({
-    dialect: 'sequelize',
+    dialect: 'sqlite',
     storage: 'database.sqlite',
 })
 
@@ -32,7 +32,7 @@ const User = sequelize.define('User', {
 
 })
 
-class _SQLiteUserModel {
+class _UserModel {
     constructor () {}
 
     async init(fresh = false) {
@@ -40,7 +40,7 @@ class _SQLiteUserModel {
         await sequelize.sync({ force: true });
 
         if(fresh) {
-            await this.delete();
+            // await this.delete();
 
             await this.create({
                 username: "admin",
@@ -72,6 +72,6 @@ class _SQLiteUserModel {
     }
 }
 
-const SQLiteUserModel = new _SQLiteUserModel();
+const UserModel = new _UserModel();
 
-export default SQLiteUserModel;
+export default UserModel;
