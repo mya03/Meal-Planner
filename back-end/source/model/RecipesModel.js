@@ -29,15 +29,15 @@ const Recipes = sequelize.define("Recipes", {
         type: DataTypes.JSON,
         allowNull: false,
     },
-    serving: {
+    servings: {
         type: DataTypes.SMALLINT,
         allowNull: true,
         defaultValue: 0,
     },
     length: {
-        type: DataTypes.JSON,
+        type: DataTypes.SMALLINT,
         allowNull: true,
-        defaultValue: null,
+        defaultValue: 0,
     },
     instruction: {
         type: DataTypes.STRING,
@@ -61,6 +61,9 @@ const Recipes = sequelize.define("Recipes", {
 });
 
 class _RecipesModel {
+    #api = "https://api.spoonacular.com/recipes/";
+    #apiKey = "9a228f1e657f4e0eba6aadba28db9239";
+
     constructor() {}
 
     async init(fresh = false) {
@@ -69,100 +72,14 @@ class _RecipesModel {
         // An exception will be thrown if either of these operations fail.
 
         if (fresh) {
-            await this.delete();
+            // await this.delete();
 
-            await this.create({
-                recipeid: 100,
-                title: "Recipe 100",
-                description: "Description of Recipe 100",
-                nutrients: {
-                    calories: 100,
-                    protein: 100,
-                    carb: 100,
-                    sodium: 100,
-                    sugar: 100,
-                    fat: 100,
-                },
-                serving: 100,
-                length: {
-                    duration: 100,
-                    unit: "minutes",
-                },
-                instruction: "Instruction 100",
-                image: "Image 100",
+            let numRecipes = 0;
 
-                // This example if from spoonacular
-                ingredients: "Ingredients",
-                diet_type: {
-                    vegetarian: false,
-                    vegan: false,
-                    glutenFree: true,
-                    dairyFree: false,
-                    veryHealthy: false,
-                },
-            });
-
-            await this.create({
-                recipeid: 101,
-                title: "Recipe 101",
-                description: "Description of Recipe 101",
-                nutrients: {
-                    calories: 100,
-                    protein: 100,
-                    carb: 100,
-                    sodium: 100,
-                    sugar: 100,
-                    fat: 100,
-                },
-                serving: 100,
-                length: {
-                    duration: 100,
-                    unit: "minutes",
-                },
-                instruction: "Instruction 101",
-                image: "Image 100",
-
-                // This example if from spoonacular
-                ingredients: "Ingredients",
-                diet_type: {
-                    vegetarian: false,
-                    vegan: false,
-                    glutenFree: true,
-                    dairyFree: false,
-                    veryHealthy: false,
-                },
-            });
-
-            await this.create({
-                recipeid: 102,
-                title: "Recipe 102",
-                description: "Description of Recipe 102",
-                nutrients: {
-                    calories: 100,
-                    protein: 100,
-                    carb: 100,
-                    sodium: 100,
-                    sugar: 100,
-                    fat: 100,
-                },
-                serving: 100,
-                length: {
-                    duration: 100,
-                    unit: "minutes",
-                },
-                instruction: "Instruction 102",
-                image: "Image 100",
-
-                // This example if from spoonacular
-                ingredients: "Ingredients",
-                diet_type: {
-                    vegetarian: false,
-                    vegan: false,
-                    glutenFree: true,
-                    dairyFree: false,
-                    veryHealthy: false,
-                },
-            });
+            while(numRecipes < 100) {
+                await this.create(await this.#fetchRecipes());
+                numRecipes++;
+            }
         }
     }
 
@@ -196,6 +113,72 @@ class _RecipesModel {
 
         await Recipes.destroy({ where: { recipeid: recipe.recipeid } });
         return recipe;
+    }
+
+    async #fetchRecipes() {
+        return new Promise((resolve, reject) => {
+            this.#fetchRecipeData()
+                .then((data) => {
+                    this.#fetchNutritionData(data.recipes[0].id)
+                        .then((nutrition) => {
+                            let ingredients = "";
+                            for(let ingredient of nutrition.ingredients) {
+                                ingredients += ingredient.name + ",";
+                            }
+                            resolve(this.#createRecipeEntry(data.recipes[0], nutrition.nutrients, ingredients.slice(0, ingredients.length - 1)));
+                        })
+                    .catch(error => {
+                        console.error(error);
+                        reject(null);
+                    });
+                });
+        });
+    }
+
+    async #fetchRecipeData() {
+        try {
+            const response = await fetch(this.#api + "/random?apiKey=" + this.#apiKey);
+            const data = await response.json();
+            console.log('Fetched a random recipe: ' + Object.keys(data.recipes[0]));
+            // console.log('Fetched nutrition data ingredients: ', data.recipes[0].ingredients);
+            return data;
+        } catch(error) {
+            console.log('Error fetching a random recipe: ' + error);
+            return null;
+        }
+    }
+
+    async #fetchNutritionData(id) {
+        try {
+            const response = await fetch(this.#api + id + "/nutritionWidget.json?apiKey=" + this.#apiKey);
+            const data = await response.json();
+            console.log('Fetched nutrition data: ', data);
+            return data;
+        } catch (error) {
+            console.log('Error fetching nutrition data: '+ error);
+            return null;
+        }
+    }
+
+    #createRecipeEntry(data, nutrition, dataIngredients) {
+        return {
+            recipeid: data.id,
+            title: data.title,
+            description: data.summary,
+            nutrients: nutrition,
+            servings: data.servings,
+            instruction: data.instructions,
+            image: data.image,
+            diet_type: {
+                vegetarian: data.vegetarian,
+                vegan: data.vegan,
+                glutenFree: data.glutenFree,
+                dairyFree: data.dairyFree,
+                veryHealthy: data.veryHealthy,
+            },
+            ingredients: dataIngredients,
+            length: data.readyInMinutes,
+        }
     }
 }
 
