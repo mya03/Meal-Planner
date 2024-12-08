@@ -2,7 +2,7 @@ import ModelFactory from "../model/ModelFactory.js";
 
 class RecipesController {
     constructor() {
-    ModelFactory.getModel("recipes-sqlite").then((model) => {
+    ModelFactory.getModel("Recipes").then((model) => {
         this.model = model;
     });
     }
