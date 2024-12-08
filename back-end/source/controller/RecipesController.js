@@ -26,8 +26,13 @@ class RecipesController {
     // Get a random recipe in the database
     async getRandomRecipe(req, res) {
         try {
+            console.log(req.body);
+            if (!req.body || !req.body.numRecipe) {
+                return res.status(400).json({ error: "NumRecipe is required." });
+            }
+        
             const ids = new Set();
-            while(ids.size < 3) {
+            while(ids.size < req.body.numRecipe) {
                 ids.add(await this.model.getRandom());
             }
 
