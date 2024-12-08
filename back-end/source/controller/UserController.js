@@ -1,8 +1,13 @@
 import ModelFactory from "../model/ModelFactory.js";
+import bcrypt from "bcryptjs";
 
 class UserController {
   constructor() {
+<<<<<<< HEAD
     ModelFactory.getModel("User").then((model) => {
+=======
+    ModelFactory.getModel().then((model) => {
+>>>>>>> 314c75c4ee2f2b5b6a557408deebbd12d001ced5
       this.model = model;
     });
   }
@@ -20,9 +25,16 @@ class UserController {
       if(!req.body || !req.body.username || !req.body.password) {
         return res.status(400).json({error: "Username and password are required."})
       }
-  
+
+      const existsUser = await this.existsUser(req.body.username);
+      
+      if(existsUser){
+        return res.status(400).json({error: "Username already exists."})
+      }
+      const hashPass = await bcrypt.hash(req.body.password, 10);
+      const body = {username: req.body.username, password: hashPass};
       // Create the new user object 
-      const user = await this.model.create(req.body);
+      const user = await this.model.create(body);
   
       return res.status(200).json(user);
     } catch (error) {
@@ -30,6 +42,38 @@ class UserController {
       console.error("Error adding user:", error);
       return res.status(500).json({error: "Falied to add user. Please try again."})
     }
+  }
+
+  //log in 
+  async login (req, res){
+    try {
+        console.log("received request")
+        const { username, password } = req.body;
+        console.log("Username: " + username);
+        // Check if username and password are provided
+        if(!req.body || !req.body.username || !req.body.password) {
+          return res.status(400).json({error: "Username and password are required."})
+        }
+    
+        // find user
+        const user = await this.model.findUsername(username);
+        console.log(await bcrypt.compare(password, user.password));
+
+        if (!user || !(await bcrypt.compare(password, user.password))) {
+            console.log("hii");
+            return res.status(401).json({error: "Invalid credentials"});
+        }
+        return res.status(200).json(user);
+      } catch (error) {
+        // Log any unexpected error
+        console.error("Error adding user:", error);
+        return res.status(500).json({error: "Falied to login. Please try again."})
+      }
+  }
+
+  async existsUser(username){
+    const user = await this.model.findUsername(username);
+    return user;
   }
 }
 

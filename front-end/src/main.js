@@ -1,5 +1,5 @@
 import { AppControllerComponent } from "./components/AppControllerComponent/AppControllerComponent.js";
-// import { RecipesRepositoryService } from "./services/RecipesRepositoryService.js";
+import { RecipesRepositoryService } from "./services/RecipesRepositoryService.js";
 
 // Create an instance of AppControllerComponent
 const appController = new AppControllerComponent();
@@ -10,4 +10,4 @@ appContainer.appendChild(appController.render());/* main.js */
 
 
 // Services
-// const taskRepository = new RecipesRepositoryService();
+const taskRepository = new RecipesRepositoryService();
