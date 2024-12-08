@@ -3,11 +3,7 @@ import bcrypt from "bcryptjs";
 
 class UserController {
   constructor() {
-<<<<<<< HEAD
     ModelFactory.getModel("User").then((model) => {
-=======
-    ModelFactory.getModel().then((model) => {
->>>>>>> 314c75c4ee2f2b5b6a557408deebbd12d001ced5
       this.model = model;
     });
   }
