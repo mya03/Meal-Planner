@@ -1,10 +1,10 @@
 import RecipesModel from "./RecipesModel.js";
 
 class _ModelFactory {
-    async getModel(model) {
-        if (model === "recipes-sqlite") {
+    async getModel(model = "sqlite") {
+        if (model === "sqlite") {
             return RecipesModel;
-        } else if (model === "recipes-sqlite-fresh") {
+        } else if (model === "sqlite-fresh") {
             await RecipesModel.init(true);
             return RecipesModel;
         }

@@ -18,6 +18,10 @@ class RecipesRoutes {
 
         this.router.post("/ingredients", async (req, res) => {
             await RecipesController.filterIngredients(req, res);
+        });
+
+        this.router.post("/diet", async (req, res) => {
+            await RecipesController.filterRecipesBasedOnDiet(req, res);
         })
     }
 

@@ -137,6 +137,44 @@ class _RecipesModel {
         return await Recipes.create(recipe);
     }
 
+    async filterDiet(dietTypes) {
+        const set = new Set(dietTypes.trim().split(","));
+        const result = [];
+        const recipes = await Recipes.findAll();
+        if(set.size == 0) {
+            for(let i = 0; i < recipes.length; i++) {
+                results.push(recipes[i].dataValues);
+            }
+        } else {
+            for(let i = 0; i < recipes.length; i++) {
+                let ok = true;
+                const recipe = recipes[i].dataValues;
+                for(const type of set) {
+                    switch(type) {
+                        case 'vegan':
+                            ok = recipe.diet_type["vegan"];
+                            break;
+                        case 'glutenFree':
+                            ok = recipe.diet_type["glutenFree"];
+                            break;
+                        case 'dairyFree':
+                            ok = recipe.diet_type["dairyFree"];
+                            break;
+                        case 'vegetarian':
+                            ok = recipe.diet_type["vegetarian"];
+                            break;
+                        default: // still ok
+                            break;
+                    }
+
+                    if(!ok) break;
+                }
+                if(ok) result.push(recipe);
+            }
+        }
+        return result;
+    }
+
     async read(recipeid = null) {
         if (recipeidid) {
             return await Recipes.findByPk(recipeidid);

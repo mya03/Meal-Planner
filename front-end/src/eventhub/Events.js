@@ -5,4 +5,5 @@ export const Events = {
     FindRecipes: 'FindRecipes',
     AllRecipes: 'AllRecipes',
     FilterIngredients: 'FilterIngredients',
+    FilterDiet: 'FilterDiet',
   };
