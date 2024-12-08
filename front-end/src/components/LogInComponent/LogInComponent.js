@@ -101,7 +101,12 @@ export class LogInComponent extends BaseComponent{
     }
 
     #handleLoginSuccess(){
-      alert("Welcome! You're logged in");
+      const hub = EventHub.getInstance();
+      hub.publish('navigateToHome', null); //navigate to home page
+
+      //clear container once logged in
+      this.#container.innerHTML = '';
+      this.#container.innerHTML = `<h1>You're logged in</h1>`
     }
     
 

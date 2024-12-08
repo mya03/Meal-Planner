@@ -40,54 +40,27 @@ export class ProfileComponent extends BaseComponent{
         this.#userInfoComponent = document.createElement('div');
         this.#userInfoComponent.classList.add("user-info");
 
-        this.#userInfoComponent.innerHTML =  `<h1>Hello ${username}</h1>`;
-
-        //add info box
-        this.#userInfoComponent.appendChild(this.#createInfoBox(5, 112));
+        this.#userInfoComponent.innerHTML =  `<h1>Hello ${username}, you may like these recipes</h1>`;
 
         return this.#userInfoComponent;
     }
 
-    #createInfoBox(height, weight) {
-        const infoBox = document.createElement('div');
-        infoBox.classList.add("info-box");
-        infoBox.innerHTML = `
-          <p>Height: ${height} ft<p>
-          <p>Weight: ${weight} lbs<p>
-        `;
-        return infoBox;
-    }
+    //create preference section
+    #createPreferenceContainer(){
+        const recRecipeContainer = document.createElement('div');
+        recRecipeContainer.classList.add('ProfileRecipeContainer');
+        for (let i=0; i < 9;i++){
+            const recipeCard = document.createElement('div');
+            recipeCard.classList.add('ProfileRecipeCard');
+            recipeCard.innerHTML = `
+                <div></div>
+                <h3>Name of the Recipe</h3>
+                <h4>Calories</h4>
+            `;
 
-    #createPreferenceContainer() {
-        const preferenceContainer = document.createElement('div');
-        preferenceContainer.classList.add("preference-container");
-        preferenceContainer.innerHTML = "<h1>Preferences</h1>";
-        preferenceContainer.appendChild(this.#createPreferenceBox());
-        return preferenceContainer;
-    }
-
-    #createPreferenceBox(){
-        const preferenceBox = document.createElement('div');
-        preferenceBox.classList.add("preference-box");
-        preferenceBox.innerHTML += `<h3>Dietary Restrictions</h3>`;
-        preferenceBox.appendChild(this.#getPreferenceTemplate("Vegan", "Vegetarian", "Gluten Free"));
-        preferenceBox.innerHTML += `<h3>Health & Fitness Goals</h3>`;
-        preferenceBox.appendChild(this.#getPreferenceTemplate("Low Carb", "High Protein", "Low Fat"));
-        preferenceBox.innerHTML += `<h3>Cuisine Preferences</h3>`;
-        preferenceBox.appendChild(this.#getPreferenceTemplate("Western", "Asian", "Mediterranean"));
-        return preferenceBox;
-    }
-    
-
-    #getPreferenceTemplate(option1, option2, option3){
-        const options = document.createElement('div');
-        options.classList.add("preference-options");
-        options.innerHTML = `
-        <button>${option1}</button>
-        <button>${option2}</button>
-        <button>${option3}</button>
-        `;
-        return options;
+            recRecipeContainer.appendChild(recipeCard);
+        }
+        return recRecipeContainer;
     }
 
     #attachEventListeners(){
