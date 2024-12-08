@@ -1,10 +1,7 @@
-import { Sequelize, DataTypes } from "sequelize";
+import { DataTypes } from "sequelize";
+import { SQLiteDB } from "./SQLiteDB.js";
 
-// Initialize a new Sequelize instance with SQLite
-const sequelize = new Sequelize({
-    dialect: "sqlite",
-    storage: "database.sqlite",
-});
+const sequelize = SQLiteDB.getInstance();
 
 const Recipes = sequelize.define("Recipes", {
     id: { // primary key
@@ -62,45 +59,101 @@ const Recipes = sequelize.define("Recipes", {
 
 class _RecipesModel {
     #api = "https://api.spoonacular.com/recipes/";
-    #apiKey1 = "75689177ee554a0d991c952b86f4b4f0";
-    #apiKey2 = "c38789c63e6448d296ae87c829288fa6";
-    #apiKey3 = "a1b174e35419408daadb08677f61695c";
-    #apiKey4 = "b47b29729e9644edb531ee75a3150db5";
+    // #apiKey1 = "28b0ce37f2fe40b0aa609436c7dd9b13";
+    // #apiKey2 = "c38789c63e6448d296ae87c829288fa6";
+    // #apiKey3 = "a1b174e35419408daadb08677f61695c";
+    // #apiKey4 = "b47b29729e9644edb531ee75a3150db5";
+    // #apiKey5 = "5bc47f30f94e4cc8adaeb0c417249a7f";
+    // #apiKey6 = "193232ec7aa447bd889235b1cb5196ad";
+    // #apiKey7 = "56696075b2fe4df48b9d6f5660305da8";
+    // #apiKey8 = "6b0150d40bae4966ac02152c34620ba4";
+    // #apiKey9 = "9a228f1e657f4e0eba6aadba28db9239";
+    // #apiKey10 = "8ad8b6f8e8ed44db9a414b157662a162";
 
+    
     constructor() {}
-
+    
     async init(fresh = false) {
         await sequelize.authenticate();
         await sequelize.sync({ force: true });
         // An exception will be thrown if either of these operations fail.
-
+        
         if (fresh) {
-            // await this.delete();
+            await this.delete();
 
-            let numRecipes = 0;
+            const apiKeys = [
+                "28b0ce37f2fe40b0aa609436c7dd9b13",
+                "348c299525a9466283ede68c204fb2b0",
+                "8c22866419b44f32a05baeafcca28fa8",
+                "fdace8161aa849829f7350d36e3542b9",
+                "68d3837d88b14dd9b60962f35be4282c",
+                "f8e8e063372c4bc681bf15aab2b436bb",
+                "919f687eff9d4745a6636630c1f84740",
+                "32905160df7e42db8453b0e5be699ea3"
+            ];
 
-            while(numRecipes < 34) {
-                await this.create(await this.#fetchRecipes(this.#apiKey1));
-                numRecipes++;
+            for(const key of apiKeys) {
+                let numRecipes = 0;
+    
+                while(numRecipes < 34) {
+                    await this.create(await this.#fetchRecipes(key));
+                    numRecipes++;
+                }
             }
 
-            numRecipes = 0;
-            while(numRecipes < 34) {
-                await this.create(await this.#fetchRecipes(this.#apiKey2));
-                numRecipes++;
-            }
+            // numRecipes = 0;
+            // while(numRecipes < 34) {
+            //     await this.create(await this.#fetchRecipes(this.#apiKey2));
+            //     numRecipes++;
+            // }
 
-            numRecipes = 0;
-            while(numRecipes < 34) {
-                await this.create(await this.#fetchRecipes(this.#apiKey3));
-                numRecipes++;
-            }
+            // numRecipes = 0;
+            // while(numRecipes < 34) {
+            //     await this.create(await this.#fetchRecipes(this.#apiKey3));
+            //     numRecipes++;
+            // }
             
-            numRecipes = 0;
-            while(numRecipes < 30) {
-                await this.create(await this.#fetchRecipes(this.#apiKey4));
-                numRecipes++;
-            }
+            // numRecipes = 0;
+            // while(numRecipes < 34) {
+            //     await this.create(await this.#fetchRecipes(this.#apiKey4));
+            //     numRecipes++;
+            // }
+            
+            // numRecipes = 0;
+            // while(numRecipes < 34) {
+            //     await this.create(await this.#fetchRecipes(this.#apiKey5));
+            //     numRecipes++;
+            // }
+            
+            // numRecipes = 0;
+            // while(numRecipes < 34) {
+            //     await this.create(await this.#fetchRecipes(this.#apiKey6));
+            //     numRecipes++;
+            // }
+
+            // numRecipes = 0;
+            // while(numRecipes < 34) {
+            //     await this.create(await this.#fetchRecipes(this.#apiKey7));
+            //     numRecipes++;
+            // }
+
+            // numRecipes = 0;
+            // while(numRecipes < 34) {
+            //     await this.create(await this.#fetchRecipes(this.#apiKey8));
+            //     numRecipes++;
+            // }
+            // numRecipes = 0;
+            // while(numRecipes < 34) {
+            //     await this.create(await this.#fetchRecipes(this.#apiKey9));
+            //     numRecipes++;
+            // }
+
+            // numRecipes = 0;
+            // while(numRecipes < 34) {
+            //     await this.create(await this.#fetchRecipes(this.#apiKey10));
+            //     numRecipes++;
+            // }
+
         }
     }
 
