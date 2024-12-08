@@ -108,9 +108,10 @@ class _RecipesModel {
         return await Recipes.create(recipe);
     }
 
-    async read(recipeid = null) {
-        if (recipeidid) {
-            return await Recipes.findByPk(recipeidid);
+    async read(id = null) {
+        if (id) {
+            console.log(id);
+            return await Recipes.findByPk(id);
         }
 
         return await Recipes.findAll();
@@ -134,6 +135,18 @@ class _RecipesModel {
 
         await Recipes.destroy({ where: { recipeid: recipe.recipeid } });
         return recipe;
+    }
+
+    async count() {
+        return Recipes.count();
+    }
+
+    async getRandom() {
+        Recipes.findAll({ order: sequelize.random(), limit: 1 }).then((recipe) => {
+            // single random encounter
+            return recipe[0].dataValues;
+        });
+        return null;
     }
 
     async #fetchRecipes(key) {
