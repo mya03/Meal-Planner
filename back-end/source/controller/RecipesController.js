@@ -26,10 +26,16 @@ class RecipesController {
     // Get a random recipe in the database
     async getRandomRecipe(req, res) {
         try {
-            let id = await this.model.getRandom();
-            console.log(id);
-            let response = await this.model.read(id);
-            return res.status(200).json(response);
+            const ids = new Set();
+            while(ids.size < 3) {
+                ids.add(await this.model.getRandom());
+            }
+            console.log(ids);
+            const recipes = [];
+            for(const id of ids) {
+                recipes.push(await this.model.read(id));
+            }
+            return res.status(200).json(recipes);
         } catch (error) {
             return res.status(500).json(`${error}`);
         }
