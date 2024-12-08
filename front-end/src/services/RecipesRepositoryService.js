@@ -267,7 +267,7 @@ export class RecipesRepositoryService extends Service {
       const data = await response.json();
       console.log("sign up success");
       const hub = EventHub.getInstance();
-      hub.publish('LogInSuccess', data);
+      hub.publish('LogInSuccess', data.username);
       return data;
     }catch(error){
       console.error("failed sign up:", error);
