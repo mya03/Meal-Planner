@@ -2,7 +2,7 @@ import ModelFactory from "../model/ModelFactory.js";
 
 class UserController {
   constructor() {
-    ModelFactory.getModel("sqlite-fresh").then((model) => {
+    ModelFactory.getModel().then((model) => {
       this.model = model;
     });
   }
@@ -30,6 +30,32 @@ class UserController {
       console.error("Error adding user:", error);
       return res.status(500).json({error: "Falied to add user. Please try again."})
     }
+  }
+
+  //log in 
+  async login (req, res){
+    try {
+        console.log("received request")
+        const { username, password } = req.body;
+        console.log("Username: " + username);
+        // Check if username and password are provided
+        if(!req.body || !req.body.username || !req.body.password) {
+          return res.status(400).json({error: "Username and password are required."})
+        }
+    
+        // find user
+        const user = await this.model.findUsername(username);
+
+        if (!user || !(password === user.password)) {
+            return res.status(401).json({error: "Invalid credentials"});
+        }
+        console.log(res.json(user.dataValues));
+        return res.status(200).json(user.dataValues);
+      } catch (error) {
+        // Log any unexpected error
+        console.error("Error adding user:", error);
+        return res.status(500).json({error: "Falied to login. Please try again."})
+      }
   }
 }
 

@@ -70,6 +70,11 @@ class _UserModel {
         await userUpdate.update(user);
         return userUpdate
     }
+
+    async findUsername(username){
+        const user = await User.findOne({ where: { username } });
+        return user;
+    }
 }
 
 const UserModel = new _UserModel();

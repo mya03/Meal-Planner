@@ -1,4 +1,5 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
+import { EventHub } from '../../eventhub/EventHub.js';
 
 export class LogInComponent extends BaseComponent{
     #container = null
@@ -14,7 +15,7 @@ export class LogInComponent extends BaseComponent{
             return this.#container;
         }
         this.#createContainer();
-        //this.#attachEventListeners();
+        this.#attachEventListeners();
         return this.#container;
     }
 
@@ -54,12 +55,31 @@ export class LogInComponent extends BaseComponent{
           <input type="password" id="passwordField" placeholder="Enter your password" required>
         </div>
         <div>
-          <button type="submit">Log In</button>
-          <button type="submit">Sign Up</button>
+          <button id="loginBtn">Log In</button>
+          <button id="signupBtn">Sign Up</button>
         </div>
       `;
 
       return this.#LogInForm;
+    }
+
+    #attachEventListeners(){
+      const userNameField = this.#LogInForm.querySelector('#userNameField');
+      const passwordField = this.#LogInForm.querySelector('#passwordField');
+      const loginBtn = this.#LogInForm.querySelector('#loginBtn');
+      const signupBtn = this.#LogInForm.querySelector('#signupBtn');
+
+      loginBtn.addEventListener("click", ()=>this.#handleLogIn(userNameField,passwordField));
+
+    }
+
+    #handleLogIn(userNameField,passwordField){
+      const username = userNameField.value;
+      const password = passwordField.value;
+
+      const user = {username, password};
+      const hub = EventHub.getInstance();
+      hub.publish('LogInUser', user);
     }
 
     
