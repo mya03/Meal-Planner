@@ -46,16 +46,18 @@ export class ProfileComponent extends BaseComponent{
     }
 
     //create preference section
-    #createPreferenceContainer(){
+    #createPreferenceContainer(RecipeArray){
+        const recipes = RecipeArray;
         const recRecipeContainer = document.createElement('div');
         recRecipeContainer.classList.add('ProfileRecipeContainer');
         for (let i=0; i < 9;i++){
+            const image = recipes[i].image || "https://www.svgrepo.com/show/508699/landscape-placeholder.svg";
             const recipeCard = document.createElement('div');
             recipeCard.classList.add('ProfileRecipeCard');
             recipeCard.innerHTML = `
-                <div></div>
-                <h3>Name of the Recipe</h3>
-                <h4>Calories</h4>
+                <div><img src=${image}></div>
+                <h3>${recipes[i].title}</h3>
+                <p>Servings: ${recipes[i].servings}<p>
             `;
 
             recRecipeContainer.appendChild(recipeCard);
@@ -63,17 +65,21 @@ export class ProfileComponent extends BaseComponent{
         return recRecipeContainer;
     }
 
-    #attachEventListeners(){
+    async #attachEventListeners(){
         const hub = EventHub.getInstance();
-        hub.subscribe('LogInSuccess', (data) =>this.#handleLoginSuccess(data));
+        const response ={};
+        const numRecipes = 9;
+        const data = {numRecipes, response}
+        await hub.publishAsync(Events.RandomRecipe, data);
+        hub.subscribe('LogInSuccess', (data) =>this.#handleLoginSuccess(data, response));
     }
 
-    #handleLoginSuccess(data){
+    #handleLoginSuccess(data, response){
         this.#logged_in = true;
         this.#username = data;
         this.#container.innerHTML = '';
         this.#container.appendChild(this.#createUserInfoContainer(this.#username));
-        this.#container.appendChild(this.#createPreferenceContainer());
+        this.#container.appendChild(this.#createPreferenceContainer(response.data));
 
     }
 
