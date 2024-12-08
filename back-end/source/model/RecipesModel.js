@@ -136,6 +136,10 @@ class _RecipesModel {
         return recipe;
     }
 
+    async count() {
+        return await Recipes.count();
+    }
+
     async #fetchRecipes(key) {
         return new Promise((resolve, reject) => {
             this.#fetchRecipeData(key)

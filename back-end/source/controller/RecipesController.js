@@ -18,6 +18,18 @@ class RecipesController {
         await this.model.delete();
         res.json(await this.model.read());
     }
+
+    // Get the size of the database
+    async count(req, res) {
+        try {
+            const response = await this.model.count();
+            return res.status(200).json(response);
+        } catch (error) {
+            return res
+            .status(500)
+            .json({ error: "Failed to get the number of entries in Recipes table. Please try again." });
+        }
+    }
 }
 
 export default new RecipesController();
