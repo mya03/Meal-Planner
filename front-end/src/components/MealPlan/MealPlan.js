@@ -9,7 +9,7 @@ export class MealPlan extends BaseComponent {
         this.loadCSS('MealPlan');
     }
 
-    render() {
+    render(data) {
         if(this.#container) {
             return this.#container;
         }

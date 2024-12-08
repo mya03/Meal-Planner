@@ -89,9 +89,9 @@ export class AppControllerComponent{
             this.#renderCurrentView();
         });
 
-        this.#hub.subscribe('navigateToMealPlan', () => {
+        this.#hub.subscribe('navigateToMealPlan', (data) => {
             this.#currentView = 'mealPlan';
-            this.#renderCurrentView();
+            this.#renderCurrentView(data);
         });
 
         this.#hub.subscribe('navigateToProfile', () => {
@@ -121,7 +121,7 @@ export class AppControllerComponent{
     }
 
     // Renders the current view based on the #currentView state
-    #renderCurrentView() {
+    #renderCurrentView(data) {
         const viewContainer = this.#container.querySelector('#viewContainer');
         viewContainer.innerHTML = ''; // Clear existing content
 
@@ -134,7 +134,7 @@ export class AppControllerComponent{
             viewContainer.appendChild(this.#detailedRecipeComponent.render());      
         } else if (this.#currentView === 'goalPlan') {
             //render detailed recipe page 
-            viewContainer.appendChild(this.#GoalOrientedMealPlanning.render());    
+            viewContainer.appendChild(this.#GoalOrientedMealPlanning.render(data));    
         } else if (this.#currentView === 'mealPlan') {
             //render detailed recipe page 
             viewContainer.appendChild(this.#MealPlan.render());    

@@ -217,7 +217,6 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         const hub = EventHub.getInstance();
         const res = {};
         await hub.publishAsync(Events.CaloriesRecommendation, {numRecipes: 3, calories: averageCalories, response: res});
-        console.log(res.data);
         const options = document.getElementsByClassName("goal-option");
         for(let option of options) {
             option.addEventListener('click', () => {
