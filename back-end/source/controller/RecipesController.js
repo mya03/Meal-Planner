@@ -30,7 +30,7 @@ class RecipesController {
             while(ids.size < 3) {
                 ids.add(await this.model.getRandom());
             }
-            console.log(ids);
+
             const recipes = [];
             for(const id of ids) {
                 recipes.push(await this.model.read(id));

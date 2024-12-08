@@ -144,10 +144,6 @@ class _RecipesModel {
         const ids = await Recipes.findAll({
             attributes: ['id'],
         });
-        // console.log(ids);
-        // for(let i = 0; i < ids.length; i++) {
-        //     console.log(ids[i].dataValues.id);
-        // }
         return ids[Math.floor(Math.random() * ids.length)].dataValues.id;
     }
 

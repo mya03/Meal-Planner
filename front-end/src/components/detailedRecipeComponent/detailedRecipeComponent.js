@@ -42,24 +42,25 @@ export class detailedRecipeComponent extends BaseComponent{
         const hub = EventHub.getInstance();
         recipeInfoContainer.classList.add('detailed-flex-item');
 
-        recipeInfoContainer.innerHTML = `
-        <h1>Name of Recipe</h1>
-        <p> 
-            Lorem ipsum odor amet, consectetuer adipiscing elit. Lacinia elementum in vel ullamcorper vulputate penatibus quis nibh. 
-            Dui pellentesque in venenatis tristique etiam mattis. Fermentum fermentum bibendum nulla nostra, cubilia ultrices parturient. 
-            Convallis molestie sagittis neque venenatis purus netus lacinia quis libero.
-        </p>
-        <span>
-            <p>Time: 90 minutes<p>
-            <p>Serving Size: 4 people</p>
-        </span>
-        <h3>Nutriton</h3>
-        <ul>
-            <li>Calories: 547 kcal</li>
-            <li>Vitamin: A, E, C</li>
-        </ul>
-        `;
-        hub.publish(Events.RandomRecipe, recipeInfoContainer);
+        // recipeInfoContainer.innerHTML = `
+        // <h1>Name of Recipe</h1>
+        // <p> 
+        //     Lorem ipsum odor amet, consectetuer adipiscing elit. Lacinia elementum in vel ullamcorper vulputate penatibus quis nibh. 
+        //     Dui pellentesque in venenatis tristique etiam mattis. Fermentum fermentum bibendum nulla nostra, cubilia ultrices parturient. 
+        //     Convallis molestie sagittis neque venenatis purus netus lacinia quis libero.
+        // </p>
+        // <span>
+        //     <p>Time: 90 minutes<p>
+        //     <p>Serving Size: 4 people</p>
+        // </span>
+        // <h3>Nutriton</h3>
+        // <ul>
+        //     <li>Calories: 547 kcal</li>
+        //     <li>Vitamin: A, E, C</li>
+        // </ul>
+        // `;
+        const randomRecipes = {};
+        hub.publish(Events.RandomRecipe, randomRecipes);
         this.#container.appendChild(recipeInfoContainer);
     }
 

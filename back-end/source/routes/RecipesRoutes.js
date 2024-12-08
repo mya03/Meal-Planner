@@ -20,7 +20,7 @@ class RecipesRoutes {
         // STATUS CODES
         //   200 - OK: The request was successful
         //   500 - Internal Server Error: The server encountered an error
-        this.router.get("/random", async (req, res) => {
+        this.router.post("/random", async (req, res) => {
             await RecipesController.getRandomRecipe(req, res);
         });
 

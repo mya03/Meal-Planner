@@ -21,7 +21,7 @@ export class RecipesRepositoryService extends Service {
     //   this.getRandomRecipe();
     // })
     // this.addSubscriptions();
-    this.publish(Events.RandomRecipe, null);
+    // this.publish(Events.RandomRecipe, null);
   }
 
   // async #initRecipes() {
@@ -128,8 +128,8 @@ export class RecipesRepositoryService extends Service {
 
 
   addSubscriptions() {
-      this.subscribe(Events.RandomRecipe, (element) => {
-        this.getRandomRecipe(element);
+      this.subscribe(Events.RandomRecipe, (obj) => {
+        this.getRandomRecipe(obj);
       });
   }
 
@@ -145,10 +145,16 @@ export class RecipesRepositoryService extends Service {
   //     }
   // }
 
-  async getRandomRecipe(element) {
+  async getRandomRecipe(numRecipe, obj) {
+
+    // numRecipe = Math.max(1, Math.min(numRecipe, ))
 
     const response = await fetch("/v1/random", {
-      method: "GET",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(numRecipe),
     });
 
     if (!response.ok) {
@@ -156,9 +162,7 @@ export class RecipesRepositoryService extends Service {
     }
 
     const data = await response.json();
-    console.log(data);
-    // element.innerHTML = data.title;
-    return data;
+    obj.data = data;
   }
 }
   
