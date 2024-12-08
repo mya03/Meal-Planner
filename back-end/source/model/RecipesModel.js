@@ -161,9 +161,9 @@ class _RecipesModel {
         return await Recipes.create(recipe);
     }
 
-    async read(recipeid = null) {
-        if (recipeidid) {
-            return await Recipes.findByPk(recipeidid);
+    async read(id = null) {
+        if (id) {
+            return await Recipes.findByPk(id);
         }
 
         return await Recipes.findAll();
@@ -187,6 +187,17 @@ class _RecipesModel {
 
         await Recipes.destroy({ where: { recipeid: recipe.recipeid } });
         return recipe;
+    }
+
+    async count() {
+        return Recipes.count();
+    }
+
+    async getRandom() {
+        const ids = await Recipes.findAll({
+            attributes: ['id'],
+        });
+        return ids[Math.floor(Math.random() * ids.length)].dataValues.id;
     }
 
     async #fetchRecipes(key) {

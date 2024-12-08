@@ -1,4 +1,6 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
+import { EventHub } from '../../eventhub/EventHub.js';
+import { Events } from '../../eventhub/Events.js';
 
 export class detailedRecipeComponent extends BaseComponent{
     #container = null; // Private variable to store the container element
@@ -16,8 +18,6 @@ export class detailedRecipeComponent extends BaseComponent{
         this.#createContainer();
         this.#addRecipeImgContainer();
         this.#addRecipeInfo();
-        this.#addDivider();
-        this.#addRecipeDetailedInfo();
         return this.#container;
     }
 
@@ -35,28 +35,36 @@ export class detailedRecipeComponent extends BaseComponent{
     }
 
     // add general and summary info of recipe
-    #addRecipeInfo(){
+    async #addRecipeInfo(){
         const recipeInfoContainer = document.createElement('div');
+        const hub = EventHub.getInstance();
         recipeInfoContainer.classList.add('detailed-flex-item');
 
+        const randomRecipes = {};
+        await hub.publishAsync(Events.RandomRecipe, {numRecipes: 3, response: randomRecipes});
+        const recipe = randomRecipes.data[0];
         recipeInfoContainer.innerHTML = `
-        <h1>Name of Recipe</h1>
+        <h1>${recipe.title}</h1>
         <p> 
-            Lorem ipsum odor amet, consectetuer adipiscing elit. Lacinia elementum in vel ullamcorper vulputate penatibus quis nibh. 
-            Dui pellentesque in venenatis tristique etiam mattis. Fermentum fermentum bibendum nulla nostra, cubilia ultrices parturient. 
-            Convallis molestie sagittis neque venenatis purus netus lacinia quis libero.
+            ${recipe.description}
         </p>
         <span>
-            <p>Time: 90 minutes<p>
-            <p>Serving Size: 4 people</p>
+            <p>Time: ${recipe.length}<p>
+            <p>Serving Size: ${recipe.servings}</p>
         </span>
         <h3>Nutriton</h3>
         <ul>
-            <li>Calories: 547 kcal</li>
+            <li>Calories: ${this.#getCalories(recipe)} kcal</li>
             <li>Vitamin: A, E, C</li>
         </ul>
         `;
         this.#container.appendChild(recipeInfoContainer);
+        this.#addDivider();
+        this.#addRecipeDetailedInfo();
+    }
+
+    #getCalories(recipe) {
+        return recipe.nutrients[0]["amount"];
     }
 
     // the divider between the upper section and lower section

@@ -15,6 +15,10 @@ export class RecipesRepositoryService extends Service {
     this.subscribe('SignUpUser', async (data) => {
       await this.signup(data);
     });
+
+    this.subscribe(Events.RandomRecipe, async(data) => {
+      await this.getRandomRecipe(data.numRecipes, data.response);
+    });
   }
 
   async login(user){
@@ -62,6 +66,24 @@ export class RecipesRepositoryService extends Service {
     }catch(error){
       console.error("failed sign up:", error);
     }
+  }
+
+  async getRandomRecipe(numRecipe, obj) {
+
+    const response = await fetch("/v1/random", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({numRecipe: numRecipe}),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to get a random recipe");
+    }
+
+    const data = await response.json();
+    obj.data = data;
   }
 }
   

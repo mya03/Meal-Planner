@@ -1,5 +1,6 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
-import { EventHub } from '../../eventhub/EventHub.js'; 
+import { EventHub } from '../../eventhub/EventHub.js';
+import { Events } from '../../eventhub/Events.js';
 
 export class HomeComponent extends BaseComponent {
     #container = null; // Private variable to store the container element
@@ -17,7 +18,6 @@ export class HomeComponent extends BaseComponent {
         this.#createContainer();
         this.#createIntroContainer();
         this.#createRecommendedRecipeContainer();
-        this.#attachEventListeners();
        
         return this.#container;
     }
@@ -57,27 +57,37 @@ export class HomeComponent extends BaseComponent {
     }
 
     // Add recommended recipes section
-    #createRecommendedRecipeContainer(){
+    async #createRecommendedRecipeContainer(){
         const recTitle = document.createElement('h2');
+        const hub = EventHub.getInstance();
         recTitle.innerText = "Recommended Recipes";
         recTitle.id = "recTitle";
         const recRecipeContainer = document.createElement('div');
         recRecipeContainer.classList.add('homeRecipeContainer');
         recRecipeContainer.appendChild(recTitle);
+        
+        const res = {};
+        await hub.publishAsync(Events.RandomRecipe, {numRecipes: 3, response: res});
+
         for (let i=0; i < 3;i++){
             const recipeCard = document.createElement('div');
             recipeCard.classList.add('homeRecipeCard');
+            recRecipeContainer.appendChild(recipeCard);
+            
+            let recipe = res.data[i];
             recipeCard.innerHTML = `
                 <div></div>
-                <h3>Name of the Recipe</h3>
-                <h4>Calories</h4>
+                <h3>${recipe.title}</h3>
+                <h4>${this.#getCalories(recipe)} kcal</h4>
             `;
-
-            recRecipeContainer.appendChild(recipeCard);
         }
 
         this.#container.appendChild(recRecipeContainer);
+        this.#attachEventListeners();
+    }
 
+    #getCalories(recipe) {
+        return recipe.nutrients[0]["amount"];
     }
 
     #attachEventListeners(){
