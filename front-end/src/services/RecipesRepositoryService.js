@@ -6,8 +6,18 @@ export class RecipesRepositoryService extends Service {
 
   constructor() {
     super();
-    const res = {};
-    this.publish(Events.FilterDiet, {diet: "glutenFree, dairyFree", response: res});
+
+    this.publish(Events.FilterRecipes, {
+      ingredientsObj : {
+        ingredients: "asparagus,olive oil",
+        response: {}
+      },
+      dietObj : {
+        diet: "glutenFree, dairyFree",
+        response: {}
+      },
+      resObj : {}
+    });
   }
 
   addSubscriptions() {
@@ -17,6 +27,10 @@ export class RecipesRepositoryService extends Service {
 
       this.subscribe(Events.FilterDiet, (data) => {
         this.filterRecipesBasedOnDiet(data);
+      });
+
+      this.subscribe(Events.FilterRecipes, (data) => {
+        this.filterRecipes(data.ingredientsObj, data.dietObj, data.resObj);
       });
   }
 
@@ -35,7 +49,6 @@ export class RecipesRepositoryService extends Service {
     
     const data = await response.json();
     obj.response.data = data;
-    console.log(obj.response);
   }
   
   async filterRecipesBasedOnDiet(obj) {
@@ -53,8 +66,22 @@ export class RecipesRepositoryService extends Service {
 
     const data = await response.json();
     obj.response.data = data;
-    console.log(obj.response);
   }
 
+  async filterRecipes(ingredientsObj, dietObj, resObj) {
+    await this.filterIngredients(ingredientsObj);
+    await this.filterRecipesBasedOnDiet(dietObj);
+    let setIngredients = new Set(ingredientsObj.response.data);
+    for(const recipe of ingredientsObj.response.data) {
+      setIngredients.add(recipe.recipeid);
+    }
+    const res = [];
+    for(const recipe of dietObj.response.data) {
+      if(setIngredients.has(recipe.recipeid)) {
+        res.push(recipe);
+      }
+    }
+    resObj.data = res;
+  }
 }
   

@@ -6,4 +6,5 @@ export const Events = {
     AllRecipes: 'AllRecipes',
     FilterIngredients: 'FilterIngredients',
     FilterDiet: 'FilterDiet',
+    FilterRecipes: 'FilterRecipes',
   };
