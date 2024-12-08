@@ -4,4 +4,5 @@
 export const Events = {
     FindRecipes: 'FindRecipes',
     AllRecipes: 'AllRecipes',
+    FilterIngredients: 'FilterIngredients',
   };

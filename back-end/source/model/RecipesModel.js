@@ -104,6 +104,35 @@ class _RecipesModel {
         }
     }
 
+    async filterIngredients(ingredients) {
+        const list = ingredients.trim().split(",");
+        for(let i = 0; i < list.length; i++) {
+            list[i] = list[i].trim();
+        }
+        const set = new Set(list);
+        const ids = new Set();
+        const result = [];
+        const recipes = await Recipes.findAll();
+        if(list.length === 0 || (list.length === 1 && list[0] === '')) {
+            for(let i = 0; i < recipes.length; i++) {
+                if(ids.has(recipes[i].dataValues.id)) continue;
+                ids.add(recipes[i].dataValues.id);
+                result.push(recipes[i].dataValues);
+            }
+        } else {
+            for(let i = 0; i < recipes.length; i++) {
+                let recipeIngredients = recipes[i].dataValues.ingredients.trim().split(",");
+                for(let ingredient of recipeIngredients) {
+                    if(set.has(ingredient) && !(ids.has(recipes[i].dataValues.id))) {
+                        ids.add(recipes[i].dataValues.id);
+                        result.push(recipes[i].dataValues);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
     async create(recipe) {
         return await Recipes.create(recipe);
     }
