@@ -7,7 +7,7 @@ export class RecipesRepositoryService extends Service {
   constructor() {
     super();
     const res = {};
-    this.publish(Events.FilterDiet, {ingredients: "glutenFree, dairyFree", response: res});
+    this.publish(Events.FilterDiet, {diet: "glutenFree, dairyFree", response: res});
   }
 
   addSubscriptions() {

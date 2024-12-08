@@ -149,7 +149,8 @@ class _RecipesModel {
             for(let i = 0; i < recipes.length; i++) {
                 let ok = true;
                 const recipe = recipes[i].dataValues;
-                for(const type of set) {
+                for(let type of set) {
+                    type = type.trim();
                     switch(type) {
                         case 'vegan':
                             ok = recipe.diet_type["vegan"];
