@@ -30,6 +30,8 @@ export class ProfileComponent extends BaseComponent{
         if(this.#logged_in){
             this.#container.appendChild(this.#createUserInfoContainer(this.#username));
             this.#container.appendChild(this.#createPreferenceContainer());
+        }else{
+            this.#container.innerHTML = `<h3>You're not logged in</h3>`;
         }
         
     }
