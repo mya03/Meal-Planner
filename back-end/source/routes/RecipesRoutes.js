@@ -15,6 +15,10 @@ class RecipesRoutes {
         this.router.delete("/recipes", async (req, res) => {
             await RecipesController.clearRecipes(req, res);
         });
+
+        this.router.post("/diet", async (req, res) => {
+            await RecipesController.filterRecipes(req, res);
+        })
     }
 
     getRouter() {

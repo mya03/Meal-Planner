@@ -108,6 +108,27 @@ class _RecipesModel {
         return await Recipes.create(recipe);
     }
 
+    async filterRecipes(dietType) {
+        switch(dietType) {
+            case 'vegan' || 'gluten' || 'vegetarian' || 'dairy':
+                return await this.filter(dietType);
+            default:
+                console.error("invalid diet type");
+                return null;
+        }
+    }
+
+    async filter(dietType) {
+        const recipes = await Recipes.findAll();
+        const results = []
+        for(let i = 0; i < recipes.length; i++) {
+            if(recipes[i].dataValues.diet_type[dietType]) {
+                results.push(recipes[i].dataValues);
+            }
+        }
+        return results;
+    }
+
     async read(recipeid = null) {
         if (recipeidid) {
             return await Recipes.findByPk(recipeidid);
