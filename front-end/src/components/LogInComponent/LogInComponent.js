@@ -43,7 +43,7 @@ export class LogInComponent extends BaseComponent{
     }
 
     #createLogInForm(){
-        this.#LogInForm = document.createElement('form');
+        this.#LogInForm = document.createElement('div');
         this.#LogInForm.classList.add("log-in-form");
         this.#LogInForm.innerHTML = `
         <div class="usernameDiv">
@@ -70,6 +70,7 @@ export class LogInComponent extends BaseComponent{
       const signupBtn = this.#LogInForm.querySelector('#signupBtn');
 
       loginBtn.addEventListener("click", ()=>this.#handleLogIn(userNameField,passwordField));
+      signupBtn.addEventListener("click", ()=>this.#handleSignUp(userNameField,passwordField));
 
     }
 
@@ -80,6 +81,15 @@ export class LogInComponent extends BaseComponent{
       const user = {username, password};
       const hub = EventHub.getInstance();
       hub.publish('LogInUser', user);
+    }
+
+    #handleSignUp(userNameField,passwordField){
+      const username = userNameField.value;
+      const password = passwordField.value;
+
+      const user = {username, password};
+      const hub = EventHub.getInstance();
+      hub.publish('SignUpUser', user);
     }
 
     

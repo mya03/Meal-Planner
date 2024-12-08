@@ -12,7 +12,8 @@
     "dependencies": {
       "express": "^5.0.1",
       "sequelize": "^6.37.5",
-      "sqlite3": "^5.1.7"
+      "sqlite3": "^5.1.7",
+      "bcryptjs": "^2.4.3"
     },
     "type": "module"
   }

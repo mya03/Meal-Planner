@@ -221,11 +221,14 @@ export class RecipesRepositoryService extends Service {
     this.subscribe('LogInUser', async (data) => {
       await this.login(data);
     });
+
+    this.subscribe('SignUpUser', async (data) => {
+      await this.signup(data);
+    });
   }
 
   async login(user){
     try{
-      console.log(user);
       const response = await fetch("/v1/login", {
         method: "POST",
         headers: {
@@ -233,20 +236,38 @@ export class RecipesRepositoryService extends Service {
         },
         body: JSON.stringify(user),
       });
-      console.log("hiiiii");
       if (!response.ok) {
         throw new Error("Failed to login");
       }
 
       const data = await response.json();
-      console.log("success");
-      console.log(data);
 
       return data;
     }catch(error){
       console.error("failed log in:", error);
     }
     
+  }
+
+  async signup(user){
+    try{
+      const response = await fetch("/v1/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to signup");
+      }
+
+      const data = await response.json();
+      console.log("sign up success");
+      return data;
+    }catch(error){
+      console.error("failed sign up:", error);
+    }
   }
 }
   
