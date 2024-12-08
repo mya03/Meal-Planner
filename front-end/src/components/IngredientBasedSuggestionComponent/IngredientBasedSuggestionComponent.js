@@ -160,7 +160,6 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
         const hub = EventHub.getInstance();
         const res = {};
         await hub.publishAsync(Events.FilterIngredients, {ingredients: ingredients, response: res});
-        console.log(res.data);
         if (!ingredients) {
             alert('Please enter at least one ingredient.');
             return;

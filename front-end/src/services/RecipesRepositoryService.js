@@ -17,7 +17,6 @@ export class RecipesRepositoryService extends Service {
   }
 
   async filterIngredients(obj) {
-    console.log(obj);
     const response = await fetch("/v1/ingredients", {
       method: "POST",
       headers: {
