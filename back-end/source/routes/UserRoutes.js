@@ -18,7 +18,7 @@ class UserRoutes {
         // DESCRIPTION
         //   Add a new user. This endpoint creates a new uer with the provided
         //   data and returns the created user.
-        this.router.post("/users", async (req, res)=> {
+        this.router.post("/user", async (req, res)=> {
             await UserController.addUser(req, res);
         });
           

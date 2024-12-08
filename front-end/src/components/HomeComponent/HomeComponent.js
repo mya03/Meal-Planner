@@ -35,7 +35,7 @@ export class HomeComponent extends BaseComponent {
         const textContainer = document.createElement('div');
         textContainer.classList.add('homeTextContainer');
         textContainer.innerHTML = `
-        <h1>Hey Siri!</h1>
+        <h1 id="welcomeTxt">Hey Siri!</h1>
         <p>
             Lorem ipsum odor amet, consectetuer adipiscing elit. Convallis est eget purus fringilla est cursus netus hac. 
             Aenean nisl quis accumsan nisi posuere faucibus est taciti ex. 
@@ -84,6 +84,7 @@ export class HomeComponent extends BaseComponent {
         const hub = EventHub.getInstance();
         const homeRecipeCards = this.#container.querySelectorAll('.homeRecipeCard');
         const discoverBtn = this.#container.querySelector('#discoverBtn');
+        const welcomeTxt = this.#container.querySelector('#welcomeTxt');
 
         // Loop through each element in the List of recipe cards and attach event
         homeRecipeCards.forEach((homeRecipeCard) => {
@@ -94,6 +95,10 @@ export class HomeComponent extends BaseComponent {
 
         discoverBtn.addEventListener('click', () => {
             hub.publish('navigateToRecipes', null);
+        })
+
+        hub.subscribe('showUserInfo', (username) => {
+            welcomeTxt.innerText = `Hey ${username}`;
         })
 
     }
