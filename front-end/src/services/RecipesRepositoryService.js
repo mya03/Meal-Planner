@@ -3,32 +3,27 @@ import { EventHub } from '../eventhub/EventHub.js';
 import Service from './Service.js';
 
 export class RecipesRepositoryService extends Service {
-  #api = "https://api.spoonacular.com/recipes/";
-  #apiKey = "56696075b2fe4df48b9d6f5660305da8";
 
   constructor() {
     super();
-    this.dbName = 'recipesDB';
-    this.storeName = 'recipes';
-    this.db = null;
-    this.recipesData = [];
-
-    this.publish(Events.FilterIngredients, {ingredients: "rum, flour"});
+    const res = {};
+    // this.publish(Events.FilterIngredients, {ingredients: "rum, flour", response: res});
   }
 
   addSubscriptions() {
-      this.subscribe(Events.FilterIngredients, (ingredients) => {
-        this.filterIngredients(ingredients);
+      this.subscribe(Events.FilterIngredients, (data) => {
+        this.filterIngredients(data);
       });
   }
 
-  async filterIngredients(ingredients) {
+  async filterIngredients(obj) {
+    console.log(obj);
     const response = await fetch("/v1/ingredients", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(ingredients),
+      body: JSON.stringify(obj),
     });
 
     if (!response.ok) {
@@ -36,8 +31,8 @@ export class RecipesRepositoryService extends Service {
     }
 
     const data = await response.json();
-    console.log(data);
-    return data;
+    obj.response.data = data;
+    console.log(obj.response);
   }
 }
   
