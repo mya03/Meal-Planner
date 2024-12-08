@@ -243,7 +243,7 @@ export class RecipesRepositoryService extends Service {
       const data = await response.json();
       
       const hub = EventHub.getInstance();
-      hub.publish('LogInSuccess');
+      hub.publish('LogInSuccess', data.username);
       return data;
     }catch(error){
       console.error("failed log in:", error);
@@ -266,6 +266,8 @@ export class RecipesRepositoryService extends Service {
 
       const data = await response.json();
       console.log("sign up success");
+      const hub = EventHub.getInstance();
+      hub.publish('LogInSuccess', data);
       return data;
     }catch(error){
       console.error("failed sign up:", error);

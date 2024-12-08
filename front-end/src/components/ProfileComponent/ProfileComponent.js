@@ -5,6 +5,8 @@ import { Events } from '../../eventhub/Events.js';
 export class ProfileComponent extends BaseComponent{
     #container = null
     #userInfoComponent = null;
+    #logged_in = false;
+    #username = '';
 
     constructor(){
         super();
@@ -16,7 +18,7 @@ export class ProfileComponent extends BaseComponent{
             return this.#container;
         }
         this.#createContainer();
-        //this.#attachEventListeners();
+        this.#attachEventListeners();
         return this.#container;
     }
 
@@ -25,15 +27,18 @@ export class ProfileComponent extends BaseComponent{
         this.#container = document.createElement('div');;
         this.#container.classList.add("user-profile");
 
-        this.#container.appendChild(this.#createUserInfoContainer());
-        this.#container.appendChild(this.#createPreferenceContainer());
+        if(this.#logged_in){
+            this.#container.appendChild(this.#createUserInfoContainer(this.#username));
+            this.#container.appendChild(this.#createPreferenceContainer());
+        }
+        
     }
 
-    #createUserInfoContainer() {
+    #createUserInfoContainer(username) {
         this.#userInfoComponent = document.createElement('div');
         this.#userInfoComponent.classList.add("user-info");
 
-        this.#userInfoComponent.innerHTML = "<h1>Hello Siri</h1>";
+        this.#userInfoComponent.innerHTML =  `<h1>Hello ${username}</h1>`;
 
         //add info box
         this.#userInfoComponent.appendChild(this.#createInfoBox(5, 112));
@@ -81,6 +86,20 @@ export class ProfileComponent extends BaseComponent{
         <button>${option3}</button>
         `;
         return options;
+    }
+
+    #attachEventListeners(){
+        const hub = EventHub.getInstance();
+        hub.subscribe('LogInSuccess', (data) =>this.#handleLoginSuccess(data));
+    }
+
+    #handleLoginSuccess(data){
+        this.#logged_in = true;
+        this.#username = data;
+        this.#container.innerHTML = '';
+        this.#container.appendChild(this.#createUserInfoContainer(this.#username));
+        this.#container.appendChild(this.#createPreferenceContainer());
+
     }
 
 }

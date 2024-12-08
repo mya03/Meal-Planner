@@ -132,7 +132,7 @@ export class AppControllerComponent{
         const viewContainer = this.#container.querySelector('#viewContainer');
         viewContainer.innerHTML = ''; // Clear existing content
 
-        this.initializePages();
+        //this.initializePages();
         if (this.#currentView === 'home'){
             //render home page
             viewContainer.appendChild(this.#HomeComponent.render());
