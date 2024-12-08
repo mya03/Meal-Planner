@@ -22,6 +22,7 @@ export class RecipesRepositoryService extends Service {
   }
 
   async login(user){
+    const hub = EventHub.getInstance();
     try{
       const response = await fetch("/v1/login", {
         method: "POST",
@@ -36,16 +37,17 @@ export class RecipesRepositoryService extends Service {
 
       const data = await response.json();
       
-      const hub = EventHub.getInstance();
       hub.publish('LogInSuccess', data.username);
       return data;
     }catch(error){
+      hub.publish('FailedLogIn', null);
       console.error("failed log in:", error);
     }
     
   }
 
   async signup(user){
+    const hub = EventHub.getInstance();
     try{
       const response = await fetch("/v1/user", {
         method: "POST",
@@ -60,10 +62,10 @@ export class RecipesRepositoryService extends Service {
 
       const data = await response.json();
       console.log("sign up success");
-      const hub = EventHub.getInstance();
       hub.publish('LogInSuccess', data.username);
       return data;
     }catch(error){
+      hub.publish('FailedSignUp', null);
       console.error("failed sign up:", error);
     }
   }

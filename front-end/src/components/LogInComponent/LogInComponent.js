@@ -74,7 +74,8 @@ export class LogInComponent extends BaseComponent{
 
       const hub = EventHub.getInstance();
       hub.subscribe('LogInSuccess', () =>this.#handleLoginSuccess());
-
+      hub.subscribe('FailedLogIn', ()=>this.#handleFailedLogIn());
+      hub.subscribe('FailedSignUp', ()=>this.#handleFailedSignUp());
     }
 
     #handleLogIn(userNameField,passwordField){
@@ -108,6 +109,13 @@ export class LogInComponent extends BaseComponent{
       this.#container.innerHTML = '';
       this.#container.innerHTML = `<h1>You're logged in</h1>`
     }
+
+    #handleFailedLogIn(){
+      alert("Failed to log in. Can't find user or invalid credentials. Please sign up or try again later.");
+    }
     
+    #handleFailedSignUp(){
+      alert("Failed to sign up. Username already exists. Please log in or try another username.");
+    }
 
 }
