@@ -20,6 +20,7 @@ export class RecipesRepositoryService extends Service {
     // this.#initRecipes().then(() => {
     //   this.getRandomRecipe();
     // })
+    this.addSubscriptions();
   }
 
   // async #initRecipes() {
@@ -126,8 +127,8 @@ export class RecipesRepositoryService extends Service {
 
 
   addSubscriptions() {
-      this.subscribe(Events.FindRecipes, (ingredients) => {
-        this.findRecipes(ingredients);
+      this.subscribe(Events.RandomRecipe, () => {
+        this.getRandomRecipe();
       });
   }
 
