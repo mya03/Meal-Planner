@@ -79,8 +79,11 @@ export class LogInComponent extends BaseComponent{
       const password = passwordField.value;
 
       const user = {username, password};
+
       const hub = EventHub.getInstance();
       hub.publish('LogInUser', user);
+      userNameField.value = '';
+      passwordField.value = '';
     }
 
     #handleSignUp(userNameField,passwordField){
@@ -90,6 +93,8 @@ export class LogInComponent extends BaseComponent{
       const user = {username, password};
       const hub = EventHub.getInstance();
       hub.publish('SignUpUser', user);
+      userNameField.value = '';
+      passwordField.value = '';
     }
 
     
