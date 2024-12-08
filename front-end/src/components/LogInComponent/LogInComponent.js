@@ -72,6 +72,9 @@ export class LogInComponent extends BaseComponent{
       loginBtn.addEventListener("click", ()=>this.#handleLogIn(userNameField,passwordField));
       signupBtn.addEventListener("click", ()=>this.#handleSignUp(userNameField,passwordField));
 
+      const hub = EventHub.getInstance();
+      hub.subscribe('LogInSuccess', () =>this.#handleLoginSuccess());
+
     }
 
     #handleLogIn(userNameField,passwordField){
@@ -97,6 +100,9 @@ export class LogInComponent extends BaseComponent{
       passwordField.value = '';
     }
 
+    #handleLoginSuccess(){
+      alert("Welcome! You're logged in");
+    }
     
 
 }

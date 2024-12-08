@@ -241,7 +241,9 @@ export class RecipesRepositoryService extends Service {
       }
 
       const data = await response.json();
-
+      
+      const hub = EventHub.getInstance();
+      hub.publish('LogInSuccess');
       return data;
     }catch(error){
       console.error("failed log in:", error);
