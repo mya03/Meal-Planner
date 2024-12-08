@@ -11,8 +11,8 @@ export class RecipesRepositoryService extends Service {
   }
 
   addSubscriptions() {
-    this.subscribe(Events.CaloriesRecommendation, (data) => {
-      this.getRecipesBasedOnCalories(data);
+    this.subscribe(Events.CaloriesRecommendation, async(data) => {
+      await this.getRecipesBasedOnCalories(data);
     });
   }
 

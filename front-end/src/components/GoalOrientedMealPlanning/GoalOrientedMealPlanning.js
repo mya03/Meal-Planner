@@ -1,5 +1,6 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
 import { EventHub } from '../../eventhub/EventHub.js';
+import { Events } from '../../eventhub/Events.js';
 
 export class GoalOrientedMealPlanning extends BaseComponent {
     #container = null;
@@ -107,7 +108,7 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         const headerLoseWeight = document.createElement('h2');
         headerLoseWeight.textContent = "Lose Weight";
         const descriptionLoseWeight = document.createElement('p');
-        descriptionLoseWeight.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+        descriptionLoseWeight.textContent = "You should consume 200 kcal less than your TDEE per day.";
         contentLoseWeightOption.appendChild(headerLoseWeight);
         contentLoseWeightOption.appendChild(descriptionLoseWeight);
 
@@ -121,7 +122,7 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         const headerMaintainWeight = document.createElement('h2');
         headerMaintainWeight.textContent = "Maintain Weight";
         const descriptionMaintainWeight = document.createElement('p');
-        descriptionMaintainWeight.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+        descriptionMaintainWeight.textContent = "You should consume the same amoutn as your TDEE per day.";
         contentMaintainWeightOption.appendChild(headerMaintainWeight);
         contentMaintainWeightOption.appendChild(descriptionMaintainWeight);
 
@@ -135,7 +136,7 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         const headerGainWeight = document.createElement('h2');
         headerGainWeight.textContent = "Gain Weight";
         const descriptionGainWeight = document.createElement('p');
-        descriptionGainWeight.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+        descriptionGainWeight.textContent = "You should consume 200 kcal more than your TDEE per day.";
         contentGainWeightOption.appendChild(headerGainWeight);
         contentGainWeightOption.appendChild(descriptionGainWeight);
 
@@ -204,20 +205,23 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         this.#optionsSection.scrollIntoView({ behavior: "instant", block: "end" });
 
         // switch to options
-        this.#switchToOptions();
+        this.#switchToOptions(tdee);
 
         // Clear inputs
         this.#clearInputs(weightInput, heightInput, ageInput, maleGender, femaleGender, activityInput);
     }
 
-    #switchToOptions() {
+    async #switchToOptions(tdee) {
         // Switch to meal options
+        let averageCalories = tdee / 3;
         const hub = EventHub.getInstance();
-
+        const res = {};
+        await hub.publishAsync(Events.CaloriesRecommendation, {numRecipes: 3, calories: averageCalories, response: res});
+        console.log(res.data);
         const options = document.getElementsByClassName("goal-option");
         for(let option of options) {
             option.addEventListener('click', () => {
-                hub.publish('navigateToMealPlan', null);
+                hub.publish('navigateToMealPlan', res);
             });
         }
     }
