@@ -101,59 +101,6 @@ class _RecipesModel {
                 }
             }
 
-            // numRecipes = 0;
-            // while(numRecipes < 34) {
-            //     await this.create(await this.#fetchRecipes(this.#apiKey2));
-            //     numRecipes++;
-            // }
-
-            // numRecipes = 0;
-            // while(numRecipes < 34) {
-            //     await this.create(await this.#fetchRecipes(this.#apiKey3));
-            //     numRecipes++;
-            // }
-            
-            // numRecipes = 0;
-            // while(numRecipes < 34) {
-            //     await this.create(await this.#fetchRecipes(this.#apiKey4));
-            //     numRecipes++;
-            // }
-            
-            // numRecipes = 0;
-            // while(numRecipes < 34) {
-            //     await this.create(await this.#fetchRecipes(this.#apiKey5));
-            //     numRecipes++;
-            // }
-            
-            // numRecipes = 0;
-            // while(numRecipes < 34) {
-            //     await this.create(await this.#fetchRecipes(this.#apiKey6));
-            //     numRecipes++;
-            // }
-
-            // numRecipes = 0;
-            // while(numRecipes < 34) {
-            //     await this.create(await this.#fetchRecipes(this.#apiKey7));
-            //     numRecipes++;
-            // }
-
-            // numRecipes = 0;
-            // while(numRecipes < 34) {
-            //     await this.create(await this.#fetchRecipes(this.#apiKey8));
-            //     numRecipes++;
-            // }
-            // numRecipes = 0;
-            // while(numRecipes < 34) {
-            //     await this.create(await this.#fetchRecipes(this.#apiKey9));
-            //     numRecipes++;
-            // }
-
-            // numRecipes = 0;
-            // while(numRecipes < 34) {
-            //     await this.create(await this.#fetchRecipes(this.#apiKey10));
-            //     numRecipes++;
-            // }
-
         }
     }
 
@@ -187,6 +134,40 @@ class _RecipesModel {
 
         await Recipes.destroy({ where: { recipeid: recipe.recipeid } });
         return recipe;
+    }
+
+    async getRecipeBasedOnCalories(numRecipes, calories) {
+        const recipes = await Recipes.findAll();
+        const result = []
+        const ids = new Set();
+        let iterations = 0;
+        const possibles = [];
+        for(let i = 0; i < recipes.length; i++) {
+            let kcal = await this.#getCalories(recipes[i].dataValues);
+            // marginal error +-50
+            if(kcal <= calories + 50 && kcal >= calories - 50) {
+                possibles.push(recipes[i].dataValues);
+            }
+        }
+        while((result.length < numRecipes) && (iterations < possibles.length)) {
+            let id = Math.floor(Math.random() * possibles.length);
+            iterations++;
+            while(ids.has(id) && (iterations < possibles.length)) {
+                id = Math.floor(Math.random() * possibles.length);
+                iterations++;
+            }
+            ids.add(id);
+            result.push(possibles[id]);
+        }
+        while(result.length < numRecipes) {
+            let id = Math.floor(Math.random() * recipes.length);
+            result.push(recipes[id].dataValues);
+        }
+        return result;
+    }
+
+    async #getCalories(recipe) {
+        return await recipe.nutrients[0]["amount"];
     }
 
     async #fetchRecipes(key) {
