@@ -110,7 +110,6 @@ class _RecipesModel {
 
     async read(id = null) {
         if (id) {
-            console.log(id);
             return await Recipes.findByPk(id);
         }
 
@@ -142,11 +141,14 @@ class _RecipesModel {
     }
 
     async getRandom() {
-        Recipes.findAll({ order: sequelize.random(), limit: 1 }).then((recipe) => {
-            // single random encounter
-            return recipe[0].dataValues;
+        const ids = await Recipes.findAll({
+            attributes: ['id'],
         });
-        return null;
+        // console.log(ids);
+        // for(let i = 0; i < ids.length; i++) {
+        //     console.log(ids[i].dataValues.id);
+        // }
+        return ids[Math.floor(Math.random() * ids.length)].dataValues.id;
     }
 
     async #fetchRecipes(key) {

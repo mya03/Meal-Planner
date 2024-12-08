@@ -127,8 +127,8 @@ export class RecipesRepositoryService extends Service {
 
 
   addSubscriptions() {
-      this.subscribe(Events.RandomRecipe, () => {
-        this.getRandomRecipe();
+      this.subscribe(Events.RandomRecipe, (element) => {
+        this.getRandomRecipe(element);
       });
   }
 
@@ -144,7 +144,7 @@ export class RecipesRepositoryService extends Service {
   //     }
   // }
 
-  async getRandomRecipe() {
+  async getRandomRecipe(element) {
 
     const response = await fetch("/v1/recipes", {
       method: "GET",
@@ -156,6 +156,7 @@ export class RecipesRepositoryService extends Service {
 
     const data = await response.json();
     console.log(data);
+    element.innerHTML = data.title;
     return data;
   }
 }

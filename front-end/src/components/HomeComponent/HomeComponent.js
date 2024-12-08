@@ -1,5 +1,6 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
-import { EventHub } from '../../eventhub/EventHub.js'; 
+import { EventHub } from '../../eventhub/EventHub.js';
+import { Events } from '../../eventhub/Events.js';
 
 export class HomeComponent extends BaseComponent {
     #container = null; // Private variable to store the container element
@@ -59,6 +60,7 @@ export class HomeComponent extends BaseComponent {
     // Add recommended recipes section
     #createRecommendedRecipeContainer(){
         const recTitle = document.createElement('h2');
+        const hub = EventHub.getInstance();
         recTitle.innerText = "Recommended Recipes";
         recTitle.id = "recTitle";
         const recRecipeContainer = document.createElement('div');
@@ -74,6 +76,7 @@ export class HomeComponent extends BaseComponent {
             `;
 
             recRecipeContainer.appendChild(recipeCard);
+            hub.publish(Events.RandomRecipe, recipeCard);
         }
 
         this.#container.appendChild(recRecipeContainer);

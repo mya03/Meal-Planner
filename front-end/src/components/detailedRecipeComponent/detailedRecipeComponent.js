@@ -1,4 +1,6 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
+import { EventHub } from '../../eventhub/EventHub.js';
+import { Events } from '../../eventhub/Events.js';
 
 export class detailedRecipeComponent extends BaseComponent{
     #container = null; // Private variable to store the container element
@@ -37,6 +39,7 @@ export class detailedRecipeComponent extends BaseComponent{
     // add general and summary info of recipe
     #addRecipeInfo(){
         const recipeInfoContainer = document.createElement('div');
+        const hub = EventHub.getInstance();
         recipeInfoContainer.classList.add('detailed-flex-item');
 
         recipeInfoContainer.innerHTML = `
@@ -56,6 +59,7 @@ export class detailedRecipeComponent extends BaseComponent{
             <li>Vitamin: A, E, C</li>
         </ul>
         `;
+        hub.publish(Events.RandomRecipe, recipeInfoContainer);
         this.#container.appendChild(recipeInfoContainer);
     }
 
