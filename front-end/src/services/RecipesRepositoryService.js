@@ -5,17 +5,6 @@ export class RecipesRepositoryService extends Service {
 
   constructor() {
     super();
-    this.publish(Events.FilterRecipes, {
-      ingredientsObj : {
-        ingredients: "asparagus,olive oil",
-        response: {}
-      },
-      dietObj : {
-        diet: "glutenFree, dairyFree",
-        response: {}
-      },
-      resObj : {}
-    });
   }
 
   async getRandomRecipe(numRecipe, obj) {
