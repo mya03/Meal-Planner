@@ -144,18 +144,22 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
         const ingredientInput = this.#searchComponent.querySelector('#ingredientInput');
         const findRecipeBtn = this.#searchComponent.querySelector('#findRecipeBtn');
 
-        findRecipeBtn.addEventListener("click", ()=>this.#handleFindRecipe(ingredientInput));
-
         const hub = EventHub.getInstance();
+        findRecipeBtn.addEventListener("click", async()=> {
+            await this.#handleFindRecipe(ingredientInput);
+            hub.subscribe(Events.AllRecipes, (recipes) =>this.#createPlaceHolderRecipes());//placeholder recipes
+            hub.subscribe("FoundRecipes", (foundRecipes) => this.#createPlaceHolderRecipes());//placeholder recipes
+        });
+
         // hub.subscribe(Events.AllRecipes, (recipes) =>this.#displayRecipes(recipes));
         // hub.subscribe("FoundRecipes", (foundRecipes) => this.#displayRecipes(foundRecipes));
-        hub.subscribe(Events.AllRecipes, (recipes) =>this.#createPlaceHolderRecipes());//placeholder recipes
-        hub.subscribe("FoundRecipes", (foundRecipes) => this.#createPlaceHolderRecipes());//placeholder recipes
     }
 
-    #handleFindRecipe(ingredientInput){
+    async #handleFindRecipe(ingredientInput){
         const ingredients = ingredientInput.value;
-
+        const hub = EventHub.getInstance();
+        const res = {};
+        await hub.publishAsync(Events.FilterIngredients, {ingredients: ingredients, response: res});
         if (!ingredients) {
             alert('Please enter at least one ingredient.');
             return;

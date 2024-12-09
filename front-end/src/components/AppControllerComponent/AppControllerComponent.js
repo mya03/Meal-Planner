@@ -108,10 +108,6 @@ export class AppControllerComponent{
             this.#currentView = 'sharing';
             this.#renderCurrentView();
         });
-        
-
-
-        
     }
 
     // Renders the navigation bar
