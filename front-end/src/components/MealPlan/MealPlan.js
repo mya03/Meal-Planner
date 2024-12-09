@@ -72,7 +72,7 @@ export class MealPlan extends BaseComponent {
                 <h3>recipe recommendation</h3>
                 <div class="recipe-card">
                     <div class="recipe-content">
-                        <h3>${title0}</h3>
+                        <h3 id ="mealTitle">${title0}</h3>
                         <p>Click image to see the details of the recipe below or swipe left to see other meals. </p>
                     </div>
                     <div class="recipe-info">
@@ -86,7 +86,7 @@ export class MealPlan extends BaseComponent {
                 <h3>recipe recommendation</h3>
                 <div class="recipe-card">
                     <div class="recipe-content">
-                        <h3>${title1}</h3>
+                        <h3 id ="mealTitle">${title1}</h3>
                         <p>Click image to see the details of the recipe below or swipe left to see other meals. </p>
                     </div>
                     <div class="recipe-info">
@@ -100,7 +100,7 @@ export class MealPlan extends BaseComponent {
                 <h3>recipe recommendation</h3>
                 <div class="recipe-card">
                     <div class="recipe-content">
-                        <h3>${title2}</h3>
+                        <h3 id ="mealTitle">${title2}</h3>
                         <p>Click image to see the details of the recipe below or swipe left to see other meals. </p>
                     </div>
                     <div class="recipe-info">
