@@ -1,3 +1,4 @@
+import { EventHub } from '../eventhub/EventHub.js';
 import { Events } from '../eventhub/Events.js';
 import Service from './Service.js';
 
