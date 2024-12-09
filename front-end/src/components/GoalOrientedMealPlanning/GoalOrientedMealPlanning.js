@@ -220,7 +220,7 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         const options = document.getElementsByClassName("goal-option");
         for(let option of options) {
             option.addEventListener('click', () => {
-                hub.publish('navigateToMealPlan', res);
+                hub.publish('navigateToMealPlan', res.data);
             });
         }
     }
