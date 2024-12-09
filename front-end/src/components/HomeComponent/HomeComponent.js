@@ -35,11 +35,11 @@ export class HomeComponent extends BaseComponent {
         const textContainer = document.createElement('div');
         textContainer.classList.add('homeTextContainer');
         textContainer.innerHTML = `
-        <h1 id="welcomeTxt">Hey Siri!</h1>
+        <h1>Hey there!</h1>
         <p>
-            Lorem ipsum odor amet, consectetuer adipiscing elit. Convallis est eget purus fringilla est cursus netus hac. 
-            Aenean nisl quis accumsan nisi posuere faucibus est taciti ex. 
-            Rhoncus lacus varius tortor tempor tincidunt luctus.
+            Having all the ingredients but don't know what to cook? Tired to think about what will I cook today?
+            Meally is here to help you explore a world of culinary delights, perfectly tailored to your preference.
+            From comfort food to healthy meals, we've got you covered. Click below to start your journey!
         <p>
         <button id="discoverBtn">Discover Recipes</button>
         `;
@@ -95,10 +95,6 @@ export class HomeComponent extends BaseComponent {
 
         discoverBtn.addEventListener('click', () => {
             hub.publish('navigateToRecipes', null);
-        })
-
-        hub.subscribe('showUserInfo', (username) => {
-            welcomeTxt.innerText = `Hey ${username}`;
         })
 
     }
