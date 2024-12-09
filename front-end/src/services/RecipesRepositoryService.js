@@ -6,18 +6,6 @@ export class RecipesRepositoryService extends Service {
 
   constructor() {
     super();
-
-    this.publish(Events.FilterRecipes, {
-      ingredientsObj : {
-        ingredients: "asparagus,olive oil",
-        response: {}
-      },
-      dietObj : {
-        diet: "glutenFree, dairyFree",
-        response: {}
-      },
-      resObj : {}
-    });
   }
 
   addSubscriptions() {
@@ -48,6 +36,8 @@ export class RecipesRepositoryService extends Service {
     }
     
     const data = await response.json();
+    const hub = EventHub.getInstance();
+    hub.publish('FoundRecipes', data);
     obj.response.data = data;
   }
   
@@ -82,6 +72,8 @@ export class RecipesRepositoryService extends Service {
       }
     }
     resObj.data = res;
+    const hub = EventHub.getInstance();
+    hub.publish('FoundFilterRecipes', res);
   }
 }
   
