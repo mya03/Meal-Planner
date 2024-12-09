@@ -1,67 +1,47 @@
 .user-profile{
     display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .user-info{
-    margin-left: 10%; 
+    margin-left: 5%; 
     margin-right: 20px;
-    width: 30%;
 }
 
-/* container for both preferences header and box */
-.preference-container{
-    flex-grow: 1;
-    margin-right: 10%;
-}
-
-.info-box{
-    background-color: #badd7f;
-    padding: 10px;
-    font-size: 1rem;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-/* container for all the preferences */
-.preference-box{
-    background-color: #badd7f;
-    height: auto;
-    flex-grow: 1;
-    padding: 10px;
-    font-size: 1rem;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-/* three options buttons */
-.preference-options{
+.ProfileRecipeContainer{
     display: flex;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    margin-left: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
-.preference-options button{
-    margin-top: 10px;
-    margin-left: 40px;
-    margin-right: 40px;
-    width: 200px; /* Fixed width for the button */
+.ProfileRecipeCard {
+    background-color: #efaca5;
     padding: 10px;
-    font-size: 1rem;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    box-sizing: border-box;
-    background-color: #EFACA5;
+    width: 25%;
+    height: 350px;
+    border-radius: 12px;
+    margin-bottom: 30px;
 }
 
-.preference-options button:active{
-    background-color: #ec968c;
+/* .ProfileRecipeCard div {
+    background-color: #f7efda;
+    aspect-ratio: 1/1;
+    border-radius: 8px;
+  
+} */
+
+.ProfileRecipeCard img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
 }
+
+.ProfileRecipeCard:hover {
+    cursor: pointer;
+}
+
 
 /*Responsive Design*/
 
@@ -77,16 +57,9 @@
         width: 100%;
     }
 
-    .preference-container {
-        margin: 0px;
-    }
-
-    .preference-options{
-        margin: 0px;
-    }
-
-    .preference-options button {
-        margin: 5px;
+    .ProfileRecipeCard {
+        width: 70%;
+        margin: 10px;
     }
     
 }

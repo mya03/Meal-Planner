@@ -2,9 +2,83 @@ import { Events } from '../eventhub/Events.js';
 import Service from './Service.js';
 
 export class RecipesRepositoryService extends Service {
-
-  constructor() {
+  constructor(){
     super();
+  }
+
+  addSubscriptions(){
+    this.subscribe('LogInUser', async (data) => {
+      await this.login(data);
+    });
+
+    this.subscribe('SignUpUser', async (data) => {
+      await this.signup(data);
+    });
+
+    this.subscribe(Events.RandomRecipe, async(data) => {
+      await this.getRandomRecipe(data.numRecipes, data.response);
+    });
+
+    this.subscribe(Events.FilterIngredients, async(data) => {
+      await this.filterIngredients(data);
+    });
+
+    this.subscribe(Events.FilterDiet, async(data) => {
+      await this.filterRecipesBasedOnDiet(data);
+    });
+
+    this.subscribe(Events.FilterRecipes, async(data) => {
+      await this.filterRecipes(data.ingredientsObj, data.dietObj, data.resObj);
+    });
+  }
+
+  async login(user){
+    const hub = EventHub.getInstance();
+    try{
+      const response = await fetch("/v1/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to login");
+      }
+
+      const data = await response.json();
+      
+      hub.publish('LogInSuccess', data.username);
+      return data;
+    }catch(error){
+      hub.publish('FailedLogIn', null);
+      console.error("failed log in:", error);
+    }
+    
+  }
+
+  async signup(user){
+    const hub = EventHub.getInstance();
+    try{
+      const response = await fetch("/v1/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to signup");
+      }
+
+      const data = await response.json();
+      console.log("sign up success");
+      hub.publish('LogInSuccess', data.username);
+      return data;
+    }catch(error){
+      hub.publish('FailedSignUp', null);
+      console.error("failed sign up:", error);
+    }
   }
 
   async getRandomRecipe(numRecipe, obj) {
@@ -61,17 +135,19 @@ export class RecipesRepositoryService extends Service {
     }
     
     const data = await response.json();
+    const hub = EventHub.getInstance();
+    hub.publish('FoundRecipes', data);
     obj.response.data = data;
   }
-  
+
   async filterRecipesBasedOnDiet(obj) {
-      const response = await fetch("/v1/diet", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      body: JSON.stringify(obj),
-    });
+    const response = await fetch("/v1/diet", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    body: JSON.stringify(obj),
+  });
 
     if (!response.ok) {
       throw new Error("Failed to filter by diet");
@@ -95,6 +171,8 @@ export class RecipesRepositoryService extends Service {
       }
     }
     resObj.data = res;
+    const hub = EventHub.getInstance();
+    hub.publish('FoundFilterRecipes', res);
   }
 
   async getRecipesBasedOnCalories(obj) {
@@ -115,4 +193,7 @@ export class RecipesRepositoryService extends Service {
     obj.response.data = data;
   }
 }
+  
+
+
   
