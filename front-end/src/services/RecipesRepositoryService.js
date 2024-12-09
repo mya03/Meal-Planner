@@ -41,16 +41,20 @@ export class RecipesRepositoryService extends Service {
       await this.getRandomRecipe(data.numRecipes, data.response);
     });
 
-    this.subscribe(Events.FilterIngredients, (data) => {
-      this.filterIngredients(data);
+    this.subscribe(Events.FilterIngredients, async(data) => {
+      await this.filterIngredients(data);
     });
 
-    this.subscribe(Events.FilterDiet, (data) => {
-      this.filterRecipesBasedOnDiet(data);
+    this.subscribe(Events.FilterDiet, async(data) => {
+      await this.filterRecipesBasedOnDiet(data);
     });
 
-    this.subscribe(Events.FilterRecipes, (data) => {
-      this.filterRecipes(data.ingredientsObj, data.dietObj, data.resObj);
+    this.subscribe(Events.FilterRecipes, async(data) => {
+      await this.filterRecipes(data.ingredientsObj, data.dietObj, data.resObj);
+    });
+
+    this.subscribe(Events.CaloriesRecommendation, async(data) => {
+      await this.getRecipesBasedOnCalories(data);
     });
   }
 
@@ -102,6 +106,24 @@ export class RecipesRepositoryService extends Service {
       }
     }
     resObj.data = res;
+  }
+
+  async getRecipesBasedOnCalories(obj) {
+
+    const response = await fetch("/v1/calories", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(obj),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to get recipes based on calories.");
+    }
+
+    const data = await response.json();
+    obj.response.data = data;
   }
 }
   
