@@ -1,6 +1,11 @@
 ## Contribution Log for Ray Zhou
 
 ### December 10, 2024
+- **Task**: Update `ray-zhou.md`
+- **Details**: Updated tasks completed
+- **Link to Commit**: [Initial Commit](https://github.com/mya03/Meal-Planner/commit/a902c2e901b1d0b3f99d78c355a3f066a51df10b)
+
+### December 10, 2024
 - **Task**: Implement Recipe Sharing Tables
 - **Details**: Created `SharedRecipesController.js`, `SharedRecipesModel.js`, and `SharedRecipeRoutes.js`. Implemented `SharedRecipesController.js`.
 - **Link to Commit**: [Initial Commit](https://github.com/mya03/Meal-Planner/commit/6114cd564622ea41773abc7455749da51dd024e0)
