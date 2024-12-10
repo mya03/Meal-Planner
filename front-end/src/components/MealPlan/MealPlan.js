@@ -10,12 +10,14 @@ export class MealPlan extends BaseComponent {
     }
 
     render(data = null) {
+        // recreate container because each time, there will be new recipes
         this.#createContainer(data);
         this.#attachEventListener(data);
         return this.#container;
     }
     
     // add events to navigate to detailed recipes page when click images
+    // the data will be 3 recipes (based on average calories in GoalOrientedMealPlanner TDEE output)
     #attachEventListener(data = null) {
         const hub = EventHub.getInstance();
 

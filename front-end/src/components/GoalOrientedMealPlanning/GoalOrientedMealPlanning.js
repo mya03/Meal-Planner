@@ -217,6 +217,8 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         const hub = EventHub.getInstance();
 
         // get the recommened recipes based on tdee
+        // and store in res, which will have a 'data' field
+        // that stores 3 recipes, each has around the same calories as the averageCalories
         const res = {};
         await hub.publishAsync(Events.CaloriesRecommendation, {numRecipes: 3, calories: averageCalories, response: res});
         const options = document.getElementsByClassName("goal-option");
