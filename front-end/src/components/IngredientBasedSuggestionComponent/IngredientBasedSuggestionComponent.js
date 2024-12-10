@@ -110,13 +110,13 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
         this.#recipeComponent.id = "recipes-container";
 
         for(let i=0; i<recipes.length; i++){
-            this.#recipeComponent.appendChild(this.#createRecipeComponent(recipes[i].title, recipes[i].image, recipes[i].description));
+            this.#recipeComponent.appendChild(this.#createRecipeComponent(recipes[i],recipes[i].title, recipes[i].image, recipes[i].description));
         }
         return this.#recipeComponent;
     }
 
     //add recipe component
-    #createRecipeComponent(name, image, summary){
+    #createRecipeComponent(recipe,name, image, summary){
         const recipeComponent = document.createElement('div');
         recipeComponent.classList.add("recipe-box");
         recipeComponent.innerHTML = this.#getRecipeImageTemplate(image);
@@ -127,6 +127,10 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
         recipeInfo.innerHTML = this.#getRecipeInfoTemplate(name, summary);
         recipeComponent.appendChild(recipeInfo);
 
+        recipeComponent.addEventListener('click', ()=>{
+            const hub = EventHub.getInstance();
+            hub.publish('navigateToDetailedRecipe', recipe);
+        })
         return recipeComponent;
     }
 

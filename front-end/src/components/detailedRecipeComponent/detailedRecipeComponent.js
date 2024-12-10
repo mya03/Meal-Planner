@@ -11,10 +11,6 @@ export class detailedRecipeComponent extends BaseComponent{
     }
 
     render(data = null){
-        if (this.#container) {
-            return this.#container;
-        }
-          
         this.#createContainer();
         this.#addRecipeImgContainer(data);
         this.#addRecipeInfo(data);

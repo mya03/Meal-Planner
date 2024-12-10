@@ -60,6 +60,10 @@ export class ProfileComponent extends BaseComponent{
                 <p>Servings: ${recipes[i].servings}<p>
             `;
 
+            recipeCard.addEventListener('click', ()=>{
+                const hub = EventHub.getInstance();
+                hub.publish('navigateToDetailedRecipe', recipes[i]);
+            })
             recRecipeContainer.appendChild(recipeCard);
         }
         return recRecipeContainer;
