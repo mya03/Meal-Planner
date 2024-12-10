@@ -218,6 +218,7 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         const res = {};
         await hub.publishAsync(Events.CaloriesRecommendation, {numRecipes: 3, calories: averageCalories, response: res});
         const options = document.getElementsByClassName("goal-option");
+        console.log(res.data);
         for(let option of options) {
             option.addEventListener('click', () => {
                 hub.publish('navigateToMealPlan', res.data);

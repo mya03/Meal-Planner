@@ -48,7 +48,6 @@ export class AppControllerComponent{
         this.#HomeComponent.render();
         this.#NavigationBarComponent.render();
         this.#GoalOrientedMealPlanning.render();
-        this.#MealPlan.render();
         this.#IngredientBasedSuggestionComponent.render();
         this.#ProfileComponent.render();
         this.#LogInComponent.render();
@@ -135,13 +134,13 @@ export class AppControllerComponent{
             viewContainer.appendChild(this.#HomeComponent.render());
         } else if (this.#currentView === 'detailedRecipe') {
             //render detailed recipe page 
-            console.log(data);
             viewContainer.appendChild(this.#detailedRecipeComponent.render(data));      
         } else if (this.#currentView === 'goalPlan') {
             //render detailed recipe page 
             viewContainer.appendChild(this.#GoalOrientedMealPlanning.render());    
         } else if (this.#currentView === 'mealPlan') {
             //render detailed recipe page 
+            console.log(data);
             viewContainer.appendChild(this.#MealPlan.render(data));    
         } else if (this.#currentView === 'profile') {
             //render detailed recipe page 

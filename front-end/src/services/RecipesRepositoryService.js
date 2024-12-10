@@ -31,6 +31,10 @@ export class RecipesRepositoryService extends Service {
     this.subscribe(Events.FilterRecipes, async(data) => {
       await this.filterRecipes(data.ingredientsObj, data.dietObj, data.resObj);
     });
+
+    this.subscribe(Events.CaloriesRecommendation, async(data) => {
+      await this.getRecipesBasedOnCalories(data);
+    })
   }
 
   async login(user){
