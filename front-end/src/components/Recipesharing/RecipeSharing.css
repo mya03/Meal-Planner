@@ -19,7 +19,9 @@
   }
   
   .recipe-form label {
+    display: block; 
     font-weight: 500;
+    margin-bottom: px;
   }
   
   .recipe-form input,
