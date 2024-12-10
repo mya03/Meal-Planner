@@ -3,6 +3,8 @@ import UserModel from "./UserModel.js";
 
 class _ModelFactory {
     async getModel(table, model = "sqlite") {
+
+        // Recipes Model
         if(table === "Recipes") {
             if (model === "sqlite") {
                 return RecipesModel;
@@ -10,6 +12,8 @@ class _ModelFactory {
                 await RecipesModel.init(true);
                 return RecipesModel;
             }
+        
+        // User Model
         } else if (table === "User") {
             if (model === "sqlite") {
                 return UserModel;

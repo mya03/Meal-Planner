@@ -215,10 +215,13 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         // Switch to meal options
         let averageCalories = tdee / 3;
         const hub = EventHub.getInstance();
+
+        // get the recommened recipes based on tdee
         const res = {};
         await hub.publishAsync(Events.CaloriesRecommendation, {numRecipes: 3, calories: averageCalories, response: res});
         const options = document.getElementsByClassName("goal-option");
-        console.log(res.data);
+
+        // navigate to meal plan component and pass in the recommended recipes
         for(let option of options) {
             option.addEventListener('click', () => {
                 hub.publish('navigateToMealPlan', res.data);
@@ -226,6 +229,7 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         }
     }
 
+    // check if the input is Number
     #isNumeric(str) {
         if (typeof str != "string") return false;
         return !isNaN(str) && !isNaN(parseFloat(str));

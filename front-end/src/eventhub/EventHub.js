@@ -20,6 +20,7 @@ export class EventHub {
       this.events[event].forEach(listener => listener(data));
     }
 
+    // this function publish async functions
     async publishAsync(event, data) {
       if (!this.events[event]) return;
       try {
