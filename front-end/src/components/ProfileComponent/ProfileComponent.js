@@ -5,6 +5,8 @@ import { Events } from '../../eventhub/Events.js';
 export class ProfileComponent extends BaseComponent{
     #container = null
     #userInfoComponent = null;
+    #logged_in = false;
+    #username = '';
 
     constructor(){
         super();
@@ -16,7 +18,7 @@ export class ProfileComponent extends BaseComponent{
             return this.#container;
         }
         this.#createContainer();
-        //this.#attachEventListeners();
+        this.#attachEventListeners();
         return this.#container;
     }
 
@@ -25,62 +27,64 @@ export class ProfileComponent extends BaseComponent{
         this.#container = document.createElement('div');;
         this.#container.classList.add("user-profile");
 
-        this.#container.appendChild(this.#createUserInfoContainer());
-        this.#container.appendChild(this.#createPreferenceContainer());
+        if(this.#logged_in){
+            this.#container.appendChild(this.#createUserInfoContainer(this.#username));
+            this.#container.appendChild(this.#createPreferenceContainer());
+        }else{
+            this.#container.innerHTML = `<h3>You're not logged in</h3>`;
+        }
+        
     }
 
-    #createUserInfoContainer() {
+    #createUserInfoContainer(username) {
         this.#userInfoComponent = document.createElement('div');
         this.#userInfoComponent.classList.add("user-info");
 
-        this.#userInfoComponent.innerHTML = "<h1>Hello Siri</h1>";
-
-        //add info box
-        this.#userInfoComponent.appendChild(this.#createInfoBox(5, 112));
+        this.#userInfoComponent.innerHTML =  `<h1>Hello ${username}, you may like these recipes</h1>`;
 
         return this.#userInfoComponent;
     }
 
-    #createInfoBox(height, weight) {
-        const infoBox = document.createElement('div');
-        infoBox.classList.add("info-box");
-        infoBox.innerHTML = `
-          <p>Height: ${height} ft<p>
-          <p>Weight: ${weight} lbs<p>
-        `;
-        return infoBox;
+    //create preference section
+    #createPreferenceContainer(RecipeArray){
+        const recipes = RecipeArray;
+        const recRecipeContainer = document.createElement('div');
+        recRecipeContainer.classList.add('ProfileRecipeContainer');
+        for (let i=0; i < 9;i++){
+            const image = recipes[i].image || "https://www.svgrepo.com/show/508699/landscape-placeholder.svg";
+            const recipeCard = document.createElement('div');
+            recipeCard.classList.add('ProfileRecipeCard');
+            recipeCard.innerHTML = `
+                <div><img src=${image}></div>
+                <h3>${recipes[i].title}</h3>
+                <p>Servings: ${recipes[i].servings}<p>
+            `;
+
+            recipeCard.addEventListener('click', ()=>{
+                const hub = EventHub.getInstance();
+                hub.publish('navigateToDetailedRecipe', recipes[i]);
+            })
+            recRecipeContainer.appendChild(recipeCard);
+        }
+        return recRecipeContainer;
     }
 
-    #createPreferenceContainer() {
-        const preferenceContainer = document.createElement('div');
-        preferenceContainer.classList.add("preference-container");
-        preferenceContainer.innerHTML = "<h1>Preferences</h1>";
-        preferenceContainer.appendChild(this.#createPreferenceBox());
-        return preferenceContainer;
+    async #attachEventListeners(){
+        const hub = EventHub.getInstance();
+        const response ={};
+        const numRecipes = 9;
+        const data = {numRecipes, response}
+        await hub.publishAsync(Events.RandomRecipe, data);
+        hub.subscribe('LogInSuccess', (data) =>this.#handleLoginSuccess(data, response));
     }
 
-    #createPreferenceBox(){
-        const preferenceBox = document.createElement('div');
-        preferenceBox.classList.add("preference-box");
-        preferenceBox.innerHTML += `<h3>Dietary Restrictions</h3>`;
-        preferenceBox.appendChild(this.#getPreferenceTemplate("Vegan", "Vegetarian", "Gluten Free"));
-        preferenceBox.innerHTML += `<h3>Health & Fitness Goals</h3>`;
-        preferenceBox.appendChild(this.#getPreferenceTemplate("Low Carb", "High Protein", "Low Fat"));
-        preferenceBox.innerHTML += `<h3>Cuisine Preferences</h3>`;
-        preferenceBox.appendChild(this.#getPreferenceTemplate("Western", "Asian", "Mediterranean"));
-        return preferenceBox;
-    }
-    
+    #handleLoginSuccess(data, response){
+        this.#logged_in = true;
+        this.#username = data;
+        this.#container.innerHTML = '';
+        this.#container.appendChild(this.#createUserInfoContainer(this.#username));
+        this.#container.appendChild(this.#createPreferenceContainer(response.data));
 
-    #getPreferenceTemplate(option1, option2, option3){
-        const options = document.createElement('div');
-        options.classList.add("preference-options");
-        options.innerHTML = `
-        <button>${option1}</button>
-        <button>${option2}</button>
-        <button>${option3}</button>
-        `;
-        return options;
     }
 
 }

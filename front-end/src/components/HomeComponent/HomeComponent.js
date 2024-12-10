@@ -1,5 +1,6 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
-import { EventHub } from '../../eventhub/EventHub.js'; 
+import { EventHub } from '../../eventhub/EventHub.js';
+import { Events } from '../../eventhub/Events.js';
 
 export class HomeComponent extends BaseComponent {
     #container = null; // Private variable to store the container element
@@ -17,7 +18,6 @@ export class HomeComponent extends BaseComponent {
         this.#createContainer();
         this.#createIntroContainer();
         this.#createRecommendedRecipeContainer();
-        this.#attachEventListeners();
        
         return this.#container;
     }
@@ -35,11 +35,11 @@ export class HomeComponent extends BaseComponent {
         const textContainer = document.createElement('div');
         textContainer.classList.add('homeTextContainer');
         textContainer.innerHTML = `
-        <h1>Hey Siri!</h1>
+        <h1>Hey There!</h1>
         <p>
-            Lorem ipsum odor amet, consectetuer adipiscing elit. Convallis est eget purus fringilla est cursus netus hac. 
-            Aenean nisl quis accumsan nisi posuere faucibus est taciti ex. 
-            Rhoncus lacus varius tortor tempor tincidunt luctus.
+            Having all the ingredients but don't know what to cook? Tired to think about what will I cook today?
+            Meally is here to help you explore a world of culinary delights, perfectly tailored to your preference.
+            From comfort food to healthy meals, we've got you covered. Click below to start your journey!
         <p>
         <button id="discoverBtn">Discover Recipes</button>
         `;
@@ -57,40 +57,51 @@ export class HomeComponent extends BaseComponent {
     }
 
     // Add recommended recipes section
-    #createRecommendedRecipeContainer(){
+    async #createRecommendedRecipeContainer(){
         const recTitle = document.createElement('h2');
+        const hub = EventHub.getInstance();
         recTitle.innerText = "Recommended Recipes";
         recTitle.id = "recTitle";
         const recRecipeContainer = document.createElement('div');
         recRecipeContainer.classList.add('homeRecipeContainer');
         recRecipeContainer.appendChild(recTitle);
+        
+        const res = {};
+        await hub.publishAsync(Events.RandomRecipe, {numRecipes: 3, response: res});
+
         for (let i=0; i < 3;i++){
             const recipeCard = document.createElement('div');
             recipeCard.classList.add('homeRecipeCard');
-            recipeCard.innerHTML = `
-                <div></div>
-                <h3>Name of the Recipe</h3>
-                <h4>Calories</h4>
-            `;
-
             recRecipeContainer.appendChild(recipeCard);
+            
+            let recipe = res.data[i];
+
+            // if the recipe has no image, get placeholder image
+            if(!recipe.image){
+               recipe.image = "https://media.istockphoto.com/id/1457433817/photo/group-of-healthy-food-for-flexitarian-diet.jpg?s=612x612&w=0&k=20&c=v48RE0ZNWpMZOlSp13KdF1yFDmidorO2pZTu2Idmd3M=";
+            };
+
+            recipeCard.innerHTML = `
+                <img src=${recipe.image}>
+                <h3>${recipe.title}</h3>
+                <h4>${this.#getCalories(recipe)} kcal</h4>
+            `;
+            recipeCard.addEventListener('click', () => {
+                hub.publish('navigateToDetailedRecipe', res.data[i]);
+            });
         }
 
         this.#container.appendChild(recRecipeContainer);
+        this.#attachEventListeners();
+    }
 
+    #getCalories(recipe) {
+        return recipe.nutrients[0]["amount"];
     }
 
     #attachEventListeners(){
         const hub = EventHub.getInstance();
-        const homeRecipeCards = this.#container.querySelectorAll('.homeRecipeCard');
         const discoverBtn = this.#container.querySelector('#discoverBtn');
-
-        // Loop through each element in the List of recipe cards and attach event
-        homeRecipeCards.forEach((homeRecipeCard) => {
-            homeRecipeCard.addEventListener('click', () => {
-                hub.publish('navigateToDetailedRecipe', null);
-            });
-        });
 
         discoverBtn.addEventListener('click', () => {
             hub.publish('navigateToRecipes', null);

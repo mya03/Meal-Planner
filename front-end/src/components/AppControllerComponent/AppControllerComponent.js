@@ -7,6 +7,7 @@ import { IngredientBasedSuggestionComponent } from "../IngredientBasedSuggestion
 import { ProfileComponent } from "../ProfileComponent/ProfileComponent.js";
 import { RecipeSharingComponent } from "../Recipesharing/RecipeSharing2.js";
 import { EventHub } from '../../eventhub/EventHub.js';
+import { LogInComponent } from "../LogInComponent/LogInComponent.js";
 
 export class AppControllerComponent{
     #container = null; // Private container for the component
@@ -20,10 +21,14 @@ export class AppControllerComponent{
     #ProfileComponent = null;
     #RecipeSharingComponent = null;
     #hub = null; // EventHub instance for managing events
+    #LogInComponent = null;
 
     constructor(){
         this.#hub = EventHub.getInstance();
         this.#HomeComponent = new HomeComponent();
+        this.#LogInComponent = new LogInComponent();
+        this.#ProfileComponent = new ProfileComponent();
+        this.#RecipeSharingComponent = new RecipeSharingComponent();
         this.initializePages();
     }
 
@@ -33,8 +38,6 @@ export class AppControllerComponent{
         this.#GoalOrientedMealPlanning = new GoalOrientedMealPlanning();
         this.#MealPlan = new MealPlan();
         this.#IngredientBasedSuggestionComponent = new IngredientBasedSuggestionComponent();
-        this.#ProfileComponent = new ProfileComponent();
-        this.#RecipeSharingComponent = new RecipeSharingComponent();
     }
 
     // Render the AppController component and return the container
@@ -42,13 +45,12 @@ export class AppControllerComponent{
         this.#createContainer();
         this.#setupContainerContent();
         this.#attachEventListener();
-        this.#detailedRecipeComponent.render();
         this.#HomeComponent.render();
         this.#NavigationBarComponent.render();
         this.#GoalOrientedMealPlanning.render();
-        this.#MealPlan.render();
         this.#IngredientBasedSuggestionComponent.render();
         this.#ProfileComponent.render();
+        this.#LogInComponent.render();
 
         // Rendering the navigation bar
         this.#renderNavigationBar();
@@ -74,9 +76,9 @@ export class AppControllerComponent{
     // Attaches the necessary event listeners
     #attachEventListener() {
         // Subscribe to events from the EventHub to manage switching
-        this.#hub.subscribe('navigateToDetailedRecipe', () => {
+        this.#hub.subscribe('navigateToDetailedRecipe', (data) => {
             this.#currentView = 'detailedRecipe';
-            this.#renderCurrentView();
+            this.#renderCurrentView(data);
         });
 
         this.#hub.subscribe('navigateToHome', () => {
@@ -89,9 +91,9 @@ export class AppControllerComponent{
             this.#renderCurrentView();
         });
 
-        this.#hub.subscribe('navigateToMealPlan', () => {
+        this.#hub.subscribe('navigateToMealPlan', (data) => {
             this.#currentView = 'mealPlan';
-            this.#renderCurrentView();
+            this.#renderCurrentView(data);
         });
 
         this.#hub.subscribe('navigateToProfile', () => {
@@ -109,9 +111,10 @@ export class AppControllerComponent{
             this.#renderCurrentView();
         });
         
-
-
-        
+        this.#hub.subscribe('navigateToLogIn', () => {
+            this.#currentView = 'login';
+            this.#renderCurrentView();
+        });
     }
 
     // Renders the navigation bar
@@ -121,7 +124,7 @@ export class AppControllerComponent{
     }
 
     // Renders the current view based on the #currentView state
-    #renderCurrentView() {
+    #renderCurrentView(data = null) {
         const viewContainer = this.#container.querySelector('#viewContainer');
         viewContainer.innerHTML = ''; // Clear existing content
 
@@ -131,13 +134,13 @@ export class AppControllerComponent{
             viewContainer.appendChild(this.#HomeComponent.render());
         } else if (this.#currentView === 'detailedRecipe') {
             //render detailed recipe page 
-            viewContainer.appendChild(this.#detailedRecipeComponent.render());      
+            viewContainer.appendChild(this.#detailedRecipeComponent.render(data));      
         } else if (this.#currentView === 'goalPlan') {
             //render detailed recipe page 
             viewContainer.appendChild(this.#GoalOrientedMealPlanning.render());    
         } else if (this.#currentView === 'mealPlan') {
             //render detailed recipe page 
-            viewContainer.appendChild(this.#MealPlan.render());    
+            viewContainer.appendChild(this.#MealPlan.render(data));    
         } else if (this.#currentView === 'profile') {
             //render detailed recipe page 
             viewContainer.appendChild(this.#ProfileComponent.render());    
@@ -147,6 +150,9 @@ export class AppControllerComponent{
         } else if (this.#currentView === 'sharing') {
             //render detailed recipe page 
             viewContainer.appendChild(this.#RecipeSharingComponent.render());    
+        } else if (this.#currentView === 'login') {
+            //render detailed recipe page 
+            viewContainer.appendChild(this.#LogInComponent.render());    
         }
     }
 }
