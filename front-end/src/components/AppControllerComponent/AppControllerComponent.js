@@ -89,9 +89,9 @@ export class AppControllerComponent{
             this.#renderCurrentView();
         });
 
-        this.#hub.subscribe('navigateToMealPlan', () => {
+        this.#hub.subscribe('navigateToMealPlan', (data) => {
             this.#currentView = 'mealPlan';
-            this.#renderCurrentView();
+            this.#renderCurrentView(data);
         });
 
         this.#hub.subscribe('navigateToProfile', () => {
@@ -108,10 +108,6 @@ export class AppControllerComponent{
             this.#currentView = 'sharing';
             this.#renderCurrentView();
         });
-        
-
-
-        
     }
 
     // Renders the navigation bar
@@ -137,7 +133,7 @@ export class AppControllerComponent{
             viewContainer.appendChild(this.#GoalOrientedMealPlanning.render());    
         } else if (this.#currentView === 'mealPlan') {
             //render detailed recipe page 
-            viewContainer.appendChild(this.#MealPlan.render());    
+            viewContainer.appendChild(this.#MealPlan.render(data));    
         } else if (this.#currentView === 'profile') {
             //render detailed recipe page 
             viewContainer.appendChild(this.#ProfileComponent.render());    

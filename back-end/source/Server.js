@@ -1,6 +1,7 @@
 // Server.js
 import express from "express";
 import RecipesRoutes from "./routes/RecipesRoutes.js";
+import UserRoutes from "./routes/UserRoutes.js";
 
 class Server {
   constructor() {
@@ -20,7 +21,8 @@ class Server {
 
   // Setup routes by using imported RecipesRoutes
   setupRoutes() {
-    this.app.use("/v1", RecipesRoutes); // Mount RecipesRoutes on the app
+    this.app.use("/v1", RecipesRoutes); // Mount TaskRoutes on the app
+    this.app.use("/v1", UserRoutes); // Mount TaskRoutes on the app
   }
 
   // Start the server on a specified port

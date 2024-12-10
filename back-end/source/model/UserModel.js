@@ -1,0 +1,72 @@
+import { DataTypes } from "sequelize";
+import { SQLiteDB } from "./SQLiteDB.js";
+
+const sequelize = SQLiteDB.getInstance();
+
+// Define user model
+const User = sequelize.define('User', {
+    userid: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+    },
+    username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    created_at: {
+        type: DataTypes.DATE,
+        allowNull: true,
+    },
+    update_at: {
+        type: DataTypes.DATE,
+        allowNull: true,
+    }
+
+})
+
+class _UserModel {
+    constructor () {}
+
+    async init(fresh = false) {
+        await sequelize.authenticate();
+        await sequelize.sync({ force: true });
+
+        if(fresh) {
+            await this.create({
+                username: "admin",
+                password: "123456",
+            })
+        }
+    }
+
+    async create(user) {
+        return await User.create(user);
+    }
+
+    async read(id=null) {
+        if(id) {
+            return await User.findByPk(id);
+        }
+
+        return await User.findAll();
+    }
+
+    async update(user) {
+        const userUpdate = await User.findByPk(user.userid);
+        if(!userUpdate){
+            return null;
+        }
+
+        await userUpdate.update(user);
+        return userUpdate
+    }
+}
+
+const UserModel = new _UserModel();
+
+export default UserModel;

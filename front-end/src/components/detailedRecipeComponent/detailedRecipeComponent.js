@@ -64,12 +64,13 @@ export class detailedRecipeComponent extends BaseComponent{
                 </ul>
                 `;
             }
-        
+       
         this.#container.appendChild(recipeInfoContainer);
         this.#addDivider();
         this.#addRecipeDetailedInfo(recipe);
     }
 
+    // Get the calories from the recipe object
     #getCalories(recipe) {
         return recipe.nutrients[0]["amount"];
     }
@@ -136,5 +137,4 @@ export class detailedRecipeComponent extends BaseComponent{
         recipeDetailedInfoContainer.appendChild(instructionSection);
         this.#container.appendChild(recipeDetailedInfoContainer);
     }
-    
 }       

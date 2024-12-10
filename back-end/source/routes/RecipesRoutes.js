@@ -27,6 +27,17 @@ class RecipesRoutes {
         this.router.delete("/recipes", async (req, res) => {
             await RecipesController.clearRecipes(req, res);
         });
+
+        this.router.post("/ingredients", async (req, res) => {
+            await RecipesController.filterIngredients(req, res);
+        });
+
+        this.router.post("/diet", async (req, res) => {
+            await RecipesController.filterRecipesBasedOnDiet(req, res);
+        })
+        this.router.post("/calories", async (req, res) => {
+            await RecipesController.getRecipesBasedOnCalories(req, res);
+        });
     }
 
     getRouter() {
