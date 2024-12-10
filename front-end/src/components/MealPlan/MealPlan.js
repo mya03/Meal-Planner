@@ -10,10 +10,6 @@ export class MealPlan extends BaseComponent {
     }
 
     render(data = null) {
-        if(this.#container) {
-            return this.#container;
-        }
-
         this.#createContainer(data);
         this.#attachEventListener(data);
         return this.#container;
