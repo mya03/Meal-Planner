@@ -29,6 +29,10 @@ const SharedRecipes = sequelize.define("SharedRecipes", {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
     },
+    /*isFavorite: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    },*/
 });
 
 class _SharedRecipesModel {

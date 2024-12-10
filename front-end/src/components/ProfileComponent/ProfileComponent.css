@@ -42,6 +42,24 @@
     cursor: pointer;
 }
 
+/*.favorite-checkbox {
+    display: absolute;
+    top: 10px;
+    right: 10px;
+    accent-color: #f4b084;
+    width: 20px;
+    height: 20px;
+    transition: transform 0.2s ease;
+}
+
+.favorite-checkbox:checked {
+    transform: scale(1.2);
+}
+
+.ProfileRecipeCard:hover .favorite-checkbox {
+    transform: scale(1.2);
+}*/
+
 
 /*Responsive Design*/
 
