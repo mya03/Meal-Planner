@@ -51,7 +51,7 @@ export class ProfileComponent extends BaseComponent{
         const recRecipeContainer = document.createElement('div');
         recRecipeContainer.classList.add('ProfileRecipeContainer');
         for (let i=0; i < 9;i++){
-            const image = recipes[i].image || "https://www.svgrepo.com/show/508699/landscape-placeholder.svg";
+            const image = recipes[i].image || "https://media.istockphoto.com/id/1457433817/photo/group-of-healthy-food-for-flexitarian-diet.jpg?s=612x612&w=0&k=20&c=v48RE0ZNWpMZOlSp13KdF1yFDmidorO2pZTu2Idmd3M=";
             const recipeCard = document.createElement('div');
             recipeCard.classList.add('ProfileRecipeCard');
             recipeCard.innerHTML = `
