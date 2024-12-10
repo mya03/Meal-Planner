@@ -110,7 +110,8 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
         this.#recipeComponent.id = "recipes-container";
 
         for(let i=0; i<recipes.length; i++){
-            this.#recipeComponent.appendChild(this.#createRecipeComponent(recipes[i],recipes[i].title, recipes[i].image, recipes[i].description));
+            const image =  recipes[i].image || "https://media.istockphoto.com/id/1457433817/photo/group-of-healthy-food-for-flexitarian-diet.jpg?s=612x612&w=0&k=20&c=v48RE0ZNWpMZOlSp13KdF1yFDmidorO2pZTu2Idmd3M=";
+            this.#recipeComponent.appendChild(this.#createRecipeComponent(recipes[i],recipes[i].title, image, recipes[i].description));
         }
         return this.#recipeComponent;
     }

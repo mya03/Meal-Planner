@@ -26,6 +26,9 @@ export class AppControllerComponent{
     constructor(){
         this.#hub = EventHub.getInstance();
         this.#HomeComponent = new HomeComponent();
+        this.#LogInComponent = new LogInComponent();
+        this.#ProfileComponent = new ProfileComponent();
+        this.#RecipeSharingComponent = new RecipeSharingComponent();
         this.initializePages();
     }
 
@@ -35,9 +38,6 @@ export class AppControllerComponent{
         this.#GoalOrientedMealPlanning = new GoalOrientedMealPlanning();
         this.#MealPlan = new MealPlan();
         this.#IngredientBasedSuggestionComponent = new IngredientBasedSuggestionComponent();
-        this.#ProfileComponent = new ProfileComponent();
-        this.#RecipeSharingComponent = new RecipeSharingComponent();
-        this.#LogInComponent = new LogInComponent();
     }
 
     // Render the AppController component and return the container
@@ -128,7 +128,7 @@ export class AppControllerComponent{
         const viewContainer = this.#container.querySelector('#viewContainer');
         viewContainer.innerHTML = ''; // Clear existing content
 
-        //this.initializePages();
+        this.initializePages();
         if (this.#currentView === 'home'){
             //render home page
             viewContainer.appendChild(this.#HomeComponent.render());
@@ -140,7 +140,6 @@ export class AppControllerComponent{
             viewContainer.appendChild(this.#GoalOrientedMealPlanning.render());    
         } else if (this.#currentView === 'mealPlan') {
             //render detailed recipe page 
-            console.log(data);
             viewContainer.appendChild(this.#MealPlan.render(data));    
         } else if (this.#currentView === 'profile') {
             //render detailed recipe page 
