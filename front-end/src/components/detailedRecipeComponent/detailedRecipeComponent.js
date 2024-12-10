@@ -38,30 +38,33 @@ export class detailedRecipeComponent extends BaseComponent{
     }
 
     // add general and summary info of recipe
-    #addRecipeInfo(recipe = null){
+    async #addRecipeInfo(recipe = null){
         const recipeInfoContainer = document.createElement('div');
         recipeInfoContainer.classList.add('detailed-flex-item');
+        console.log("Recipe data:", recipe);
 
-        if(recipe) {   
-            recipeInfoContainer.innerHTML = `
-            <h1>${recipe.title}</h1>
-            <p> 
-                ${recipe.description}
-            </p>
-            <span>
-                <p>Time: ${recipe.length}<p>
-                <p>Serving Size: ${recipe.servings}</p>
-            </span>
-            <h3>Nutriton</h3>
-            <ul>
-                <li>Calories: ${this.#getCalories(recipe)} kcal</li>
-                <li>Protein: ${recipe.nutrients[8]["amount"]} g</li>
-                <li>Carbohydrates: ${recipe.nutrients[3]["amount"]} g</li>
-                <li>Sugar: ${recipe.nutrients[5]["amount"]} g</li>
-                <li>Fat: ${recipe.nutrients[1]["amount"]} g</li>
-            </ul>
-            `;
-        }
+            if(recipe) {
+                
+                recipeInfoContainer.innerHTML = `
+                <h1>${recipe.title}</h1>
+                <p> 
+                    ${recipe.description}
+                </p>
+                <span>
+                    <p>Time: ${recipe.length}<p>
+                    <p>Serving Size: ${recipe.servings}</p>
+                </span>
+                <h3>Nutriton</h3>
+                <ul>
+                    <li>Calories: ${this.#getCalories(recipe)} kcal</li>
+                    <li>Protein: ${recipe.nutrients[8]["amount"]} g</li>
+                    <li>Carbohydrates: ${recipe.nutrients[3]["amount"]} g</li>
+                    <li>Sugar: ${recipe.nutrients[5]["amount"]} g</li>
+                    <li>Fat: ${recipe.nutrients[1]["amount"]} g</li>
+                </ul>
+                `;
+            }
+       
         this.#container.appendChild(recipeInfoContainer);
         this.#addDivider();
         this.#addRecipeDetailedInfo(recipe);
@@ -120,8 +123,8 @@ export class detailedRecipeComponent extends BaseComponent{
                 const singleInstruction = document.createElement("li");
                 instructionList.appendChild(singleInstruction);
                 singleInstruction.innerText = `${instructionArray[i]}`;
+        
             }
-
             
         }
         ingredientSection.appendChild(ingredientText);

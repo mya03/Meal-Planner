@@ -75,11 +75,21 @@ export class HomeComponent extends BaseComponent {
             recRecipeContainer.appendChild(recipeCard);
             
             let recipe = res.data[i];
+
+            // if the recipe has no image, get placeholder image
+            if(!recipe.image){
+               recipe.image = "https://media.istockphoto.com/id/1457433817/photo/group-of-healthy-food-for-flexitarian-diet.jpg?s=612x612&w=0&k=20&c=v48RE0ZNWpMZOlSp13KdF1yFDmidorO2pZTu2Idmd3M=";
+            };
+
             recipeCard.innerHTML = `
-                <div></div>
+                <img src=${recipe.image}>
                 <h3>${recipe.title}</h3>
                 <h4>${this.#getCalories(recipe)} kcal</h4>
             `;
+
+            recipeCard.addEventListener('click', () => {
+                hub.publish('navigateToDetailedRecipe', res.data[i]);
+            });
         }
 
         this.#container.appendChild(recRecipeContainer);
@@ -92,15 +102,7 @@ export class HomeComponent extends BaseComponent {
 
     #attachEventListeners(){
         const hub = EventHub.getInstance();
-        const homeRecipeCards = this.#container.querySelectorAll('.homeRecipeCard');
         const discoverBtn = this.#container.querySelector('#discoverBtn');
-
-        // Loop through each element in the List of recipe cards and attach event
-        homeRecipeCards.forEach((homeRecipeCard) => {
-            homeRecipeCard.addEventListener('click', () => {
-                hub.publish('navigateToDetailedRecipe', null);
-            });
-        });
 
         discoverBtn.addEventListener('click', () => {
             hub.publish('navigateToRecipes', null);
