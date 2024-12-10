@@ -1,4 +1,7 @@
 import { Sequelize } from "sequelize";
+
+// This singleton class creates 1 instance of the SQLiteDB
+// In the database.sqlite stores the tables (Recipes, User,...)
 export class SQLiteDB {
 
     // Define a static reference to the SQLiteDB

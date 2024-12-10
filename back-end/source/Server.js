@@ -21,8 +21,8 @@ class Server {
 
   // Setup routes by using imported RecipesRoutes
   setupRoutes() {
-    this.app.use("/v1", RecipesRoutes); // Mount TaskRoutes on the app
-    this.app.use("/v1", UserRoutes); // Mount TaskRoutes on the app
+    this.app.use("/v1", RecipesRoutes); // Mount RecipesRoutes on the app
+    this.app.use("/v1", UserRoutes); // Mount UserRoutes on the app
   }
 
   // Start the server on a specified port

@@ -86,6 +86,8 @@ export class RecipesRepositoryService extends Service {
     }
   }
 
+  // this function gets numRecipe number of random recipes
+  // and put the data into the passed-in obj.data field
   async getRandomRecipe(numRecipe, obj) {
 
     const response = await fetch("/v1/random", {
@@ -104,6 +106,10 @@ export class RecipesRepositoryService extends Service {
     obj.data = data;
   }
 
+  // this function gets all recipes with the specific ingredients
+  // and store those recipes in the passed-in obj.response.data field
+  // this obj has a required 'ingredients' field or else the server will 
+  // return 400 error - bad request
   async filterIngredients(obj) {
     const response = await fetch("/v1/ingredients", {
       method: "POST",
@@ -123,6 +129,10 @@ export class RecipesRepositoryService extends Service {
     obj.response.data = data;
   }
 
+  // this function gets all recipes with the specific diet types
+  // and store those recipes in the passed-in obj.response.data field
+  // this obj has a required 'diet' field or else the server will
+  // return 400 error - bad request
   async filterRecipesBasedOnDiet(obj) {
     const response = await fetch("/v1/diet", {
       method: "POST",
@@ -140,6 +150,7 @@ export class RecipesRepositoryService extends Service {
     obj.response.data = data;
   }
 
+  // this function combines filterIngredients() and filterRecipesBasedOnDiet()
   async filterRecipes(ingredientsObj, dietObj, resObj) {
     await this.filterIngredients(ingredientsObj);
     await this.filterRecipesBasedOnDiet(dietObj);
@@ -158,6 +169,12 @@ export class RecipesRepositoryService extends Service {
     hub.publish('FoundFilterRecipes', res);
   }
 
+  // this function gets numRecipes number of recipes with
+  // specific amount of calories
+  // the passed-in obj has 3 fields: numRecipes, calories, response
+  // the response fields store the returned data from the request
+  // the calories field specifies the amount of calories for each recipe
+  // the numRecipes field specifies the number of recipes to get
   async getRecipesBasedOnCalories(obj) {
 
     const response = await fetch("/v1/calories", {
@@ -176,7 +193,3 @@ export class RecipesRepositoryService extends Service {
     obj.response.data = data;
   }
 }
-  
-
-
-  
