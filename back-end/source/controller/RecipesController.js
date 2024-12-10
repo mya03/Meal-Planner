@@ -1,12 +1,10 @@
 import ModelFactory from "../model/ModelFactory.js";
-import RecipesModel from "../model/RecipesModel.js";
 
 class RecipesController {
     constructor() {
-    ModelFactory.getModel("Recipes").then((model) => {
-        this.model = model;
-        console.log("MODEL " + (this.model.read("2d851430-c779-4e5b-866b-aa876c4d5cae")));
-    });
+        ModelFactory.getModel("Recipes").then((model) => {
+            this.model = model;
+        });
     }
 
     // Get all recipes

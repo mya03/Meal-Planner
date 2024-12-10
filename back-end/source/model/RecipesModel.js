@@ -59,17 +59,6 @@ const Recipes = sequelize.define("Recipes", {
 
 class _RecipesModel {
     #api = "https://api.spoonacular.com/recipes/";
-    // #apiKey1 = "28b0ce37f2fe40b0aa609436c7dd9b13";
-    // #apiKey2 = "c38789c63e6448d296ae87c829288fa6";
-    // #apiKey3 = "a1b174e35419408daadb08677f61695c";
-    // #apiKey4 = "b47b29729e9644edb531ee75a3150db5";
-    // #apiKey5 = "5bc47f30f94e4cc8adaeb0c417249a7f";
-    // #apiKey6 = "193232ec7aa447bd889235b1cb5196ad";
-    // #apiKey7 = "56696075b2fe4df48b9d6f5660305da8";
-    // #apiKey8 = "6b0150d40bae4966ac02152c34620ba4";
-    // #apiKey9 = "9a228f1e657f4e0eba6aadba28db9239";
-    // #apiKey10 = "8ad8b6f8e8ed44db9a414b157662a162";
-
     
     constructor() {}
     
@@ -89,7 +78,16 @@ class _RecipesModel {
                 "68d3837d88b14dd9b60962f35be4282c",
                 "f8e8e063372c4bc681bf15aab2b436bb",
                 "919f687eff9d4745a6636630c1f84740",
-                "32905160df7e42db8453b0e5be699ea3"
+                "32905160df7e42db8453b0e5be699ea3",
+                "c38789c63e6448d296ae87c829288fa6",
+                "a1b174e35419408daadb08677f61695c",
+                "b47b29729e9644edb531ee75a3150db5",
+                "5bc47f30f94e4cc8adaeb0c417249a7f",
+                "193232ec7aa447bd889235b1cb5196ad",
+                "56696075b2fe4df48b9d6f5660305da8",
+                "6b0150d40bae4966ac02152c34620ba4",
+                "9a228f1e657f4e0eba6aadba28db9239",
+                "8ad8b6f8e8ed44db9a414b157662a162"
             ];
 
             for(const key of apiKeys) {
