@@ -86,7 +86,7 @@ export class HomeComponent extends BaseComponent {
                 <h3>${recipe.title}</h3>
                 <h4>${this.#getCalories(recipe)} kcal</h4>
             `;
-
+            console.log(res.data[i]);
             recipeCard.addEventListener('click', () => {
                 hub.publish('navigateToDetailedRecipe', res.data[i]);
             });

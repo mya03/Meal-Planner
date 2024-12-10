@@ -45,7 +45,6 @@ export class AppControllerComponent{
         this.#createContainer();
         this.#setupContainerContent();
         this.#attachEventListener();
-        this.#detailedRecipeComponent.render();
         this.#HomeComponent.render();
         this.#NavigationBarComponent.render();
         this.#GoalOrientedMealPlanning.render();
@@ -136,6 +135,7 @@ export class AppControllerComponent{
             viewContainer.appendChild(this.#HomeComponent.render());
         } else if (this.#currentView === 'detailedRecipe') {
             //render detailed recipe page 
+            console.log(data);
             viewContainer.appendChild(this.#detailedRecipeComponent.render(data));      
         } else if (this.#currentView === 'goalPlan') {
             //render detailed recipe page 

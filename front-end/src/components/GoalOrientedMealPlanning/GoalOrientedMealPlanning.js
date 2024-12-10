@@ -122,7 +122,7 @@ export class GoalOrientedMealPlanning extends BaseComponent {
         const headerMaintainWeight = document.createElement('h2');
         headerMaintainWeight.textContent = "Maintain Weight";
         const descriptionMaintainWeight = document.createElement('p');
-        descriptionMaintainWeight.textContent = "You should consume the same amoutn as your TDEE per day.";
+        descriptionMaintainWeight.textContent = "You should consume the same amount as your TDEE per day.";
         contentMaintainWeightOption.appendChild(headerMaintainWeight);
         contentMaintainWeightOption.appendChild(descriptionMaintainWeight);
 
