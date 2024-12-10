@@ -31,6 +31,10 @@
     border: 1px solid #ccc;
     font-family: 'Inter', sans-serif;
   }
+
+  .recipe-form input[type="file"] {
+    padding: 3px;
+  }
   
   .recipe-form button {
     background-color: #C3A6E6; /* Lavender */
