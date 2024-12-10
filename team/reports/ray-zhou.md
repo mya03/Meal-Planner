@@ -66,27 +66,27 @@
 - **Link to Commit**: [Initial Commit](https://github.com/mya03/Meal-Planner/commit/e7377c47825ba094cb5075237ae651230a49c704)
 
 ### November 15, 2024
-- - **Task**: Implement recipe sharing feature
+- **Task**: Implement recipe sharing feature
 - **Details**: `RecipeList.js` implemented.
 - **Link to Commit**: [Initial Commit](https://github.com/mya03/Meal-Planner/commit/c4c8c048e6cee3505282f63021fc4d0cdaa2c91c)
 
 ### November 15, 2024
-- - **Task**: Implement recipe sharing feature
+- **Task**: Implement recipe sharing feature
 - **Details**: `RecipeSharing.js` implemented.
 - **Link to Commit**: [Initial Commit](https://github.com/mya03/Meal-Planner/commit/4805cf95692540a2b0f906fa40674c041a80b55c)
 
 ### November 15, 2024
-- - **Task**: Implement recipe sharing feature
+- **Task**: Implement recipe sharing feature
 - **Details**: `RecipeSharing.css` implemented.
 - **Link to Commit**: [Initial Commit](https://github.com/mya03/Meal-Planner/commit/8ed89a86fe00b536636f5cdbc63c812fa89b248f)
 
 ### November 15, 2024
-- - **Task**: Implement recipe sharing feature
+- **Task**: Implement recipe sharing feature
 - **Details**: Updated css file (`RecipeSharing.css`), implemented css into other files
 - **Link to Commit**: [Initial Commit](https://github.com/mya03/Meal-Planner/commit/e4de7cc671306e464523eb25057d2af3ea315005)
 
 ### November 15, 2024
-- - **Task**: Implement recipe sharing feature
+- **Task**: Implement recipe sharing feature
 - **Details**: Added 'Inter' font to the project
 - **Link to Commit**: [Initial Commit](https://github.com/mya03/Meal-Planner/commit/f83664cefba69016aece0868732724b39cdab6f4)
 
