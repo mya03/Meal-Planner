@@ -39,6 +39,9 @@ class RecipesRoutes {
         this.router.post("/diet", async (req, res) => {
             await RecipesController.filterRecipesBasedOnDiet(req, res);
         })
+        this.router.post("/calories", async (req, res) => {
+            await RecipesController.getRecipesBasedOnCalories(req, res);
+        });
     }
 
     getRouter() {

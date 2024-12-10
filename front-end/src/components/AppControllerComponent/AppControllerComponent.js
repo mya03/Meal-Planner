@@ -78,9 +78,9 @@ export class AppControllerComponent{
     // Attaches the necessary event listeners
     #attachEventListener() {
         // Subscribe to events from the EventHub to manage switching
-        this.#hub.subscribe('navigateToDetailedRecipe', () => {
+        this.#hub.subscribe('navigateToDetailedRecipe', (data) => {
             this.#currentView = 'detailedRecipe';
-            this.#renderCurrentView();
+            this.#renderCurrentView(data);
         });
 
         this.#hub.subscribe('navigateToHome', () => {
@@ -93,9 +93,9 @@ export class AppControllerComponent{
             this.#renderCurrentView();
         });
 
-        this.#hub.subscribe('navigateToMealPlan', () => {
+        this.#hub.subscribe('navigateToMealPlan', (data) => {
             this.#currentView = 'mealPlan';
-            this.#renderCurrentView();
+            this.#renderCurrentView(data);
         });
 
         this.#hub.subscribe('navigateToProfile', () => {
@@ -128,7 +128,7 @@ export class AppControllerComponent{
     }
 
     // Renders the current view based on the #currentView state
-    #renderCurrentView() {
+    #renderCurrentView(data = null) {
         const viewContainer = this.#container.querySelector('#viewContainer');
         viewContainer.innerHTML = ''; // Clear existing content
 
@@ -138,13 +138,13 @@ export class AppControllerComponent{
             viewContainer.appendChild(this.#HomeComponent.render());
         } else if (this.#currentView === 'detailedRecipe') {
             //render detailed recipe page 
-            viewContainer.appendChild(this.#detailedRecipeComponent.render());      
+            viewContainer.appendChild(this.#detailedRecipeComponent.render(data));      
         } else if (this.#currentView === 'goalPlan') {
             //render detailed recipe page 
             viewContainer.appendChild(this.#GoalOrientedMealPlanning.render());    
         } else if (this.#currentView === 'mealPlan') {
             //render detailed recipe page 
-            viewContainer.appendChild(this.#MealPlan.render());    
+            viewContainer.appendChild(this.#MealPlan.render(data));    
         } else if (this.#currentView === 'profile') {
             //render detailed recipe page 
             viewContainer.appendChild(this.#ProfileComponent.render());    

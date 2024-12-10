@@ -38,6 +38,10 @@
 	text-decoration: underline dotted;
 }
 
+#mealTitle {
+	margin-top: 0px;
+}
+
 .recipe-card {
 	text-align: center;
 	border-radius: 5%;

@@ -157,21 +157,22 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
         glutenFreeFilter.addEventListener('change', ()=>{this.#diet += 'glutenFree,'});
         lactoseIntFilter.addEventListener('change', ()=>{this.#diet += 'dairyFree,'});
 
-
         const hub = EventHub.getInstance();
         findRecipeBtn.addEventListener("click", async()=> {
             await this.#handleFindRecipe(ingredientInput);
+            // hub.subscribe(Events.AllRecipes, (recipes) =>this.#createPlaceHolderRecipes());//placeholder recipes
+            // hub.subscribe("FoundRecipes", (foundRecipes) => this.#createPlaceHolderRecipes());//placeholder recipes
         });
 
-        hub.subscribe("FoundRecipes", (foundRecipes) => this.#displayRecipes(foundRecipes));
-        hub.subscribe("FoundFilterRecipes", (foundRecipes) => this.#displayRecipes(foundRecipes));
+        // hub.subscribe(Events.AllRecipes, (recipes) =>this.#displayRecipes(recipes));
+        // hub.subscribe("FoundRecipes", (foundRecipes) => this.#displayRecipes(foundRecipes));
     }
 
     async #handleFindRecipe(ingredientInput){
         const ingredients = ingredientInput.value;
         const hub = EventHub.getInstance();
         const res = {};
-        
+        await hub.publishAsync(Events.FilterIngredients, {ingredients: ingredients, response: res});
         if (!ingredients) {
             alert('Please enter at least one ingredient.');
             return;

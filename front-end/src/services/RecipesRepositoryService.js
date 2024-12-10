@@ -1,5 +1,4 @@
 import { Events } from '../eventhub/Events.js';
-import { EventHub } from '../eventhub/EventHub.js';
 import Service from './Service.js';
 
 export class RecipesRepositoryService extends Service {
@@ -114,26 +113,24 @@ export class RecipesRepositoryService extends Service {
     }
     
     const data = await response.json();
-    const hub = EventHub.getInstance();
-    hub.publish('FoundRecipes', data);
     obj.response.data = data;
   }
-
+  
   async filterRecipesBasedOnDiet(obj) {
-    const response = await fetch("/v1/diet", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    body: JSON.stringify(obj),
-  });
+      const response = await fetch("/v1/diet", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      body: JSON.stringify(obj),
+    });
 
-  if (!response.ok) {
-    throw new Error("Failed to filter by diet");
-  }
+    if (!response.ok) {
+      throw new Error("Failed to filter by diet");
+    }
 
-  const data = await response.json();
-  obj.response.data = data;
+    const data = await response.json();
+    obj.response.data = data;
   }
 
   async filterRecipes(ingredientsObj, dietObj, resObj) {
@@ -150,10 +147,24 @@ export class RecipesRepositoryService extends Service {
       }
     }
     resObj.data = res;
-    const hub = EventHub.getInstance();
-    hub.publish('FoundFilterRecipes', res);
   }
-  
 
+  async getRecipesBasedOnCalories(obj) {
+
+    const response = await fetch("/v1/calories", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(obj),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to get recipes based on calories.");
+    }
+
+    const data = await response.json();
+    obj.response.data = data;
+  }
 }
   
