@@ -1,9 +1,11 @@
 import ModelFactory from "../model/ModelFactory.js";
+import RecipesModel from "../model/RecipesModel.js";
 
 class RecipesController {
     constructor() {
     ModelFactory.getModel("Recipes").then((model) => {
         this.model = model;
+        console.log("MODEL " + (this.model.read("2d851430-c779-4e5b-866b-aa876c4d5cae")));
     });
     }
 
@@ -38,6 +40,7 @@ class RecipesController {
 
             const recipes = [];
             for(const id of ids) {
+                console.log(id);
                 recipes.push(await this.model.read(id));
             }
             return res.status(200).json(recipes);

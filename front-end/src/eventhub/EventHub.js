@@ -22,8 +22,12 @@ export class EventHub {
 
     async publishAsync(event, data) {
       if (!this.events[event]) return;
-      for(const listener of this.events[event]) {
-        await listener(data);
+      try {
+        for(const listener of this.events[event]) {
+          await listener(data);
+        }
+      } catch(error) {
+        console.log(error);
       }
     }
   

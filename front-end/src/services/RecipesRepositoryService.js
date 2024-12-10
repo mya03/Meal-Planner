@@ -100,28 +100,6 @@ export class RecipesRepositoryService extends Service {
     obj.data = data;
   }
 
-  addSubscriptions() {
-    this.subscribe(Events.RandomRecipe, async(data) => {
-      await this.getRandomRecipe(data.numRecipes, data.response);
-    });
-
-    this.subscribe(Events.FilterIngredients, async(data) => {
-      await this.filterIngredients(data);
-    });
-
-    this.subscribe(Events.FilterDiet, async(data) => {
-      await this.filterRecipesBasedOnDiet(data);
-    });
-
-    this.subscribe(Events.FilterRecipes, async(data) => {
-      await this.filterRecipes(data.ingredientsObj, data.dietObj, data.resObj);
-    });
-
-    this.subscribe(Events.CaloriesRecommendation, async(data) => {
-      await this.getRecipesBasedOnCalories(data);
-    });
-  }
-
   async filterIngredients(obj) {
     const response = await fetch("/v1/ingredients", {
       method: "POST",
