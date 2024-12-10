@@ -7,6 +7,7 @@ import { IngredientBasedSuggestionComponent } from "../IngredientBasedSuggestion
 import { ProfileComponent } from "../ProfileComponent/ProfileComponent.js";
 import { RecipeSharingComponent } from "../Recipesharing/RecipeSharing2.js";
 import { EventHub } from '../../eventhub/EventHub.js';
+import { LogInComponent } from "../LogInComponent/LogInComponent.js";
 
 export class AppControllerComponent{
     #container = null; // Private container for the component
@@ -20,6 +21,7 @@ export class AppControllerComponent{
     #ProfileComponent = null;
     #RecipeSharingComponent = null;
     #hub = null; // EventHub instance for managing events
+    #LogInComponent = null;
 
     constructor(){
         this.#hub = EventHub.getInstance();
@@ -35,6 +37,7 @@ export class AppControllerComponent{
         this.#IngredientBasedSuggestionComponent = new IngredientBasedSuggestionComponent();
         this.#ProfileComponent = new ProfileComponent();
         this.#RecipeSharingComponent = new RecipeSharingComponent();
+        this.#LogInComponent = new LogInComponent();
     }
 
     // Render the AppController component and return the container
@@ -49,6 +52,7 @@ export class AppControllerComponent{
         this.#MealPlan.render();
         this.#IngredientBasedSuggestionComponent.render();
         this.#ProfileComponent.render();
+        this.#LogInComponent.render();
 
         // Rendering the navigation bar
         this.#renderNavigationBar();
@@ -108,6 +112,13 @@ export class AppControllerComponent{
             this.#currentView = 'sharing';
             this.#renderCurrentView();
         });
+        
+        this.#hub.subscribe('navigateToLogIn', () => {
+            this.#currentView = 'login';
+            this.#renderCurrentView();
+        });
+
+        
     }
 
     // Renders the navigation bar
@@ -121,7 +132,7 @@ export class AppControllerComponent{
         const viewContainer = this.#container.querySelector('#viewContainer');
         viewContainer.innerHTML = ''; // Clear existing content
 
-        this.initializePages();
+        //this.initializePages();
         if (this.#currentView === 'home'){
             //render home page
             viewContainer.appendChild(this.#HomeComponent.render());
@@ -143,6 +154,9 @@ export class AppControllerComponent{
         } else if (this.#currentView === 'sharing') {
             //render detailed recipe page 
             viewContainer.appendChild(this.#RecipeSharingComponent.render());    
+        } else if (this.#currentView === 'login') {
+            //render detailed recipe page 
+            viewContainer.appendChild(this.#LogInComponent.render());    
         }
     }
 }

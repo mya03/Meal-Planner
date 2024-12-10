@@ -24,6 +24,10 @@ class RecipesRoutes {
             await RecipesController.getRandomRecipe(req, res);
         });
 
+        this.router.get("/recipes", async (req, res) => {
+            await RecipesController.getAllRecipes(req, res);
+        });
+
         this.router.delete("/recipes", async (req, res) => {
             await RecipesController.clearRecipes(req, res);
         });

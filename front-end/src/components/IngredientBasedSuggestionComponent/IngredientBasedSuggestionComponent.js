@@ -8,6 +8,7 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
     #headerComponent = null;
     #searchComponent = null;
     #recipeComponent = null;
+    #diet = '';
 
     constructor(){
         super();
@@ -58,7 +59,7 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
     #getIngredientTemplate() {
         // Returns the HTML template for the component
         return `
-          <input type="text" id="ingredientInput" placeholder="Enter your avaible ingredients. (multiple ingredients should be separated by comma and space)">
+          <input type="text" id="ingredientInput" placeholder="Enter your avaible ingredients. (multiple ingredients should be separated by comma)">
           <button id="findRecipeBtn">Find</button>
         `;
     }
@@ -68,7 +69,11 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
         this.#body = document.createElement('div');
         this.#body.classList.add("recipes-body");
         this.#body.appendChild(this.#createFilterComponent());
-        this.#body.appendChild(this.#createPlaceHolderRecipes());
+        this.#recipeComponent = document.createElement('div');
+        this.#recipeComponent.classList.add("recipes-container");
+        this.#recipeComponent.innerHTML = `<h3>Start searching for recipes</h3>`;
+        this.#recipeComponent.id = "recipes-container";
+        this.#body.appendChild(this.#recipeComponent);
         return this.#body;
     }
     
@@ -105,8 +110,7 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
         this.#recipeComponent.id = "recipes-container";
 
         for(let i=0; i<recipes.length; i++){
-            console.log(recipes[i]);
-            this.#recipeComponent.appendChild(this.#createRecipeComponent(recipes[i].title, recipes[i].image, recipes[i].summary));
+            this.#recipeComponent.appendChild(this.#createRecipeComponent(recipes[i].title, recipes[i].image, recipes[i].description));
         }
         return this.#recipeComponent;
     }
@@ -143,12 +147,21 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
     #attachEventListeners(){
         const ingredientInput = this.#searchComponent.querySelector('#ingredientInput');
         const findRecipeBtn = this.#searchComponent.querySelector('#findRecipeBtn');
+        const veganFilter = this.#body.querySelector('#veganFilter');
+        const vegetarianFilter = this.#body.querySelector('#vegetarianFilter');
+        const glutenFreeFilter = this.#body.querySelector('#glutenFreeFilter');
+        const lactoseIntFilter = this.#body.querySelector('#lactoseIntFilter');
+
+        veganFilter.addEventListener('change', ()=>{this.#diet += "vegan,"});
+        vegetarianFilter.addEventListener('change', ()=>{this.#diet += 'vegetarian,'});
+        glutenFreeFilter.addEventListener('change', ()=>{this.#diet += 'glutenFree,'});
+        lactoseIntFilter.addEventListener('change', ()=>{this.#diet += 'dairyFree,'});
 
         const hub = EventHub.getInstance();
         findRecipeBtn.addEventListener("click", async()=> {
             await this.#handleFindRecipe(ingredientInput);
-            hub.subscribe(Events.AllRecipes, (recipes) =>this.#createPlaceHolderRecipes());//placeholder recipes
-            hub.subscribe("FoundRecipes", (foundRecipes) => this.#createPlaceHolderRecipes());//placeholder recipes
+            // hub.subscribe(Events.AllRecipes, (recipes) =>this.#createPlaceHolderRecipes());//placeholder recipes
+            // hub.subscribe("FoundRecipes", (foundRecipes) => this.#createPlaceHolderRecipes());//placeholder recipes
         });
 
         // hub.subscribe(Events.AllRecipes, (recipes) =>this.#displayRecipes(recipes));
@@ -164,37 +177,44 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
             alert('Please enter at least one ingredient.');
             return;
         }
-        this.#publishFindRecipes(ingredients);
+        if(!this.#diet){
+            await hub.publishAsync(Events.FilterIngredients, {ingredients: ingredients, response: res});
+        }else{
+            const resIn = {};
+            const resDiet = {};
+            const ingredientsObj = {ingredients: ingredients, response: resIn};
+            const dietObj = {diet: this.#diet, response: resDiet};
+            await hub.publishAsync(Events.FilterRecipes, {ingredientsObj, dietObj, resObj: res});
+        }
 
-        //clear input of search box
+        //clear input of search box and filter box
         ingredientInput.value = "";
-    }
-
-    #publishFindRecipes(ingredients){
-        const hub = EventHub.getInstance();
-        hub.publish(Events.FindRecipes, ingredients);
+        this.#diet = '';
+        const veganFilter = this.#body.querySelector('#veganFilter');
+        const vegetarianFilter = this.#body.querySelector('#vegetarianFilter');
+        const glutenFreeFilter = this.#body.querySelector('#glutenFreeFilter');
+        const lactoseIntFilter = this.#body.querySelector('#lactoseIntFilter');
+        veganFilter.checked = false;
+        vegetarianFilter.checked = false;
+        glutenFreeFilter.checked = false;
+        lactoseIntFilter.checked = false;
+        return res;
     }
 
     #displayRecipes(recipes){
         //clear the recipes-container if they are current recipes displayed
         const recipeContainer = document.getElementById("recipes-container");
         if(recipeContainer){
-            this.#body.removeChild(recipeContainer);
+            this.#body.removeChild(this.#recipeComponent);
         }
 
-        this.#body.appendChild(this.#createRecipes(recipes));
-    }
-
-    //create temp placeholder recipes
-    #createPlaceHolderRecipes(){
-        this.#recipeComponent = document.createElement('div');
-        this.#recipeComponent.classList.add("recipes-container");
-        this.#recipeComponent.id = "recipes-container";
-
-        for(let i=0; i<5; i++){
-            this.#recipeComponent.appendChild(this.#createRecipeComponent("", "https://www.svgrepo.com/show/508699/landscape-placeholder.svg", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."));
+        if(recipes.length !=0){
+            this.#body.appendChild(this.#createRecipes(recipes));
+        }else{
+            this.#recipeComponent.innerHTML = `<h3>Sorry, no recipes matches your search in the database...</h3>`;
+            this.#body.appendChild(this.#recipeComponent);
         }
-        return this.#recipeComponent;
+        
     }
 
 }

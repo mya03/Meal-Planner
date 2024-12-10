@@ -291,6 +291,75 @@ class _RecipesModel {
         }
     }
 
+    async filterIngredients(ingredients) {
+        const list = ingredients.trim().split(",");
+        for(let i = 0; i < list.length; i++) {
+            list[i] = list[i].trim();
+        }
+        const set = new Set(list);
+        const ids = new Set();
+        const result = [];
+        const recipes = await Recipes.findAll();
+        if(list.length === 0 || (list.length === 1 && list[0] === '')) {
+            for(let i = 0; i < recipes.length; i++) {
+                if(ids.has(recipes[i].dataValues.id)) continue;
+                ids.add(recipes[i].dataValues.id);
+                result.push(recipes[i].dataValues);
+            }
+        } else {
+            for(let i = 0; i < recipes.length; i++) {
+                let recipeIngredients = recipes[i].dataValues.ingredients.trim().split(",");
+                for(let ingredient of recipeIngredients) {
+                    if(set.has(ingredient) && !(ids.has(recipes[i].dataValues.id))) {
+                        ids.add(recipes[i].dataValues.id);
+                        result.push(recipes[i].dataValues);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    async filterDiet(dietTypes) {
+        const set = new Set(dietTypes.trim().split(","));
+        const result = [];
+        const recipes = await Recipes.findAll();
+        if(set.size == 0) {
+            for(let i = 0; i < recipes.length; i++) {
+                results.push(recipes[i].dataValues);
+            }
+        } else {
+            for(let i = 0; i < recipes.length; i++) {
+                let ok = true;
+                const recipe = recipes[i].dataValues;
+                for(let type of set) {
+                    type = type.trim();
+                    switch(type) {
+                        case 'vegan':
+                            ok = recipe.diet_type["vegan"];
+                            break;
+                        case 'glutenFree':
+                            ok = recipe.diet_type["glutenFree"];
+                            break;
+                        case 'dairyFree':
+                            ok = recipe.diet_type["dairyFree"];
+                            break;
+                        case 'vegetarian':
+                            ok = recipe.diet_type["vegetarian"];
+                            break;
+                        default: // still ok
+                            break;
+                    }
+
+                    if(!ok) break;
+                }
+                if(ok) result.push(recipe);
+            }
+        }
+        return result;
+    }
+
+
     #createRecipeEntry(data, nutrition, dataIngredients) {
         return {
             recipeid: data.id,
