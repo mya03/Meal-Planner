@@ -70,15 +70,28 @@
 - **Details**: Added navigation to recipes sharing page
 - **Link to Commit**: [Commit on Navigation Feature](https://github.com/mya03/Meal-Planner/commit/ebf5c964c18a3852899193fc226a7b906fc24a55)
 
+### December 7, 2024
+- **Task**: Create user table
+- **Details**: Create user table in sequelize with attributes for id, username, password, updated_at, created_at, favorite, recipes
+- **Link to Commit**: [Commit on UserModel](https://github.com/mya03/Meal-Planner/commit/929cd57c1e2efa4457e2f9d652ac86a193821196)
 
+### December 7, 2024
+- **Task**: Implement user system
+- **Details**: Implement userController, userModel and userRoutes that add and fetch users
+- **Link to Commit**: [Commit on User System](https://github.com/mya03/Meal-Planner/commit/9f909d5797b872b5e48b067545214548027ca0e9)
 
+### December 8, 2024
+- **Task**: Front-end integration for Home Component and Detailed Recipe Component
+- **Details**: Get recipes from database and show them in home pages and detailed recipe page, modified app controller component so that data can be sent between pages
+- **Link to Commit**: [Commit on Front-end Integration](https://github.com/mya03/Meal-Planner/commit/721d05eb66733fb983539d721ed7b93bd1d9e0b6)
 
+### December 8, 2024
+- **Task**: Front-end integration for Goal Oriented Meal Planner page
+- **Details**: Get recipes from database based on the user info and show them in goal oriented meal planner page, modified app controller component so that data can be sent between pages
+- **Link to Commit**: [Commit on Front-end Integration](https://github.com/mya03/Meal-Planner/commit/ed28c1cd471ed2c786d10d07624129dae7a30e5b)
 
-
-
-
-  
-
-
-
+### December 9, 2024
+- **Task**: Change styles to the meal planner page
+- **Details**: Add html id to some component and change the css style of it
+- **Link to Commit**: [Commit on Front-end](https://github.com/mya03/Meal-Planner/commit/9e08f2946d0bd5502c778eb515e3f0658e42f2c6)
 
