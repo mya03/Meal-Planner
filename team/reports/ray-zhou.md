@@ -6,6 +6,16 @@
 - **Link to Commit**: [Initial Commit](https://github.com/mya03/Meal-Planner/commit/a902c2e901b1d0b3f99d78c355a3f066a51df10b)
 
 ### December 10, 2024
+- **Task**: Create Demo Video
+- **Details**: created and uploaded demo video to `demo` folder
+- **Link to Commit**: [Initial Commit](https://github.com/mya03/Meal-Planner/commit/d1217825780998d65d9c7caffb7413a0895fd2aa)
+
+### December 10, 2024
+- **Task**: Final updates to RecipeSharing
+- **Details**: Added username and file submission options
+- **Link to Commit**: [Initial Commit](https://github.com/mya03/Meal-Planner/commit/28af38640e46c8bab741c3560af87047f386678b)
+
+### December 10, 2024
 - **Task**: Implement Recipe Sharing Tables
 - **Details**: Created `SharedRecipesController.js`, `SharedRecipesModel.js`, and `SharedRecipeRoutes.js`. Implemented `SharedRecipesController.js`.
 - **Link to Commit**: [Initial Commit](https://github.com/mya03/Meal-Planner/commit/6114cd564622ea41773abc7455749da51dd024e0)
