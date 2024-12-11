@@ -45,11 +45,13 @@ export class ProfileComponent extends BaseComponent{
         return this.#userInfoComponent;
     }
 
-    //create preference section
+    //create suggestion for users section
     #createPreferenceContainer(RecipeArray){
         const recipes = RecipeArray;
         const recRecipeContainer = document.createElement('div');
         recRecipeContainer.classList.add('ProfileRecipeContainer');
+        
+        //get 9 random recipes from database
         for (let i=0; i < 9;i++){
             const image = recipes[i].image || "https://media.istockphoto.com/id/1457433817/photo/group-of-healthy-food-for-flexitarian-diet.jpg?s=612x612&w=0&k=20&c=v48RE0ZNWpMZOlSp13KdF1yFDmidorO2pZTu2Idmd3M=";
             const recipeCard = document.createElement('div');
@@ -60,6 +62,7 @@ export class ProfileComponent extends BaseComponent{
                 <p>Servings: ${recipes[i].servings}<p>
             `;
 
+            //attach event listeners to each recipe card
             recipeCard.addEventListener('click', ()=>{
                 const hub = EventHub.getInstance();
                 hub.publish('navigateToDetailedRecipe', recipes[i]);
@@ -78,6 +81,7 @@ export class ProfileComponent extends BaseComponent{
         hub.subscribe('LogInSuccess', (data) =>this.#handleLoginSuccess(data, response));
     }
 
+    //only show this page if user have logged in
     #handleLoginSuccess(data, response){
         this.#logged_in = true;
         this.#username = data;

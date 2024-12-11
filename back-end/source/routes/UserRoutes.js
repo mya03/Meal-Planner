@@ -23,7 +23,8 @@ class UserRoutes {
             await UserController.addUser(req, res);
         });
 
-        //log in user
+        //log in user. This endpoint tries to log in a user with provided username and password
+        //and returns the user if found
         this.router.post("/login", async (req, res)=> {
             console.log("Logging in");
             await UserController.login(req, res);

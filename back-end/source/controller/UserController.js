@@ -22,6 +22,7 @@ class UserController {
         return res.status(400).json({error: "Username and password are required."})
       }
 
+      //check if username already exists
       const existsUser = await this.existsUser(req.body.username);
       
       if(existsUser){
@@ -56,7 +57,6 @@ class UserController {
         console.log(await bcrypt.compare(password, user.password));
 
         if (!user || !(await bcrypt.compare(password, user.password))) {
-            console.log("hii");
             return res.status(401).json({error: "Invalid credentials"});
         }
         return res.status(200).json(user);

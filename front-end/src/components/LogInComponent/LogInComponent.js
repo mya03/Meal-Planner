@@ -42,6 +42,7 @@ export class LogInComponent extends BaseComponent{
         return header;
     }
 
+    //log in and sign up form
     #createLogInForm(){
         this.#LogInForm = document.createElement('div');
         this.#LogInForm.classList.add("log-in-form");
@@ -69,6 +70,7 @@ export class LogInComponent extends BaseComponent{
       const loginBtn = this.#LogInForm.querySelector('#loginBtn');
       const signupBtn = this.#LogInForm.querySelector('#signupBtn');
 
+      //add event listeners to log in and sign up buttons
       loginBtn.addEventListener("click", ()=>this.#handleLogIn(userNameField,passwordField));
       signupBtn.addEventListener("click", ()=>this.#handleSignUp(userNameField,passwordField));
 
@@ -85,7 +87,7 @@ export class LogInComponent extends BaseComponent{
       const user = {username, password};
 
       const hub = EventHub.getInstance();
-      hub.publish('LogInUser', user);
+      hub.publish('LogInUser', user); //pass user input to service
       userNameField.value = '';
       passwordField.value = '';
     }
@@ -96,7 +98,7 @@ export class LogInComponent extends BaseComponent{
 
       const user = {username, password};
       const hub = EventHub.getInstance();
-      hub.publish('SignUpUser', user);
+      hub.publish('SignUpUser', user); //pass user input to service
       userNameField.value = '';
       passwordField.value = '';
     }
@@ -110,10 +112,12 @@ export class LogInComponent extends BaseComponent{
       this.#container.innerHTML = `<h1>You're logged in</h1>`
     }
 
+    //user feedback authentication error
     #handleFailedLogIn(){
       alert("Failed to log in. Can't find user or invalid credentials. Please sign up or try again later.");
     }
     
+    //user feedback username already exists
     #handleFailedSignUp(){
       alert("Failed to sign up. Username already exists. Please log in or try another username.");
     }
