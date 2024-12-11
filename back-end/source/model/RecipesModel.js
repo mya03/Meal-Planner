@@ -254,7 +254,7 @@ class _RecipesModel {
     // and return numRecipes number of recipes
     // for example: numRecipes = 3, and calories = 500
     // then there will be 3 recipes being returned
-    // each recipe will have calories in the range [450,550]
+    // each recipe will have calories in the range [300,700]
     async getRecipeBasedOnCalories(numRecipes, calories) {
         const recipes = await Recipes.findAll();
         const result = []
@@ -265,8 +265,8 @@ class _RecipesModel {
         // get all possible recipes
         for(let i = 0; i < recipes.length; i++) {
             let kcal = await this.#getCalories(recipes[i].dataValues);
-            // marginal error +-50
-            if(kcal <= calories + 50 && kcal >= calories - 50) {
+            // marginal error +-200
+            if(kcal <= calories + 200 && kcal >= calories - 200) {
                 possibles.push(recipes[i].dataValues);
             }
         }

@@ -238,3 +238,15 @@ Implement Recipe Recommender based on TDEE Calories:
   - This branch has all the members' subbranches 
   - Merge every complete and functional backend sub-branches into main
 - **Links to Commits**: N/A
+
+### December 10, 2024
+- **Tasks**: [Add Comments](https://github.com/mya03/Meal-Planner/issues/60)
+- **Details**: Add comment to RecipesModel, RecipesRoute, RecipesController, ModelFactory, SQLiteDB, GoalOrientedMealPlanner, MealPlan, RecipeRepositoryRemote
+- **Links to Commits**:
+  - [Add comment #60: Add commits to Server, ModelFactory, RecipeModel, SQLiteDB, RecipesRoute, RecipeModel, GoalOrientedMealPlanner, EventHub, Events](https://github.com/mya03/Meal-Planner/commit/1666b5aa4da186ea95fe912c039852629184746d)
+  - [Add comment #60: Add comments to RecipeRemoteRepository and MealPlanner and GoalOrientedMealPlanner](https://github.com/mya03/Meal-Planner/issues/60)
+
+### December 10, 2024
+- **Tasks**: [Change calories difference from 50 to 200 #65](https://github.com/mya03/Meal-Planner/pull/65)
+- **Details**: Make the difference 200 instead of 50 calories to increase the number of recipes that match the calories within the range
+- **Links to Commits**: [Modify getRecipesBasedOnCalories #64: Make the difference 200 instead of 50 calories to increase the number of recipes that match the calories within the range](https://github.com/mya03/Meal-Planner/pull/65/commits/c0b5c68c2650496ce6dcd5505f03f83cd5dc634e)

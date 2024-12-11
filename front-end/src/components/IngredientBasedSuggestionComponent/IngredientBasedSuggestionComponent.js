@@ -110,6 +110,7 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
         this.#recipeComponent.id = "recipes-container";
 
         for(let i=0; i<recipes.length; i++){
+            //image if the recipe in database has image or a generic food photo
             const image =  recipes[i].image || "https://media.istockphoto.com/id/1457433817/photo/group-of-healthy-food-for-flexitarian-diet.jpg?s=612x612&w=0&k=20&c=v48RE0ZNWpMZOlSp13KdF1yFDmidorO2pZTu2Idmd3M=";
             this.#recipeComponent.appendChild(this.#createRecipeComponent(recipes[i],recipes[i].title, image, recipes[i].description));
         }
@@ -128,6 +129,7 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
         recipeInfo.innerHTML = this.#getRecipeInfoTemplate(name, summary);
         recipeComponent.appendChild(recipeInfo);
 
+        //add event listener to each recipe card for users to view the full recipe details
         recipeComponent.addEventListener('click', ()=>{
             const hub = EventHub.getInstance();
             hub.publish('navigateToDetailedRecipe', recipe);
@@ -157,6 +159,7 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
         const glutenFreeFilter = this.#body.querySelector('#glutenFreeFilter');
         const lactoseIntFilter = this.#body.querySelector('#lactoseIntFilter');
 
+        //add event listener to each filter checkbox
         veganFilter.addEventListener('change', ()=>{this.#diet += "vegan,"});
         vegetarianFilter.addEventListener('change', ()=>{this.#diet += 'vegetarian,'});
         glutenFreeFilter.addEventListener('change', ()=>{this.#diet += 'glutenFree,'});
@@ -172,6 +175,7 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
         hub.subscribe("FoundFilterRecipes", (foundRecipes) => this.#displayRecipes(foundRecipes));
     }
 
+    //method to publish event to call to back-end to fetch recipe data
     async #handleFindRecipe(ingredientInput){
         const ingredients = ingredientInput.value;
         const hub = EventHub.getInstance();
@@ -183,7 +187,9 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
         }
         if(!this.#diet){
             await hub.publishAsync(Events.FilterIngredients, {ingredients: ingredients, response: res});
-        }else{
+        }
+        //use a different endpoint if users select filter
+        else{
             const resIn = {};
             const resDiet = {};
             const ingredientsObj = {ingredients: ingredients, response: resIn};
@@ -205,6 +211,7 @@ export class IngredientBasedSuggestionComponent extends BaseComponent{
         return res;
     }
 
+    //method to handle displaying the recipes found
     #displayRecipes(recipes){
         //clear the recipes-container if they are current recipes displayed
         const recipeContainer = document.getElementById("recipes-container");

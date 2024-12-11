@@ -45,3 +45,45 @@
 - **Details**: Update ui-diagrams.md to reflect the current web app changes.
 - **Link to Commit**: [Commit on Problem.md](https://github.com/mya03/Meal-Planner/commit/f02fa275445bbb11a6dda24c8315a72bade75853)
 
+### December 7, 2024
+- **Task**:  Implement front-end for login/signup page.
+- **Details**: Add js and css files for log in component and authentication system
+- **Link to Commit**: [front-end for login/signup page](https://github.com/mya03/Meal-Planner/commit/c13073ca36cde79b9c3c04305acc1aa107c132d5)
+
+### December 7, 2024
+- **Task**:  Set up log in route.
+- **Details**: Set up the route for login in UserRoutes and update UserController, UserModel, integrate login with frontend
+- **Link to Commit**: [log in route](https://github.com/mya03/Meal-Planner/commit/f4cceff79b15b44ad6bdb759e370cfa1b1c5fccb)
+
+### December 7, 2024
+- **Task**:  Set up sign up route.
+- **Details**: Set up the route for sign up route and add method to check if user already exists in UserController, add bcrypt, add event listeners for sign up button
+- **Link to Commit**: [sign up route](https://github.com/mya03/Meal-Planner/commit/76c02c6366b1ff4c023bddde2ed3bb59d43b3f6d)
+
+
+### December 8, 2024
+- **Task**:  Front-end integration for login component and profile component.
+- **Details**: Set up the route for sign up route and add method to check if user already exists in UserController, add bcrypt, add event listeners for sign up button, and update profile page
+- **Link to Commit**: 
+    -[Front-end integration](https://github.com/mya03/Meal-Planner/commit/76c02c6366b1ff4c023bddde2ed3bb59d43b3f6d)
+    -[Front-end integration](https://github.com/mya03/Meal-Planner/commit/47840beae6a2e8a6c3c7ffd4fc0cbd49063ee452)
+    -[Add user feedback authentication failed](https://github.com/mya03/Meal-Planner/commit/1604a039f5d50192ff64f64aa20b5b45be8a3cb8)
+    -[Front-end integration](https://github.com/mya03/Meal-Planner/commit/a3cbb41a1b4a793539f21efd30afa7bda02c0778)
+    -[Update signup route, profile component to show not logged in](https://github.com/mya03/Meal-Planner/commit/aeb40fb19bb8204bc339eaa0ce80e3f98ad6c4c8)
+    -[Front-end integration](https://github.com/mya03/Meal-Planner/commit/314c75c4ee2f2b5b6a557408deebbd12d001ced5)
+    -[Update user profile](https://github.com/mya03/Meal-Planner/commit/470934bd9d9f945cd10051ab4112fc65314b8d9f)
+    
+
+### December 9, 2024
+- **Task**:  Merging login component and searching recipe
+- **Details**: Merging two two components together
+- **Link to Commit**: [Merge branches](https://github.com/mya03/Meal-Planner/commit/951ed818ce25cdbd2c2b910c1ed4cdf4a2ad0422)
+
+### December 9, 2024
+- **Task**:  Adding event listeners 
+- **Details**: Add event listeners to recipe cards for profile component and search recipes component
+- **Link to Commit**: [Merge branches](https://github.com/mya03/Meal-Planner/commit/dcd48c41b0a431113ac29046043f26e208708fd4)
+
+### December 10, 2024
+- **Task**:  Add read me
+- **Details**: Add README.md file
